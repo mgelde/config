@@ -38,6 +38,7 @@ map <F6> :set list! <CR>
 "We use airline. The above is just legacy for systems without airline
 set laststatus=2
 set wildmenu
+set wildmode=list:longest,full
 
 colorscheme darkZ
 
