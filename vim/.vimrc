@@ -39,7 +39,7 @@ set laststatus=2
 set wildmenu
 set wildmode=list:longest,full
 
-colorscheme darkZ
+colorscheme desert
 
 "move 'normally' in wrapped lines
 nnoremap j gj
