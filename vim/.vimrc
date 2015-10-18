@@ -1,5 +1,4 @@
-filetype plugin on
-filetype indent on
+filetype plugin indent on      
 
 syntax enable "enable syntax highlighting while keeping highkight settings intact
 
@@ -34,8 +33,8 @@ set foldmethod=indent " others: marker manual expr syntax diff
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 map <F6> :set list! <CR>
 
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 "We use airline. The above is just legacy for systems without airline
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set laststatus=2
 set wildmenu
 set wildmode=list:longest,full
@@ -55,3 +54,5 @@ nnoremap gV `[v`] "highlight the last inserted text (and jump to it)
 "TODO:
 "gundo
 "sessions 'mksession' etc
+
+
