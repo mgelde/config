@@ -48,10 +48,16 @@ set hlsearch "highlight search results
 set foldenable "enable folding
 set foldlevelstart=10 "first ten levels of folds are open by default
 noremap <space> za
-set foldmethod=indent " others: marker manual expr syntax diff
+set foldmethod=manual " others: marker manual expr syntax diff
 
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 map <F6> :set list! <CR>
+
+"delete trailing whitespace
+map <F5> :%s/[ \t]\+$//g <CR>
+
+"do not highlight search results
+nnoremap n :nohls <CR>
 
 "We use airline. The above is just legacy for systems without airline
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
