@@ -1,4 +1,24 @@
-filetype plugin indent on      
+" If we have vundle, let's unleash awsome plugins. If not -> "normal" vimrc
+:if !empty(glob("~/.vim/bundle/Vundle.vim"))
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'Valloric/YouCompleteMe'
+
+" All vundle Plugins must be added before the following line
+call vundle#end()            " required
+
+:endif "endif have vundle
+
+filetype plugin indent on    " required
 
 syntax enable "enable syntax highlighting while keeping highkight settings intact
 
@@ -49,6 +69,7 @@ nnoremap k gk
 nnoremap B ^
 nnoremap E $
 
+"highlight the latest changes
 nnoremap gV `[v`] "highlight the last inserted text (and jump to it)
 
 "TODO:
