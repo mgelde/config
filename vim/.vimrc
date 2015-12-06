@@ -82,4 +82,8 @@ nnoremap gV `[v`] "highlight the last inserted text (and jump to it)
 "gundo
 "sessions 'mksession' etc
 
-
+:if !empty(glob("~/.vim/custom"))
+for f in split(glob("~/.vim/custom/*"), "\n")
+    exe "source" f
+endfor
+:endif
