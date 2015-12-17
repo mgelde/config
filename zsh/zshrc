@@ -1,0 +1,22 @@
+autoload -U compinit promptinit colors
+colors
+compinit
+promptinit
+
+#menu completion
+zstyle ':completion:*' menu select
+#make aliasc completion work naturally
+setopt completealiases
+
+#make history search depend on current input
+[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"    history-beginning-search-backward
+[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}"  history-beginning-search-forward
+
+#vim binding
+bindkey -v
+
+# This will set the default prompt to the walters theme
+prompt adam2
+
+
+alias ls="ls --color=auto"
