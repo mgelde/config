@@ -3,6 +3,8 @@ colors
 compinit
 promptinit
 
+MY_CONF_DIR=~/.zshconf
+
 #menu completion
 zstyle ':completion:*' menu select
 #make aliasc completion work naturally
@@ -38,9 +40,4 @@ if [ $commands[autojump] ]; then
 fi
 
 # Alias definitions
-
-alias ls="ls --color=auto"
-alias grep="grep --color=auto"
-alias la="ls -la"
-alias ll="ls -lh"
-alias sudo="nocorrect sudo"
+source $MY_CONF_DIR/aliases

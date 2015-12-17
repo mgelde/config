@@ -1,0 +1,10 @@
+alias ls="ls --color=auto"
+alias la="ls -la"
+alias ll="ls -lh"
+
+alias grep="grep --color=auto"
+
+# nocorrects
+alias sudo="nocorrect sudo"
+alias man="nocorrect man"
+alias vim="nocorrect vim"
