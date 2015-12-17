@@ -1,4 +1,4 @@
-autoload -U compinit promptinit colors
+autoload -Uz compinit promptinit colors
 colors
 compinit
 promptinit
@@ -11,6 +11,10 @@ setopt completealiases
 #make history search depend on current input
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"    history-beginning-search-backward
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}"  history-beginning-search-forward
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zshist
+
 
 #vim binding
 bindkey -v
@@ -18,5 +22,21 @@ bindkey -v
 # This will set the default prompt to the walters theme
 prompt adam2
 
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=\$vcs_info_msg_0_
+zstyle ':vcs_info:git:*' formats '%b'
+
+
+setopt correct # spelling correction for commands
+setopt correctall # spelling correction for arguments
+
+# Alias definitions
 
 alias ls="ls --color=auto"
+alias grep="grep --color=auto"
+alias la="ls -la"
+alias ll="ls -lh"
