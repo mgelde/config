@@ -33,7 +33,7 @@ setopt correct # spelling correction for commands
 setopt correctall # spelling correction for arguments
 
 #enable autojump
-if [ $commands[autojump] ]
+if [ $commands[autojump] ]; then
     source /usr/share/autojump/autojump.zsh
 fi
 
