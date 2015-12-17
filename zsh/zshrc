@@ -15,7 +15,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zshist
 
-
 #vim binding
 bindkey -v
 
@@ -30,9 +29,13 @@ setopt prompt_subst
 RPROMPT=\$vcs_info_msg_0_
 zstyle ':vcs_info:git:*' formats '%b'
 
-
 setopt correct # spelling correction for commands
 setopt correctall # spelling correction for arguments
+
+#enable autojump
+if [ $commands[autojump] ]
+    source /usr/share/autojump/autojump.zsh
+fi
 
 # Alias definitions
 
@@ -40,3 +43,4 @@ alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias la="ls -la"
 alias ll="ls -lh"
+alias sudo="nocorrect sudo"
