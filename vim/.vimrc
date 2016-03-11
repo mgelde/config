@@ -78,6 +78,10 @@ nnoremap E $
 "highlight the latest changes
 nnoremap gV `[v`] "highlight the last inserted text (and jump to it)
 
+"for git commits:
+au BufNewFile,BufRead COMMIT_EDITMSG set spell
+au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
+
 "TODO:
 "gundo
 "sessions 'mksession' etc
