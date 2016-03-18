@@ -4,6 +4,7 @@ compinit
 promptinit
 
 MY_CONF_DIR=~/.zshconf
+MY_LOCAL_CONF_DIR=~/.zshlocal
 
 #menu completion
 zstyle ':completion:*' menu select
@@ -64,3 +65,8 @@ fi
 
 # Alias definitions
 source $MY_CONF_DIR/aliases
+if [ -d $MY_LOCAL_CONF_DIR ]; then
+    for file in $MY_LOCAL_CONF_DIR/*; do
+        source "$file"
+    done
+fi
