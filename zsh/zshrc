@@ -52,7 +52,7 @@ zle -N zle-keymap-select
 zle -N zle-line-init
 
 #The actual prompt variables
-PROMPT="%{%B%}\$MY_VIM_PROMPT%{%b%} %B%F{red}%n%f@%F{blue}%m%f%b%F{yellow}(%~)%f%# "
+PROMPT="%{%B%}\$MY_VIM_PROMPT%{%b%} %B%F{red}%n%f@%F{blue}%m%f%b%F{yellow}(%5~)%f%# "
 RPROMPT="%{%F{green}%}\$vcs_info_msg_0_%{%f%}%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
 
 setopt correct # spelling correction for commands
