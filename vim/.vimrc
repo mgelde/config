@@ -13,6 +13,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 
+Plugin 'taglist.vim'
+
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -81,6 +83,9 @@ nnoremap gV `[v`] "highlight the last inserted text (and jump to it)
 "for git commits:
 au BufNewFile,BufRead COMMIT_EDITMSG set spell
 au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
+
+"for taglist
+noremap <F1> :Tlist <CR>
 
 "TODO:
 "gundo
