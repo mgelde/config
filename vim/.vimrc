@@ -87,6 +87,15 @@ au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
 "for taglist
 noremap <F1> :Tlist <CR>
 
+function MyCodeFormat()
+    let my_clang_format_file = "~/.vim/clang-format.py"
+    let l:lines = "all"
+	execute ":pyf " . my_clang_format_file
+endfunction
+
+map <C-I> :call MyCodeFormat() <CR>
+imap <C-I> <ESC> :call MyCodeFormat() <CR>i
+
 "TODO:
 "gundo
 "sessions 'mksession' etc
