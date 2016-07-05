@@ -88,7 +88,7 @@ au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
 noremap <F1> :Tlist <CR>
 
 function MyCodeFormat()
-    let my_clang_format_file = "~/.vim/clang-format.py"
+    let my_clang_format_file = "/usr/share/clang/clang-format.py"
     let l:lines = "all"
 	execute ":pyf " . my_clang_format_file
 endfunction
