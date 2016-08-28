@@ -1,4 +1,4 @@
-" If we have vundle, let's unleash awsome plugins. If not -> "normal" vimrc
+" If we have vundle, let's unleash awesome plugins. If not -> "normal" vimrc
 :if !empty(glob("~/.vim/bundle/Vundle.vim"))
 
 set nocompatible              " be iMproved, required
@@ -22,7 +22,7 @@ call vundle#end()            " required
 
 filetype plugin indent on    " required
 
-syntax enable "enable syntax highlighting while keeping highkight settings intact
+syntax enable "enable syntax highlighting while keeping highlight settings intact
 
 set autoindent
 set number
@@ -31,7 +31,7 @@ set background=dark
 set cursorline "display a line under the cursor
 
 "this does not work. why?
-set showcmd "show last commend in bottom right corner. also: number of selected characters and such
+set showcmd "show last command in bottom right corner. also: number of selected characters and such
 
 set lazyredraw "redraw only when necessary. may speed up things.
 
@@ -76,9 +76,6 @@ nnoremap k gk
 "jump to beginning and end of line
 nnoremap B ^
 nnoremap E $
-
-"highlight the latest changes
-nnoremap gV `[v`] "highlight the last inserted text (and jump to it)
 
 "for git commits:
 au BufNewFile,BufRead COMMIT_EDITMSG set spell
