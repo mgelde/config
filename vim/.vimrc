@@ -55,19 +55,54 @@ set foldmethod=manual " others: marker manual expr syntax diff
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 map <F6> :set list! <CR>
 
-"delete trailing whitespace
-map <F5> :%s/[ \t]\+$//g <CR>
-
-"do not highlight search results
-nnoremap m :nohls <CR>
-
 "We use airline. The above is just legacy for systems without airline
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set laststatus=2
 set wildmenu
 set wildmode=list:longest,full
 
+"Define a highlight group and ensure that it survives colorscheme commands
+"(some colorscheme commands apparently clear user-defined groups)
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+"Set the default color-scheme
 colorscheme desert
+
+"show trailing whitespace (except when typing)
+" Beware of this gotcha: While 'match' requires a leading /,
+" 'matchadd' *must not* have a leading /... whatever
+call matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
+            \
+augroup TrailingWhitespaceMatch
+  autocmd!
+  autocmd BufWinEnter * let w:whitespace_match_number =
+        \ matchadd('ExtraWhitespace', '\s\+$')
+  autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
+  autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+augroup END
+
+function! s:ToggleWhitespaceMatch(mode)
+  let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
+  if exists('w:whitespace_match_number')
+    call matchdelete(w:whitespace_match_number)
+    call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
+  else
+    " Something went wrong, try to be graceful.
+    let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
+  endif
+endfunction
+
+
+"Binding to delete trailing whitespace
+    "define a function to do the job
+function MyDeleteTrailingWhitespace()
+    :silent! %s/[ \t]\+$//ge
+    :nohls
+endfunction
+    "map to F% for convenience
+map <F5> :call MyDeleteTrailingWhitespace() <CR>
+
+"do not highlight search results
+nnoremap m :nohls <CR>
 
 "move 'normally' in wrapped lines
 nnoremap j gj
@@ -83,15 +118,6 @@ au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
 
 "for taglist
 noremap <F1> :Tlist <CR>
-
-function MyCodeFormat()
-    let my_clang_format_file = "/usr/share/clang/clang-format.py"
-    let l:lines = "all"
-	execute ":pyf " . my_clang_format_file
-endfunction
-
-map <C-I> :call MyCodeFormat() <CR>
-imap <C-I> <ESC> :call MyCodeFormat() <CR>i
 
 "TODO:
 "gundo
