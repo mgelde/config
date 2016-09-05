@@ -61,36 +61,40 @@ set laststatus=2
 set wildmenu
 set wildmode=list:longest,full
 
+"##########  Trailing Whitespace ###########
+
 "Define a highlight group and ensure that it survives colorscheme commands
 "(some colorscheme commands apparently clear user-defined groups)
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 "Set the default color-scheme
 colorscheme desert
 
-"show trailing whitespace (except when typing)
-" Beware of this gotcha: While 'match' requires a leading /,
-" 'matchadd' *must not* have a leading /... whatever
-call matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
-            \
-augroup TrailingWhitespaceMatch
-  autocmd!
-  autocmd BufWinEnter * let w:whitespace_match_number =
-        \ matchadd('ExtraWhitespace', '\s\+$')
-  autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
-  autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
-augroup END
+"Define a function to highlight trailing whitespaces
+"   This function checks for a window-local variable
+"   'w:no_trailing_ws_highlight' and ignores trailing
+"   whitespace if that variable is set to 1.
+function! MyTrailingWhitespaceHighlight()
+    if !exists('w:no_trailing_ws_highlight')
+        let w:no_trailing_ws_highlight = 0
+    endif
+    if w:no_trailing_ws_highlight == 1
+        return
+    endif
 
-function! s:ToggleWhitespaceMatch(mode)
-  let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
-  if exists('w:whitespace_match_number')
-    call matchdelete(w:whitespace_match_number)
-    call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
-  else
-    " Something went wrong, try to be graceful.
-    let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
-  endif
+    if exists('w:whitespace_match_number')
+        call matchdelete(w:whitespace_match_number)
+    endif
+    let w:whitespace_match_number = matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
 endfunction
 
+"enable trailing whitespace matching
+call MyTrailingWhitespaceHighlight()
+
+"enure that trailing whitespace highlighting is enabled on new windows
+augroup TrailingWhitespace
+    au!
+    autocmd BufWinEnter * call MyTrailingWhitespaceHighlight()
+augroup END
 
 "Binding to delete trailing whitespace
     "define a function to do the job
@@ -98,8 +102,11 @@ function MyDeleteTrailingWhitespace()
     :silent! %s/[ \t]\+$//ge
     :nohls
 endfunction
-    "map to F% for convenience
-map <F5> :call MyDeleteTrailingWhitespace() <CR>
+    "map to F5 for convenience
+noremap <F5> :call MyDeleteTrailingWhitespace() <CR>
+
+" ###############################################
+
 
 "do not highlight search results
 nnoremap m :nohls <CR>
