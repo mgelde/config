@@ -6,8 +6,8 @@ function! MyCodeFormat()
 	execute ":pyf " . my_clang_format_file
 endfunction
 
-map <C-I> :call MyCodeFormat() <CR>
-imap <C-I> <ESC> :call MyCodeFormat() <CR>i
+noremap ,i :call MyCodeFormat() <CR>
+inoremap ,i <ESC> :call MyCodeFormat() <CR>i
 
 "For C and the like, foldmethod syntax is the way to go
 setlocal foldmethod=syntax
