@@ -3,11 +3,12 @@ alias la="ls -lah"
 alias ll="ls -lh"
 alias l="ls -l"
 
-alias grep="grep --color=auto"
+alias grep="nocorrect grep --color=auto"
+
+alias make="nocorrect make -j$(nproc)"
 
 # nocorrects
 alias sudo="nocorrect sudo"
 alias man="nocorrect man"
 alias vim="nocorrect vim"
 alias mkdir="nocorrect mkdir"
-alias grep="nocorrect grep"

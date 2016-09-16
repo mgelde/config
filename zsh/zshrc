@@ -15,6 +15,7 @@ setopt completealiases
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
+
 #eventually, use zkbd here
 bindkey  "^[[A"    history-beginning-search-backward
 bindkey  "^[[B"  history-beginning-search-forward
@@ -65,6 +66,8 @@ fi
 
 # Alias definitions
 source $MY_CONF_DIR/aliases
+
+# local configuration
 if [ -d $MY_LOCAL_CONF_DIR ]; then
     for file in $MY_LOCAL_CONF_DIR/*; do
         source "$file"
