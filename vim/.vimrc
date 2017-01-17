@@ -22,6 +22,8 @@ Plugin 'scrooloose/nerdtree'
 "Highlight words under the cursor
 Plugin 'itchyny/vim-cursorword'
 
+Plugin 'tpope/vim-fugitive'
+
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
 
