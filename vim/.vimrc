@@ -55,11 +55,16 @@ set foldmethod=manual " others: marker manual expr syntax diff
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 map <F6> :set list! <CR>
 
-"We use airline. The above is just legacy for systems without airline
+"##########  Status Line ###########
+
+"We use airline. This is just legacy for systems without airline
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set laststatus=2
 set wildmenu
 set wildmode=list:longest,full
+
+"Now for airline
+let g:airline_theme="dark"
 
 "##########  Trailing Whitespace ###########
 
