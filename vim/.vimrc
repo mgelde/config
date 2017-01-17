@@ -13,7 +13,14 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 
+"To get symbols in C/C++ files
 Plugin 'taglist.vim'
+
+"File browser
+Plugin 'scrooloose/nerdtree'
+
+"Highlight words under the cursor
+Plugin 'itchyny/vim-cursorword'
 
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
@@ -74,6 +81,9 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 "Set the default color-scheme
 colorscheme desert
 
+"Make search hits readable
+hi Search cterm=NONE ctermfg=black ctermbg=blue
+
 "Define a function to highlight trailing whitespaces
 "   This function checks for a window-local variable
 "   'w:no_trailing_ws_highlight' and ignores trailing
@@ -130,6 +140,9 @@ au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
 
 "for taglist
 noremap <F1> :Tlist <CR>
+
+"for nerdtree
+noremap <F2> :NERDTreeToggle <CR>
 
 "TODO:
 "gundo
