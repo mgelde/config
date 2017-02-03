@@ -1,4 +1,3 @@
-" If we have vundle, let's unleash awesome plugins. If not -> "normal" vimrc
 :if !empty(glob("~/.vim/bundle/Vundle.vim"))
 
 set nocompatible              " be iMproved, required
@@ -132,10 +131,6 @@ nnoremap m :nohls <CR>
 nnoremap j gj
 nnoremap k gk
 
-"jump to beginning and end of line
-nnoremap B ^
-nnoremap E $
-
 "for git commits:
 au BufNewFile,BufRead COMMIT_EDITMSG set spell
 au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
@@ -145,6 +140,8 @@ noremap <F1> :Tlist <CR>
 
 "for nerdtree
 noremap <F2> :NERDTreeToggle <CR>
+
+noremap <leader>d "_d
 
 "TODO:
 "gundo
