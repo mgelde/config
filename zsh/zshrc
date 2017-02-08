@@ -19,8 +19,8 @@ zle -N down-line-or-beginning-search
 #eventually, use zkbd here
 bindkey  "^[[A"    history-beginning-search-backward
 bindkey  "^[[B"  history-beginning-search-forward
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=~/.zshist
 
 #vim binding
