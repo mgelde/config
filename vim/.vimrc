@@ -79,7 +79,7 @@ set wildmenu
 set wildmode=list:longest,full
 
 "Now for airline
-let g:airline_theme="dark"
+let g:airline_theme="onedark"
 
 "##########  Trailing Whitespace ###########
 
