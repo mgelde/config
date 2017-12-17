@@ -92,6 +92,10 @@ colorscheme desert
 "Make search hits readable
 hi Search cterm=NONE ctermfg=black ctermbg=blue
 
+"Make spelling error highlighting a little easier on the eyes
+hi clear SpellBad
+hi SpellBad cterm=underline ctermbg=Magenta ctermfg=black
+
 "Define a function to highlight trailing whitespaces
 "   This function checks for a window-local variable
 "   'w:no_trailing_ws_highlight' and ignores trailing
