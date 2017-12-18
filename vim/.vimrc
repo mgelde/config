@@ -154,6 +154,12 @@ noremap <F2> :NERDTreeToggle <CR>
 
 noremap <leader>d "_d
 
+" YouComepleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+noremap <leader>yt :YcmCompleter GetType <CR>
+noremap <leader>yg :YcmCompleter GoToDefinition <CR>
+noremap <leader>yd :YcmCompleter GetDoc <CR>
+
 "TODO:
 "gundo
 "sessions 'mksession' etc
