@@ -23,7 +23,7 @@ Plugin 'itchyny/vim-cursorword'
 
 Plugin 'tpope/vim-fugitive'
 
-Plugin 'vim-latex/vim-latex'
+Plugin 'lervag/vimtex'
 
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
@@ -31,11 +31,6 @@ call vundle#end()            " required
 :endif "endif have vundle
 
 filetype plugin indent on    " required
-
-" For vim-latex
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-let g:Tex_Menus=1
 
 syntax enable "enable syntax highlighting while keeping highlight settings intact
 
