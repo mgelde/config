@@ -149,6 +149,27 @@ noremap <F2> :NERDTreeToggle <CR>
 
 noremap <leader>d "_d
 
+"for vimtex
+let g:tex_comment_nospell = 1
+let g:vimtex_format_enabled=1
+let g:vimtex_compiler_latexmk = {
+        \ 'backend' : 'jobs',
+        \ 'background' : 1,
+        \ 'build_dir' : '',
+        \ 'callback' : 1,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
+        \ 'options' : [
+        \   '-pdf',
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+let g:vimtex_view_method='zathura'
+
+
 " YouComepleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 noremap <leader>yt :YcmCompleter GetType <CR>
