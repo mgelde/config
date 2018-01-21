@@ -38,6 +38,15 @@ set autoindent
 set number
 set background=dark
 
+"Allow buffers to be hidden when modified
+set hidden
+
+"mappings for interacting with buffers
+noremap <leader>bn :bnext <CR>
+noremap <leader>bp :bprev <CR>
+noremap <leader>bg :buf <SPACE>
+noremap <leader>bq :bp <BAR> bd #<CR>
+
 set cursorline "display a line under the cursor
 
 "this does not work. why?
@@ -75,6 +84,9 @@ set wildmode=list:longest,full
 
 "Now for airline
 let g:airline_theme="onedark"
+let g:airline#extensions#branch#enabled = 1 "enable git integration
+let g:airline#extensions#tabline#enabled = 1 "show buffers at the top
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 "##########  Trailing Whitespace ###########
 
@@ -120,6 +132,7 @@ augroup END
 
 "Binding to delete trailing whitespace
     "define a function to do the job
+
 function MyDeleteTrailingWhitespace()
     :silent! %s/[ \t]\+$//ge
     :nohls
@@ -147,11 +160,21 @@ noremap <F1> :Tlist <CR>
 "for nerdtree
 noremap <F2> :NERDTreeToggle <CR>
 
+"delete without yank
 noremap <leader>d "_d
 
-"for vimtex
+""for vimtex
+
+"prevent files from being recognized as plaintex
+let g:tex_flavor = 'latex'
+
+"do not spellcheck comments
 let g:tex_comment_nospell = 1
+
+"make support for formatting suck less ever so slightly
 let g:vimtex_format_enabled=1
+
+"configure latexmk
 let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'jobs',
         \ 'background' : 1,
@@ -167,6 +190,8 @@ let g:vimtex_compiler_latexmk = {
         \   '-interaction=nonstopmode',
         \ ],
         \}
+
+"viewer that is launched
 let g:vimtex_view_method='zathura'
 
 
