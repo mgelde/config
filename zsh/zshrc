@@ -20,6 +20,10 @@ key[PageUp]="$terminfo[kpp]"
 key[PageDown]="$terminfo[knp]"
 
 # setup key accordingly
+#
+## Note: We prefer backward-delete-char over vi-backward-delete-char
+## because the latter has a weird opinion where to delete based on
+## the position insert mode was entered... tl;dr it's imho counterintuitive
 [[ -n "$key[Home]"      ]] && bindkey -- "$key[Home]"      beginning-of-line
 [[ -n "$key[End]"       ]] && bindkey -- "$key[End]"       end-of-line
 [[ -n "$key[Insert]"    ]] && bindkey -- "$key[Insert]"    overwrite-mode
@@ -33,7 +37,11 @@ key[PageDown]="$terminfo[knp]"
 ## Also bind stuff in vicmd map
 [[ -n "$key[Home]"      ]] && bindkey -a -- "$key[Home]"      vi-beginning-of-line
 [[ -n "$key[End]"       ]] && bindkey -a -- "$key[End]"       vi-end-of-line
-[[ -n "$key[Backspace]" ]] && bindkey -a -- "$key[Backspace]" vi-backward-delete-char
+[[ -n "$key[Backspace]" ]] && bindkey -a -- "$key[Backspace]" backward-delete-char
+
+#because apparently zsh maps ^? regardless of terminfo, so do we
+bindkey -a -- '^?'  backward-delete-char
+bindkey    -- '^?'  backward-delete-char
 
 autoload -Uz compinit promptinit colors
 colors
