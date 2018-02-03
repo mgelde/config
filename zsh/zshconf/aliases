@@ -12,3 +12,4 @@ alias sudo="nocorrect sudo"
 alias man="nocorrect man"
 alias vim="nocorrect vim"
 alias mkdir="nocorrect mkdir"
+alias pgrep='nocorrect pgrep'

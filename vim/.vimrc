@@ -25,6 +25,8 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'lervag/vimtex'
 
+Plugin 'ctrlpvim/ctrlp.vim'
+
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -183,7 +185,7 @@ let g:vimtex_compiler_latexmk = {
         \ 'continuous' : 1,
         \ 'executable' : 'latexmk',
         \ 'options' : [
-        \   '-pdf',
+        \   '-xelatex',
         \   '-verbose',
         \   '-file-line-error',
         \   '-synctex=1',
@@ -204,6 +206,11 @@ noremap <leader>yd :YcmCompleter GetDoc <CR>
 "TODO:
 "gundo
 "sessions 'mksession' etc
+"
+
+"CptrlP
+noremap <C-B> :CtrlPBuffer <CR>
+noremap <leader>cp :CtrlPMRU
 
 :if !empty(glob("~/.vim/custom"))
 for f in split(glob("~/.vim/custom/*"), "\n")
