@@ -10,6 +10,6 @@ alias make="nocorrect make -j$(nproc)"
 # nocorrects
 alias sudo="nocorrect sudo"
 alias man="nocorrect man"
-alias vim="nocorrect vim"
+alias vim="nocorrect vim --servername VIM"
 alias mkdir="nocorrect mkdir"
 alias pgrep='nocorrect pgrep'
