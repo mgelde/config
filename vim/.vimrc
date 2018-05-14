@@ -194,9 +194,7 @@ let g:vimtex_compiler_latexmk = {
         \}
 
 "viewer that is launched
-let g:vimtex_view_method='general'
-let g:vimtex_view_general_viewer='/usr/bin/evince'
-let g:vimtex_view_general_options_latexmk=''
+let g:vimtex_view_method='zathura'
 
 " YouComepleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
@@ -211,7 +209,7 @@ noremap <leader>yd :YcmCompleter GetDoc <CR>
 
 "CptrlP
 noremap <C-B> :CtrlPBuffer <CR>
-noremap <leader>cp :CtrlPMRU
+noremap <leader>cp :CtrlPMRU <CR>
 let g:ctrlp_extensions = ['autoignore']
 
 :if !empty(glob("~/.vim/custom"))
