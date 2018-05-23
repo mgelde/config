@@ -27,6 +27,8 @@ Plugin 'lervag/vimtex'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 
+Plugin 'bling/vim-bufferline'
+
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -87,6 +89,7 @@ set wildmode=list:longest,full
 "Now for airline
 let g:airline_theme="onedark"
 let g:airline#extensions#branch#enabled = 1 "enable git integration
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1 "show buffers at the top
 let g:airline#extensions#tabline#fnamemod = ':t'
 
