@@ -21,13 +21,13 @@ Plugin 'scrooloose/nerdtree'
 "Highlight words under the cursor
 Plugin 'itchyny/vim-cursorword'
 
-Plugin 'tpope/vim-fugitive'
-
 Plugin 'lervag/vimtex'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'bling/vim-bufferline'
+
+Plugin 'jez/vim-superman'
 
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
@@ -41,6 +41,11 @@ syntax enable "enable syntax highlighting while keeping highlight settings intac
 set autoindent
 set number
 set background=dark
+set cursorline "display a line under the cursor
+
+
+"Man pages
+runtime ftplugin/man.vim
 
 "Allow buffers to be hidden when modified
 set hidden
@@ -51,9 +56,7 @@ noremap <leader>bp :bprev <CR>
 noremap <leader>bg :buf <SPACE>
 noremap <leader>bq :bp <BAR> bd #<CR>
 
-set cursorline "display a line under the cursor
 
-"this does not work. why?
 set showcmd "show last command in bottom right corner. also: number of selected characters and such
 
 set lazyredraw "redraw only when necessary. may speed up things.
@@ -142,11 +145,11 @@ function MyDeleteTrailingWhitespace()
     :silent! %s/[ \t]\+$//ge
     :nohls
 endfunction
-    "map to F5 for convenience
+
+"map to F5 for convenience
 noremap <F5> :call MyDeleteTrailingWhitespace() <CR>
 
 " ###############################################
-
 
 "do not highlight search results
 nnoremap m :nohls <CR>
@@ -204,11 +207,6 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 noremap <leader>yt :YcmCompleter GetType <CR>
 noremap <leader>yg :YcmCompleter GoToDefinition <CR>
 noremap <leader>yd :YcmCompleter GetDoc <CR>
-
-"TODO:
-"gundo
-"sessions 'mksession' etc
-"
 
 "CptrlP
 noremap <C-B> :CtrlPBuffer <CR>
