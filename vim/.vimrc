@@ -182,6 +182,8 @@ let g:tex_comment_nospell = 1
 "make support for formatting suck less ever so slightly
 let g:vimtex_format_enabled=1
 
+let g:vimtex_indent_enabled=1
+
 "configure latexmk
 let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'jobs',
@@ -191,13 +193,24 @@ let g:vimtex_compiler_latexmk = {
         \ 'continuous' : 1,
         \ 'executable' : 'latexmk',
         \ 'options' : [
-        \   '-xelatex',
         \   '-verbose',
         \   '-file-line-error',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
         \ ],
         \}
+
+
+let g:vimtex_compiler_latexmk_engines = {
+        \ '_'                : '-xelatex',
+        \ 'pdflatex'         : '-pdf',
+        \ 'lualatex'         : '-lualatex',
+        \ 'xelatex'          : '-xelatex',
+        \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+        \ 'context (luatex)' : '-pdf -pdflatex=context',
+		\ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+		\}
+
 
 "viewer that is launched
 let g:vimtex_view_method='zathura'
