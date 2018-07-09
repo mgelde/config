@@ -29,6 +29,9 @@ Plugin 'bling/vim-bufferline'
 
 Plugin 'jez/vim-superman'
 
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
 " All vundle Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -124,7 +127,7 @@ function! MyTrailingWhitespaceHighlight()
     endif
 
     if exists('w:whitespace_match_number')
-        call matchdelete(w:whitespace_match_number)
+        :call matchdelete(w:whitespace_match_number)
     endif
     let w:whitespace_match_number = matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
 endfunction
