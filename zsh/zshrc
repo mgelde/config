@@ -65,16 +65,17 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-finish
 fi
 
+
+setopt correct # spelling correction for commands
+setopt correctall # spelling correction for arguments
+
 #menu completion
-zstyle ':completion:*' menu select
-#make aliasc completion work naturally
+zstyle ':completion:*' menu select=3
 setopt completealiases
 zstyle ':completion:*:correct:*'       insert-unambiguous true
 zstyle ':completion:*:corrections'     format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}'
 zstyle ':completion:*:correct:*'       original true
 zstyle ':completion:*:default'         list-colors ${(s.:.)LS_COLORS}
-
-zstyle ':completion:*:history-words'   menu yes
 
 #make history search depend on current input
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
@@ -84,18 +85,15 @@ zle -N down-line-or-beginning-search
 [[ -n "$key[Up]" ]] && bindkey -- "$key[Up]" up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
 
-if [[ -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
 
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zshist
 
-# Custom prompt.
+## Custom prompt.
 
 #Environment variable for the status of VIM input mode.
-MY_VIM_PROMPT="[NO]"
+MY_VIM_PROMPT="[N]"
 
 #Version control info for git.
 autoload -Uz vcs_info
@@ -111,9 +109,9 @@ function zle-line-init zle-keymap-select
 {
     echoti smkx
     if [[ $KEYMAP == "viins" || $KEYMAP == "main" ]]; then
-        MY_VIM_PROMPT="[IN]"
+        MY_VIM_PROMPT="[I]"
     elif [[ $KEYMAP == "vicmd" ]]; then
-        MY_VIM_PROMPT="[NO]"
+        MY_VIM_PROMPT="[N]"
     fi
     zle reset-prompt;
 }
@@ -121,17 +119,28 @@ zle -N zle-keymap-select
 zle -N zle-line-init
 
 #The actual prompt variables
-PROMPT="%{%B%}\$MY_VIM_PROMPT%{%b%} %B%F{red}%n%f@%F{blue}%m%f%b%F{yellow}(%5~)%f%# "
+PROMPT="%{%B%}\$MY_VIM_PROMPT%{%b%} %B%242F%n%f@%F{magenta}%m%f%b%F{cyan}:%5~ %f%#> "
 RPROMPT="%{%F{green}%}\$vcs_info_msg_0_%{%f%}%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
+if [[ ! -z "$SSH_CLIENT" ]]; then
+    RPROMPT="$RPROMPT %{%F{red}%}⇄"
+fi
 
-setopt correct # spelling correction for commands
-setopt correctall # spelling correction for arguments
-
+## Plugins
 #enable autojump
 if [ $commands[autojump] ]; then
     source /usr/share/autojump/autojump.zsh
 fi
+# Autosuggestions a la fish
+if [[ -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
+# Syntax highlighting
+if [[ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+## Customizations
 # Alias definitions
 source $MY_CONF_DIR/aliases
 
