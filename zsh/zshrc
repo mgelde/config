@@ -135,11 +135,6 @@ if [[ -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; 
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# Syntax highlighting
-if [[ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
 ## Customizations
 # Alias definitions
 source $MY_CONF_DIR/aliases
@@ -149,4 +144,9 @@ if [ -d $MY_LOCAL_CONF_DIR ]; then
     for file in $MY_LOCAL_CONF_DIR/*; do
         source "$file"
     done
+fi
+
+# Syntax highlighting (must be sourced at the end)
+if [[ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
