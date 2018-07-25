@@ -90,13 +90,15 @@ HISTFILE=~/.zshist
 
 ## Custom prompt.
 
+# Perform parameter substitution etc on the prompt
+setopt prompt_subst
+
 #Version control info for git (only for non-root)
 if [[ ${EUID} != 0 ]]; then
     autoload -Uz vcs_info
     zstyle ':vcs_info:*' enable git
     precmd_vcs_info() { vcs_info }
     precmd_functions+=( precmd_vcs_info )
-    setopt prompt_subst
     zstyle ':vcs_info:git:*' formats '%b'
 fi
 
