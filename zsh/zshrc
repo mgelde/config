@@ -51,7 +51,6 @@ promptinit
 MY_CONF_DIR=~/.zshconf
 MY_LOCAL_CONF_DIR=~/.zshlocal
 
-
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
@@ -85,20 +84,21 @@ zle -N down-line-or-beginning-search
 [[ -n "$key[Up]" ]] && bindkey -- "$key[Up]" up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
 
-
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zshist
 
 ## Custom prompt.
 
-#Version control info for git.
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-zstyle ':vcs_info:git:*' formats '%b'
+#Version control info for git (only for non-root)
+if [[ ${EUID} != 0 ]]; then
+    autoload -Uz vcs_info
+    zstyle ':vcs_info:*' enable git
+    precmd_vcs_info() { vcs_info }
+    precmd_functions+=( precmd_vcs_info )
+    setopt prompt_subst
+    zstyle ':vcs_info:git:*' formats '%b'
+fi
 
 #Widgets updating the environment variable once the VIM mode changes.
 
@@ -129,13 +129,18 @@ if [[ ! -z "$SSH_CLIENT" ]]; then
 fi
 
 ## Plugins
-#enable autojump
-if [ $commands[autojump] ]; then
-    source /usr/share/autojump/autojump.zsh
-fi
-# Autosuggestions a la fish
-if [[ -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# We enable plugins only for non-root shells. Should not get too comfortable ona  root shell
+# anyway, plus plugins can slow things down on some devices.
+
+if [[ ${EUID} != 0 ]]; then
+    #enable autojump
+    if [ $commands[autojump] ]; then
+        source /usr/share/autojump/autojump.zsh
+    fi
+    # Autosuggestions a la fish
+    if [[ -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+        source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    fi
 fi
 
 ## Customizations
@@ -150,6 +155,8 @@ if [ -d $MY_LOCAL_CONF_DIR ]; then
 fi
 
 # Syntax highlighting (must be sourced at the end)
-if [[ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ ${EUID} != 0 ]]; then
+    if [[ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+        source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
 fi
