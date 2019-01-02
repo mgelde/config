@@ -131,12 +131,12 @@ if [[ ! -z "$SSH_CLIENT" ]]; then
 fi
 
 ## Plugins
-# We enable plugins only for non-root shells. Should not get too comfortable ona  root shell
+# We enable plugins only for non-root shells. Should not get too comfortable on a root shell
 # anyway, plus plugins can slow things down on some devices.
 
 if [[ ${EUID} != 0 ]]; then
     #enable autojump
-    if [ $commands[autojump] ]; then
+    if [[ $commands[autojump] ]]; then
         source /usr/share/autojump/autojump.zsh
     fi
     # Autosuggestions a la fish
@@ -150,7 +150,7 @@ fi
 source $MY_CONF_DIR/aliases
 
 # local configuration
-if [ -d $MY_LOCAL_CONF_DIR ]; then
+if [[ -d $MY_LOCAL_CONF_DIR ]]; then
     for file in $MY_LOCAL_CONF_DIR/*; do
         source "$file"
     done
