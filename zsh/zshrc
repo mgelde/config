@@ -122,7 +122,7 @@ zle -N zle-line-init
 
 #The actual prompt variables
 # Note: We escape the `$` character to ensure that the PROMPT variable still holds
-# the string `${MY_VIM_PROMPT}` in order for that to be exanded only upon zle-reset-prompt
+# the string `${MY_VIM_PROMPT}` in order for that to be expanded only upon zle-reset-prompt
 # above.
 PROMPT="%B%242F%n%f@%F{magenta}%m%f%b%F{cyan}:%5~ %f%{\${MY_VIM_PROMPT}%}%#>%f "
 RPROMPT="%{%F{green}%}\$vcs_info_msg_0_%{%f%}%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
