@@ -106,20 +106,23 @@ fi
 
 
 #Environment variable for the status of VIM input mode.
-MY_VIM_PROMPT="%009F"
-function zle-line-init zle-keymap-select
-{
-    echoti smkx
-    if [[ $KEYMAP == "viins" || $KEYMAP == "main" ]]; then
-        MY_VIM_PROMPT=""
-    elif [[ $KEYMAP == "vicmd" ]]; then
-        MY_VIM_PROMPT="%009F"
-    fi
-    zle reset-prompt;
-}
-zle -N zle-keymap-select
-zle -N zle-line-init
-
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    MY_VIM_PROMPT="%009F"
+    function zle-line-init zle-keymap-select
+    {
+        echoti smkx
+        if [[ $KEYMAP == "viins" || $KEYMAP == "main" ]]; then
+            MY_VIM_PROMPT=""
+        elif [[ $KEYMAP == "vicmd" ]]; then
+            MY_VIM_PROMPT="%009F"
+        fi
+        zle reset-prompt;
+    }
+    zle -N zle-keymap-select
+    zle -N zle-line-init
+else
+    MY_VIM_PROMPT=""
+fi
 #The actual prompt variables
 # Note: We escape the `$` character to ensure that the PROMPT variable still holds
 # the string `${MY_VIM_PROMPT}` in order for that to be expanded only upon zle-reset-prompt
