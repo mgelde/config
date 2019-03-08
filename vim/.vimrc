@@ -227,7 +227,7 @@ noremap <leader>yd :YcmCompleter GetDoc <CR>
 "CptrlP
 noremap <C-B> :CtrlPBuffer <CR>
 noremap <leader>cp :CtrlPMRU <CR>
-let g:ctrlp_extensions = ['autoignore']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 :if !empty(glob("~/.vim/custom"))
 for f in split(glob("~/.vim/custom/*"), "\n")
