@@ -1,42 +1,35 @@
-:if !empty(glob("~/.vim/bundle/Vundle.vim"))
+:if !empty(glob("~/.vim/autoload/plug.vim"))
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Use vim-plug
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'Valloric/YouCompleteMe'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'Valloric/YouCompleteMe'
 "To get symbols in C/C++ files
-Plugin 'taglist.vim'
+Plug 'vim-scripts/taglist.vim'
 
 "File browser
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 "Highlight words under the cursor
-Plugin 'itchyny/vim-cursorword'
+Plug 'itchyny/vim-cursorword'
 
-Plugin 'lervag/vimtex'
+Plug 'lervag/vimtex'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
-Plugin 'bling/vim-bufferline'
+Plug 'bling/vim-bufferline'
 
-Plugin 'jez/vim-superman'
+Plug 'jez/vim-superman'
 
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
-" All vundle Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()
+:endif
 
-:endif "endif have vundle
-
-filetype plugin indent on    " required
+set nocompatible
+filetype plugin indent on
 
 syntax enable "enable syntax highlighting while keeping highlight settings intact
 
