@@ -11,7 +11,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Valloric/YouCompleteMe'
-
 "To get symbols in C/C++ files
 Plugin 'taglist.vim'
 
@@ -68,7 +67,7 @@ set showmatch "highlight matching parentheses
 
 "tab settings. softtabstop and tabstop should be identical or else mixtures of
 "tabs and spaces may be used
-set tabstop=4   "visual spaces per tab (exisitng spaces)
+set tabstop=4   "visual spaces per tab (existing spaces)
 set softtabstop=4 "spaces per tab in insert mode (i.e. creating new spaces vs. displaying)
 set shiftwidth=4 "spaces used when indenting '>>' or '<<'
 set expandtab "use spaces not tabs
@@ -162,7 +161,7 @@ nnoremap j gj
 nnoremap k gk
 
 "for git commits:
-au BufNewFile,BufRead COMMIT_EDITMSG set spell
+au BufNewFile,BufRead COMMIT_EDITMSG set spell spl=en
 au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
 
 "for taglist
