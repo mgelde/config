@@ -25,6 +25,8 @@ Plug 'jez/vim-superman'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
+Plug 'SirVer/ultisnips'
+
 call plug#end()
 :endif
 
@@ -220,6 +222,12 @@ noremap <leader>yd :YcmCompleter GetDoc <CR>
 noremap <C-B> :CtrlPBuffer <CR>
 noremap <leader>cp :CtrlPMRU <CR>
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" Snippets
+let g:UltiSnipsSnippetsDir = '~/.vim/snippets'
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
 :if !empty(glob("~/.vim/custom"))
 for f in split(glob("~/.vim/custom/*"), "\n")
