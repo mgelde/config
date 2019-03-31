@@ -224,7 +224,7 @@ noremap <leader>cp :CtrlPMRU <CR>
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Snippets
-let g:UltiSnipsSnippetsDir = '~/.vim/snippets'
+let g:UltiSnipsSnippetDirectories = ['ultisnippets']
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
