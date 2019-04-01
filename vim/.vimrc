@@ -169,17 +169,14 @@ noremap <F2> :NERDTreeToggle <CR>
 noremap <leader>d "_d
 
 ""for vimtex
-
 "prevent files from being recognized as plaintex
 let g:tex_flavor = 'latex'
-
 "do not spellcheck comments
 let g:tex_comment_nospell = 1
-
 "make support for formatting suck less ever so slightly
 let g:vimtex_format_enabled=1
-
 let g:vimtex_indent_enabled=1
+let g:vimtex_intent_bib_enabled=1
 
 "configure latexmk
 let g:vimtex_compiler_latexmk = {
@@ -196,8 +193,6 @@ let g:vimtex_compiler_latexmk = {
         \   '-interaction=nonstopmode',
         \ ],
         \}
-
-
 let g:vimtex_compiler_latexmk_engines = {
         \ '_'                : '-xelatex',
         \ 'pdflatex'         : '-pdf',
@@ -207,8 +202,6 @@ let g:vimtex_compiler_latexmk_engines = {
         \ 'context (luatex)' : '-pdf -pdflatex=context',
 		\ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
 		\}
-
-
 "viewer that is launched
 let g:vimtex_view_method='zathura'
 

@@ -1,52 +1,72 @@
-snippet bframe "frame environment" bA
-\\begin{frame}{${1}}
-	${0:${VISUAL}}
-\\end{frame}
+snippet benv "begin environment" bA
+\begin{${1}}${2}
+${0:${VISUAL}}
+\end{$1}
 endsnippet
-snippet bfrfr "frame environment" bA
-\\begin{frame}[${2:fragile}{${1}}
+
+snippet prgr "paragraph" bA
+\paragraph{${1:Hinweis:}}$0
+endsnippet
+
+snippet bframe "frame environment" bA
+\begin{frame}{${1}}
 	${0:${VISUAL}}
-\\end{frame}
+\end{frame}
+endsnippet
+snippet bfrop "frame environment" bA
+\begin{frame}[${2:fragile}]{${1}}
+	${0:${VISUAL}}
+\end{frame}
 endsnippet
 
 snippet frame "frame command" bA
-\\frame[${1}]{${0:${VISUAL}}}
+\frame[${1}]{${0:${VISUAL}}}
 endsnippet
 
 snippet stanfr "standout frame" b
 \frame[plain,standout]{\Huge ${0}}
 endsnippet
+snippet bibfr "bibliography frame" bA
+\frame[plain,allowframebreaks]{\frametitle{Bibliography} \printbibliography[heading=none]}
+endsnippet
 snippet lect "lecture" bA
-\\lecture{${1}}{${2:lec:${3}}}
-endsnippet
-snippet bblock "block environment" bAm
-\\begin{block}{${1:title}}
-	${0:${VISUAL}}
-\\end{block}
-endsnippet
-snippet alrt "alert text" wA
-\\alert{${1:${VISUAL:text}}} ${0}
-endsnippet
-snippet bitem "itemize" bAw
-\\begin{itemize}[${1:<+->}]
-	\\item ${0}
-\\end{itemize}
+\lecture{${1}}{${2:lec:`!p
+m = re.match("(Week|Woche)\s+(\d+)", t[1])
+snip.rv = m[2] if m is not None else ''
+`}}${0}
 endsnippet
 
-snippet it "item" bwm
-\\item ${0}
+snippet bblock "block environment" bAm
+\begin{block}{${1:title}}
+	${0:${VISUAL}}
+\end{block}
+endsnippet
+snippet alrt "alert text" wA
+\alert{${1:${VISUAL:text}}} ${0}
+endsnippet
+snippet bitem "itemize" bAw
+\begin{itemize}${1:[<+->]}
+	\item ${0:${VISUAL}}
+\end{itemize}
+endsnippet
+snippet benum "enumerate" bA
+\begin{enumerate}
+	\item ${0:${VISUAL}}
+\end{enumerate}
 endsnippet
 
 snippet lst "lisitngs environ" bA
-\\begin{lstlisting}[language=${1:language}]
+\begin{lstlisting}${1:[${2:language={${3}},}${4:basicstyle=${5:\footnotesize\ttfamily}}]}
 	${0:${VISUAL}}
-\\end{lstlisting}
+\end{lstlisting}
 endsnippet
 
 snippet lsi
-	\\lstinline|${1}| ${0}
+\lstinline|${1}| ${0}
 endsnippet
-# Hyperlinks
-snippet enq enquote
-	\\enquote{${1:${VISUAL:text}}} ${0}
+snippet "\"(\w+)\"en" "Parenthesis (postfix)" wAr
+\enquote{`!p snip.rv = match.group(1)`}$0
+endsnippet
+snippet "\'(\w+)\'en" "Parenthesis (postfix)" wAr
+\enquote*{`!p snip.rv = match.group(1)`}$0
 endsnippet
