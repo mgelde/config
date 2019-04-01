@@ -26,9 +26,11 @@ endsnippet
 snippet stanfr "standout frame" b
 \frame[plain,standout]{\Huge ${0}}
 endsnippet
+
 snippet bibfr "bibliography frame" bA
 \frame[plain,allowframebreaks]{\frametitle{Bibliography} \printbibliography[heading=none]}
 endsnippet
+
 snippet lect "lecture" bA
 \lecture{${1}}{${2:lec:`!p
 m = re.match("(Week|Woche)\s+(\d+)", t[1])
@@ -41,18 +43,31 @@ snippet bblock "block environment" bAm
 	${0:${VISUAL}}
 \end{block}
 endsnippet
+
 snippet alrt "alert text" wA
 \alert{${1:${VISUAL:text}}} ${0}
 endsnippet
+
 snippet bitem "itemize" bAw
 \begin{itemize}${1:[<+->]}
 	\item ${0:${VISUAL}}
 \end{itemize}
 endsnippet
+
 snippet benum "enumerate" bA
 \begin{enumerate}
 	\item ${0:${VISUAL}}
 \end{enumerate}
+endsnippet
+
+snippet bdesc "description" bA
+\begin{description}
+	\item[${1}] ${0}
+\end{description}
+endsnippet
+
+snippet it "item" b
+\item${1:[${2}]}${0}
 endsnippet
 
 snippet lst "lisitngs environ" bA
@@ -64,9 +79,35 @@ endsnippet
 snippet lsi
 \lstinline|${1}| ${0}
 endsnippet
+
 snippet "\"(.+)\"en" "Parenthesis (postfix)" wAr
 \enquote{`!p snip.rv = match.group(1)`}$0
 endsnippet
+
 snippet "\'(.+)\'en" "Parenthesis (postfix)" wAr
 \enquote*{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet sect "section" b
+\section{${1}}
+${0}
+endsnippet
+
+snippet subsec "subsection" b
+\subsection{${1}}
+${0}
+endsnippet
+
+snippet exc "exercise" b
+\begin{exercise}
+${0:${VISUAL}}
+\end{exercise}
+endsnippet
+
+snippet "\*(.*)\*dfe" "defemph" wAr
+\dfe{`!p snip.rv = match.group(1)`}${0}
+endsnippet
+
+snippet "\*(.*)\*cs" "console" wAr
+\cs{`!p snip.rv = match.group(1)`}${0}
 endsnippet
