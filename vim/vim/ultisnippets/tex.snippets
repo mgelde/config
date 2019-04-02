@@ -80,11 +80,11 @@ snippet lsi
 \lstinline|${1}| ${0}
 endsnippet
 
-snippet "\"(.+)\"en" "Parenthesis (postfix)" wAr
+snippet "\"(.+)\"enq" "Parenthesis (postfix)" wAr
 \enquote{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\'(.+)\'en" "Parenthesis (postfix)" wAr
+snippet "\'(.+)\'enq" "Parenthesis (postfix)" wAr
 \enquote*{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
@@ -93,8 +93,18 @@ snippet sect "section" b
 ${0}
 endsnippet
 
+snippet *sect "section" b
+\section*{${1}}
+${0}
+endsnippet
+
 snippet subsec "subsection" b
 \subsection{${1}}
+${0}
+endsnippet
+
+snippet *subsec "subsection" b
+\subsection*{${1}}
 ${0}
 endsnippet
 
@@ -104,10 +114,30 @@ ${0:${VISUAL}}
 \end{exercise}
 endsnippet
 
-snippet "\*(.*)\*dfe" "defemph" wAr
-\dfe{`!p snip.rv = match.group(1)`}${0}
+snippet "\"(.+)\"dfe" "defemph" wAr
+\dfe{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\*(.*)\*cs" "console" wAr
+snippet "\"(.+)\"bf" "bold" wAr
+\textbf{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.+)\"it" "italic" wAr
+\textit{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.+)\"emp" "emph" wAr
+\emph{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.*)\"cs" "console" wAr
 \cs{`!p snip.rv = match.group(1)`}${0}
+endsnippet
+
+snippet $ "math" A
+\$${1:${VISUAL}}\$$0
+endsnippet
+
+snippet "\~(.+)\~" "tilde" rA
+\tilde{`!p snip.rv = match.group(1)`}$0
 endsnippet
