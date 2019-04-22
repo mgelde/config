@@ -44,9 +44,6 @@ snippet bblock "block environment" bAm
 \end{block}
 endsnippet
 
-snippet alrt "alert text" wA
-\alert{${1:${VISUAL:text}}} ${0}
-endsnippet
 
 snippet bitem "itemize" bAwm
 \begin{itemize}${1:[<+->]}
@@ -86,6 +83,10 @@ endsnippet
 
 snippet "\'(.+)\'enq" "Parenthesis (postfix)" wAr
 \enquote*{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.+)\"alr" "alert" wAr
+\alert{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 snippet sect "section" b
@@ -130,7 +131,7 @@ snippet "\"(.+)\"emp" "emph" wAr
 \emph{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\"(.*)\"cs" "console" wAr
+snippet "\"(.+)\"cs" "console" wAr
 \cs{`!p snip.rv = match.group(1)`}${0}
 endsnippet
 
@@ -140,4 +141,8 @@ endsnippet
 
 snippet "\~(.+)\~" "tilde" rA
 \tilde{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.+)\"alg" "algoname" wAr
+\algoname{`!p snip.rv = match.group(1)`}$0
 endsnippet
