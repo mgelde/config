@@ -135,6 +135,10 @@ snippet "\"(.+)\"cs" "console" wAr
 \cs{`!p snip.rv = match.group(1)`}${0}
 endsnippet
 
+snippet "\"(.*)\"sf" "serif" wAr
+\textsf{`!p snip.rv = match.group(1)`}${0}
+endsnippet
+
 snippet $ "math" A
 \$${1:${VISUAL}}\$$0
 endsnippet
