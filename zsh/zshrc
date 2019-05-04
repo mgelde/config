@@ -127,7 +127,7 @@ fi
 # Note: We escape the `$` character to ensure that the PROMPT variable still holds
 # the string `${MY_VIM_PROMPT}` in order for that to be expanded only upon zle-reset-prompt
 # above.
-PROMPT="%B%242F%n%f@%F{magenta}%m%f%b%F{cyan}:%5~ %f%{\${MY_VIM_PROMPT}%}%#>%f "
+PROMPT="%245F%n%239F@%60F%m%f%240F:%5~%{\${MY_VIM_PROMPT}%}%#%f "
 RPROMPT="%{%F{green}%}\$vcs_info_msg_0_%{%f%}%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
 if [[ ! -z "$SSH_CLIENT" ]]; then
     RPROMPT="$RPROMPT %{%F{red}%}⇄"
