@@ -202,7 +202,7 @@ colors:
     yellow:  '0xe6c547'
     blue:    '0x7aa6da'
     magenta: '0xc397d8'
-    cyan:    '0x70c0ba'
+    cyan:    '0x70c0c0'
     white:   '0xeaeaea'
 
   # Bright colors
@@ -213,7 +213,7 @@ colors:
     yellow:  '0xe7c547'
     blue:    '0x7aa6da'
     magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
+    cyan:    '0x54ced0'
     white:   '0xffffff'
 
   # Dim colors
