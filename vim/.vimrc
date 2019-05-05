@@ -99,7 +99,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "(some colorscheme commands apparently clear user-defined groups)
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 "Set the default color-scheme
-colorscheme desert
+colorscheme solarized
 
 "Make search hits readable
 hi Search cterm=NONE ctermfg=black ctermbg=blue
