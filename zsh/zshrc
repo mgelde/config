@@ -99,7 +99,7 @@ if [[ ${EUID} != 0 ]]; then
     zstyle ':vcs_info:*' enable git
     precmd_vcs_info() { vcs_info }
     precmd_functions+=( precmd_vcs_info )
-    zstyle ':vcs_info:git:*' formats '%b'
+    zstyle ':vcs_info:git:*' formats '%{%28F%}%b%f'
 fi
 
 #Widgets updating the environment variable once the VIM mode changes.
@@ -128,7 +128,7 @@ fi
 # the string `${MY_VIM_PROMPT}` in order for that to be expanded only upon zle-reset-prompt
 # above.
 PROMPT="%245F%n%239F@%60F%m%f%240F:%5~%{\${MY_VIM_PROMPT}%}%#%f "
-RPROMPT="%{%28F%}\$vcs_info_msg_0_%{%f%}%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
+RPROMPT="\$vcs_info_msg_0_%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
 if [[ ! -z "$SSH_CLIENT" ]]; then
     RPROMPT="$RPROMPT %{%F{red}%}⇄"
 fi
