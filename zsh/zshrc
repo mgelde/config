@@ -130,7 +130,7 @@ fi
 PROMPT="%245F%n%239F@%60F%m%f%240F:%5~%{\${MY_VIM_PROMPT}%}%#%f "
 RPROMPT="\$vcs_info_msg_0_%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
 if [[ ! -z "$SSH_CLIENT" ]]; then
-    RPROMPT="$RPROMPT %{%F{red}%}⇄"
+    RPROMPT="$RPROMPT %{%F{red}%}⇄%f"
 fi
 
 ## Plugins
