@@ -18,6 +18,12 @@ alias make="nocorrect make -j$(nproc)"
 # nocorrects
 alias sudo="nocorrect sudo"
 alias man="nocorrect man"
-alias vim="nocorrect vim --servername VIM"
+
+# Use --servername if it is compiled in
+if vim --version | grep "+clientserver" > /dev/null 2>&1; then
+    alias vim="nocorrect vim --servername VIM"
+else
+    alias vim="nocorrect vim"
+fi
 alias mkdir="nocorrect mkdir"
 alias pgrep='nocorrect pgrep'
