@@ -1,4 +1,12 @@
-alias ls="ls --color=auto"
+# vim: set ft=zsh :
+
+# Use lsd if it exists
+if which lsd > /dev/null 2>&1; then
+    alias ls="lsd"
+else
+    alias ls="ls --color=auto"
+fi
+
 alias la="ls -lah"
 alias ll="ls -lh"
 alias l="ls -l"

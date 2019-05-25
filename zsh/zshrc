@@ -94,7 +94,7 @@ HISTFILE=~/.zshist
 setopt prompt_subst
 
 #Version control info for git (only for non-root)
-if [[ ${EUID} != 0 ]]; then
+if [[ "${EUID}" != 0 ]]; then
     autoload -Uz vcs_info
     zstyle ':vcs_info:*' enable git
     precmd_vcs_info() { vcs_info }
@@ -111,7 +111,7 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     function zle-line-init zle-keymap-select
     {
         echoti smkx
-        if [[ $KEYMAP == "viins" || $KEYMAP == "main" ]]; then
+        if [[ "$KEYMAP" == "viins" || "$KEYMAP" == "main" ]]; then
             MY_VIM_PROMPT=""
         elif [[ $KEYMAP == "vicmd" ]]; then
             MY_VIM_PROMPT="%009F"
@@ -137,9 +137,9 @@ fi
 # We enable plugins only for non-root shells. Should not get too comfortable on a root shell
 # anyway, plus plugins can slow things down on some devices.
 
-if [[ ${EUID} != 0 ]]; then
+if [[ "${EUID}" != 0 ]]; then
     #enable autojump
-    if [[ $commands[autojump] ]]; then
+    if [[ "$commands[autojump]" ]]; then
         source /usr/share/autojump/autojump.zsh
     fi
     # Autosuggestions a la fish
@@ -150,17 +150,17 @@ fi
 
 ## Customizations
 # Alias definitions
-source $MY_CONF_DIR/aliases
+source "$MY_CONF_DIR"/aliases
 
 # local configuration
-if [[ -d $MY_LOCAL_CONF_DIR ]]; then
-    for file in $MY_LOCAL_CONF_DIR/*; do
+if [[ -d "$MY_LOCAL_CONF_DIR" ]]; then
+    for file in "$MY_LOCAL_CONF_DIR"/*; do
         source "$file"
     done
 fi
 
 # Syntax highlighting (must be sourced at the end)
-if [[ ${EUID} != 0 ]]; then
+if [[ "${EUID}" != 0 ]]; then
     if [[ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
         source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
