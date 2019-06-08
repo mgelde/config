@@ -9,3 +9,6 @@
 /vim/vim/custom/**
 
 /vim/vim/.netrwhist
+
+# compiled spell-files
+*.add.spl
