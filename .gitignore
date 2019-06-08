@@ -12,3 +12,7 @@
 
 # compiled spell-files
 *.add.spl
+
+## Python
+**/__pycache__/**
+*.pyc
