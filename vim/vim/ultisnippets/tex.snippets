@@ -1,17 +1,22 @@
 global !p
 
-def in_frame():
+def in_environment(environ):
 	""" Determine if current line is within a frame """
-
-	pair = vim.eval("searchpairpos('\\\\begin{frame}','','\\\\end{frame}', 'bnW', '', max([line('.') - 80, 1]))")
+	pair = vim.eval(
+		"searchpairpos('\\\\begin{{{env:s}}}','','\\\\end{{{env:s}}}', 'bnW', '', max([line('.') - 80, 1]))"
+		.format(env=environ))
 	return pair != ['0', '0']
+
+
+def in_frame():
+	return in_environment("frame")
 
 def itemize():
-	""" Determine if current line is within an itemize env """
+	return in_environment("itemize")
 
-	pair = vim.eval("searchpairpos('\\\\begin{itemize}','','\\\\end{itemize}', 'bnW', '', max([line('.') - 80, 1]))")
-	return pair != ['0', '0']
-#TODO: Make this generic for enumerate and so on
+def enumerate():
+	return in_environment("enumerate")
+
 endglobal
 
 snippet benv "begin environment" bA
@@ -77,9 +82,9 @@ snippet bdesc "description" bAwm
 \end{description}
 endsnippet
 
-context "itemize()"
+context "itemize() or enumerate()"
 snippet it "item" bmAw
-\item ${0}
+\item ${0:${VISUAL}}
 endsnippet
 
 snippet lst "lisitngs environ" bA
