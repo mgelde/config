@@ -1,0 +1,51 @@
+global !p
+
+cIncludedId = vim.eval("hlID('cIncluded')")
+
+def inside_include():
+	synstack = vim.eval('synstack(line("."), col("."))')
+	return len(synstack) > 0 and synstack[-1] == cIncludedId
+endglobal
+
+snippet inc "include" bmwA
+#include <${1}>
+$0
+endsnippet
+
+snippet Inc "include" bmwA
+#include "${1:`!p snip.rv = snip.basename + ".h"`}"
+$0
+endsnippet
+
+context "inside_include()"
+snippet stdi "stdio.h" iA
+stdio.h$0
+endsnippet
+
+context "inside_include()"
+snippet uni "unistd.h" iA
+unistd.h$0
+endsnippet
+
+context "inside_include()"
+snippet stdl "stdlib.h" iA
+stdlib.h$0
+endsnippet
+
+context "inside_include()"
+snippet str "string.h" iA
+string.h$0
+endsnippet
+
+snippet struct "struct" bmwA
+struct ${1} {
+	$0
+};
+endsnippet
+
+snippet main "main()" bmw
+int main(int argc, char **argv) {
+	$0
+	return 0;
+}
+endsnippet

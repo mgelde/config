@@ -1,0 +1,45 @@
+extends c
+
+priority 10
+
+## Common header files
+context "inside_include()"
+snippet ios "iostream" iA
+iostream$0
+endsnippet
+
+context "inside_include()"
+snippet mem "memory" iA
+memory$0
+endsnippet
+
+context "inside_include()"
+snippet vec "vector" iA
+vector$0
+endsnippet
+
+context "inside_include()"
+snippet str "string" iA
+string$0
+endsnippet
+
+snippet class "class" bwmsA
+class ${1} ${2}`!p snip.rv = ' ' if len(t[2]) > 0  else ''`{
+	$0
+};
+endsnippet
+
+snippet templ "template" bmwA
+template <${1}>
+$0
+endsnippet
+
+snippet lits "string lierals" bmw
+using namespace std::string_literals;
+$0
+endsnippet
+
+snippet usn "using namespace" bmw
+using namespace ${1};
+$0
+endsnippet
