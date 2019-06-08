@@ -1,70 +1,85 @@
+global !p
+
+def in_frame():
+	""" Determine if current line is within a frame """
+
+	pair = vim.eval("searchpairpos('\\\\begin{frame}','','\\\\end{frame}', 'bnW', '', max([line('.') - 80, 1]))")
+	return pair != ['0', '0']
+
+def itemize():
+	""" Determine if current line is within an itemize env """
+
+	pair = vim.eval("searchpairpos('\\\\begin{itemize}','','\\\\end{itemize}', 'bnW', '', max([line('.') - 80, 1]))")
+	return pair != ['0', '0']
+#TODO: Make this generic for enumerate and so on
+endglobal
+
 snippet benv "begin environment" bA
 \begin{${1}}${2}
 ${0:${VISUAL}}
 \end{$1}
 endsnippet
 
-snippet prgr "paragraph" bA
+snippet prgr "paragraph" bAw
 \paragraph{${1:Hinweis:}}$0
 endsnippet
 
-snippet bframe "frame environment" bA
+snippet bframe "frame environment" bAw
 \begin{frame}{${1}}
 	${0:${VISUAL}}
 \end{frame}
 endsnippet
-snippet bfrop "frame environment" bA
+
+snippet bfrop "frame environment" bAw
 \begin{frame}[${2:fragile}]{${1}}
 	${0:${VISUAL}}
 \end{frame}
 endsnippet
 
-snippet frame "frame command" bA
+snippet frame "frame command" bAw
 \frame[${1}]{${0:${VISUAL}}}
 endsnippet
 
-snippet stanfr "standout frame" b
+snippet stanfr "standout frame" bAw
 \frame[plain,standout]{\Huge ${0}}
 endsnippet
 
-snippet bibfr "bibliography frame" bA
+snippet bibfr "bibliography frame" bAw
 \frame[plain,allowframebreaks]{\frametitle{Bibliography} \printbibliography[heading=none]}
 endsnippet
 
-snippet lect "lecture" bA
-\lecture{${1}}{${2:lec:`!p
-m = re.match("(Week|Woche)\s+(\d+)", t[1])
-snip.rv = m[2] if m is not None else ''
-`}}${0}
-endsnippet
-
+context "in_frame()"
 snippet bblock "block environment" bAm
 \begin{block}{${1:title}}
 	${0:${VISUAL}}
 \end{block}
 endsnippet
 
-
 snippet bitem "itemize" bAwm
-\begin{itemize}${1:[<+->]}
+\begin{itemize}${1:`!p
+snip.rv = '[<+->]' if in_frame() else ''
+`}
 	\item ${0:${VISUAL}}
 \end{itemize}
 endsnippet
 
-snippet benum "enumerate" bAm
-\begin{enumerate}
+snippet benum "enumerate" bAwm
+\begin{enumerate}${1:`!p
+snip.rv = '[<+->]' if in_frame() else ''
+`}
 	\item ${0:${VISUAL}}
 \end{enumerate}
 endsnippet
 
-snippet bdesc "description" bA
+snippet bdesc "description" bAwm
 \begin{description}
 	\item[${1}] ${0}
 \end{description}
 endsnippet
 
-snippet it "item" b
-\item${1:[${2}]}${0}
+context "itemize()"
+snippet it "item" bmAw
+\item ${0}
 endsnippet
 
 snippet lst "lisitngs environ" bA
@@ -85,16 +100,12 @@ snippet "\'(.+)\'enq" "Parenthesis (postfix)" wAr
 \enquote*{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\"(.+)\"alr" "alert" wAr
-\alert{`!p snip.rv = match.group(1)`}$0
-endsnippet
-
 snippet sect "section" b
 \section{${1}}
 ${0}
 endsnippet
 
-snippet *sect "section" b
+snippet ssect "section" b
 \section*{${1}}
 ${0}
 endsnippet
@@ -104,19 +115,9 @@ snippet subsec "subsection" b
 ${0}
 endsnippet
 
-snippet *subsec "subsection" b
+snippet ssubsec "subsection" b
 \subsection*{${1}}
 ${0}
-endsnippet
-
-snippet exc "exercise" b
-\begin{exercise}
-${0:${VISUAL}}
-\end{exercise}
-endsnippet
-
-snippet "\"(.+)\"dfe" "defemph" wAr
-\dfe{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 snippet "\"(.+)\"bf" "bold" wAr
@@ -131,10 +132,6 @@ snippet "\"(.+)\"emp" "emph" wAr
 \emph{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\"(.+)\"cs" "console" wAr
-\cs{`!p snip.rv = match.group(1)`}${0}
-endsnippet
-
 snippet "\"(.*)\"sf" "serif" wAr
 \textsf{`!p snip.rv = match.group(1)`}${0}
 endsnippet
@@ -143,10 +140,6 @@ snippet $ "math" A
 \$${1:${VISUAL}}\$$0
 endsnippet
 
-snippet "\~(.+)\~" "tilde" rA
+snippet "\~(.+)\~" "tilde" rAm
 \tilde{`!p snip.rv = match.group(1)`}$0
-endsnippet
-
-snippet "\"(.+)\"alg" "algoname" wAr
-\algoname{`!p snip.rv = match.group(1)`}$0
 endsnippet
