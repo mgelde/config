@@ -222,6 +222,34 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
+" Add directories to runtime-path
+"   based on config files
+function! SetupRtp()
+py3 << EOF
+import os.path
+import vim
+
+name = os.path.realpath(vim.current.buffer.name)
+
+dirname, last = os.path.split(name)
+rtps = []
+while last is not "":
+    rtprc = os.path.join(dirname, ".vimrtprc")
+    if os.path.isfile(rtprc): # also false if doesn't exist
+        with open(rtprc, "r") as f:
+            lines = f.readlines()
+        if len(lines) > 0:
+            rtps.extend(lines)
+        else:
+            rtps.append(dirname)
+    dirname, last = os.path.split(dirname)
+vim.command('set rtp+={}'.format(",".join(rtps)))
+EOF
+endfunction
+
+call SetupRtp()
+
+
 :if !empty(glob("~/.vim/custom"))
 for f in split(glob("~/.vim/custom/*"), "\n")
     exe "source" f
