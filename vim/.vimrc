@@ -106,7 +106,7 @@ hi Search cterm=NONE ctermfg=black ctermbg=blue
 
 "Make spelling error highlighting a little easier on the eyes
 hi clear SpellBad
-hi SpellBad cterm=italic,bold ctermbg=NONE ctermfg=magenta
+hi SpellBad cterm=bold,underline ctermbg=NONE ctermfg=red
 
 "Define a function to highlight trailing whitespaces
 "   This function checks for a window-local variable
