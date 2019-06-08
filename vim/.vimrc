@@ -91,7 +91,7 @@ let g:airline_theme="onedark"
 let g:airline#extensions#branch#enabled = 1 "enable git integration
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1 "show buffers at the top
-let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'default'
 
 "##########  Trailing Whitespace ###########
 
@@ -200,8 +200,8 @@ let g:vimtex_compiler_latexmk_engines = {
         \ 'xelatex'          : '-xelatex',
         \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
         \ 'context (luatex)' : '-pdf -pdflatex=context',
-		\ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
-		\}
+        \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+        \}
 "viewer that is launched
 let g:vimtex_view_method='zathura'
 
