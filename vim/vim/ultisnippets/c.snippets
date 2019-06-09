@@ -45,33 +45,31 @@ int main(int argc, char **argv) {
 }
 endsnippet
 
-snippet if "if" bmwA
-if (${1}) {
+snippet if "if" bmw
+if (${1:${VISUAL}}) {
 	${2}
 }$0
 endsnippet
 
-snippet { "else" mwA
-{
-	${1}
-}$0
+snippet { "block" mw
+{ ${1:${VISUAL}} }$0
 endsnippet
 
-snippet while "while" bmwA
+snippet while "while" bmw
 while (${1}) {
-	${2}
+	${2:${VISUAL}}
 }
 $0
 endsnippet
 
-snippet for "for" bmwA
+snippet for "for" bmw
 for (${1}; ${2}; ${3}) {
-	${4}
+	${4:${VISUAL}}
 }
 $0
 endsnippet
 
-snippet do "do-while" bmwA
+snippet do "do-while" bmw
 do {
 	${2}
 } while (${1});
@@ -83,4 +81,8 @@ snippet iguard "include guard" bmwA
 #define $1
 $0
 #endif // $1
+endsnippet
+
+snippet func "function" bmwA
+${3} ${1}(${2})$0
 endsnippet
