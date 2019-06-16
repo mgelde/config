@@ -211,6 +211,13 @@ noremap <leader>yt :YcmCompleter GetType <CR>
 noremap <leader>yg :YcmCompleter GoToDefinition <CR>
 noremap <leader>yd :YcmCompleter GetDoc <CR>
 
+"  Effectively disable the auto-suggestions based on identifiers, because it
+"    is annoying in TeX files. Since this is a global variable, we disable it
+"    for every kind of file.
+let g:ycm_min_num_of_chars_for_completion=99
+
+
+
 "CptrlP
 noremap <C-B> :CtrlPBuffer <CR>
 noremap <leader>cp :CtrlPMRU <CR>
