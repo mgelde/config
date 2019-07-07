@@ -14,3 +14,5 @@ PIDs
 unshare
 GIDs
 UIDs
+sandboxing
+hostname
