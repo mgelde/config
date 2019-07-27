@@ -1,0 +1,31 @@
+#!/bin/bash
+
+logger -p news.info "Running .xprofile"
+
+/usr/bin/xscreensaver -nosplash &
+
+/usr/bin/setxkbmap de
+
+if [[ -e ~/.Xmodmap ]]; then
+    logger -p news.info "Xmodmapping..."
+    /usr/bin/xmodmap ~/.Xmodmap
+fi
+
+#wallpaper
+if [[ -f "${HOME}/.fehbg" ]]; then
+    source "${HOME}/.fehbg"
+fi
+
+# composite manager
+if [[ -f /usr/bin/compton ]]; then
+    /usr/bin/compton -b
+fi
+
+# use local i3 config, where available
+CONFIG_BASE="${HOME}/config/i3/config"
+CONFIG_LOCAL="${HOME}/.i3/local.conf"
+if [[ -f "${CONFIG_LOCAL}" ]]; then
+    cat "${CONFIG_BASE}" "${CONFIG_LOCAL}" > "${HOME}/.config/i3/config"
+else
+    cat "${CONFIG_BASE}" > "${HOME}/.config/i3/config"
+fi

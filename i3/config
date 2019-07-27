@@ -23,21 +23,13 @@ font pango:Source Code Pro Regular 9
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# desktop wallpaper
-exec --no-startup-id sh ~/.fehbg
-
-# composite manager
-exec --no-startup-id compton -b
 
 # start a terminal
 bindsym $mod+Return exec /usr/bin/alacritty -e tmux attach
-bindsym $mod+Shift+Return exec /usr/bin/terminator
+bindsym $mod+Shift+Return exec /usr/bin/alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-#lock
-bindsym $mod+l exec --no-startup-id i3lock -t -i ~/Pictures/50567-liquid.png
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#202020' -sb '#969696' -sf '#F0F0F0'"
