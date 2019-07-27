@@ -18,7 +18,7 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:DejaVu Sans Mono 10, Source Code Pro 9
+font pango:Source Code Pro Regular 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -26,15 +26,18 @@ floating_modifier $mod
 # desktop wallpaper
 exec --no-startup-id sh ~/.fehbg
 
+# composite manager
+exec --no-startup-id compton -b
+
 # start a terminal
-bindsym $mod+Return exec /usr/bin/terminator -e 'tmux attach'
+bindsym $mod+Return exec /usr/bin/alacritty -e tmux attach
 bindsym $mod+Shift+Return exec /usr/bin/terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 #lock
-bindsym $mod+l exec --no-startup-id i3lock -d -i ~/Pictures/hs-2002-11-d-1440x960_wallpaper.png
+bindsym $mod+l exec --no-startup-id i3lock -t -i ~/Pictures/50567-liquid.png
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -49,18 +52,6 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -91,6 +82,17 @@ bindsym $mod+a focus parent
 ### workspaces ###
 
 #workspace setup
+#
+workspace 1  output HDMI-2
+workspace 2  output HDMI-2
+workspace 3  output HDMI-2
+workspace 4  output HDMI-2
+workspace 5  output HDMI-2
+workspace 6  output DP-1
+workspace 7  output DP-1
+workspace 8  output DP-1
+workspace 9  output DP-1
+workspace 10 output DP-1
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -106,6 +108,9 @@ bindsym $mod+0 workspace 10
 
 bindsym $mod+Mod1+Right workspace next
 bindsym $mod+Mod1+Left workspace prev
+
+bindsym $mod+Shift+Left move container to output left
+bindsym $mod+Shift+Right move container to output right
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -159,5 +164,11 @@ focus_follows_mouse  no
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        colors {
+            background #202020
+            statusline #fafafa
+        }
+        tray_output primary
         status_command i3status --config ~/.i3status.conf
+        font pango:Source Code Pro Light 10
 }
