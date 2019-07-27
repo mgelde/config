@@ -40,7 +40,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+l exec --no-startup-id i3lock -t -i ~/Pictures/50567-liquid.png
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#202020' -sb '#969696' -sf '#F0F0F0'"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -160,13 +160,28 @@ bindsym $mod+r mode "resize"
 new_window 1pixel
 focus_follows_mouse  no
 
+client.focused          #30A0F0 #30A0F0 #FFFFFF #2E9EF4   #285577
+client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
+client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+
+client.background       #FFFFFF
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         colors {
             background #202020
-            statusline #fafafa
+            statusline #F0F0F0
+            separator  #666666
+
+            focused_workspace  #30A0F0 #1A5782 #FFFFFF
+            active_workspace   #333333 #222222 #FFFFFF
+            inactive_workspace #333333 #222222 #888888
+            urgent_workspace   #2F343A #900000 #FFFFFF
+            binding_mode       #2F343A #900000 #FFFFFF
         }
         tray_output primary
         status_command i3status --config ~/.i3status.conf
