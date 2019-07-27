@@ -4,8 +4,6 @@ logger -p news.info "Running .xprofile"
 
 /usr/bin/xscreensaver -nosplash &
 
-/usr/bin/setxkbmap de
-
 if [[ -e ~/.Xmodmap ]]; then
     logger -p news.info "Xmodmapping..."
     /usr/bin/xmodmap ~/.Xmodmap
