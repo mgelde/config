@@ -29,3 +29,8 @@ if [[ -f "${CONFIG_LOCAL}" ]]; then
 else
     cat "${CONFIG_BASE}" > "${HOME}/.config/i3/config"
 fi
+
+#local changes
+if [[ -f "${HOME}/.xprofile.local" ]]; then
+    source "${HOME}/.xprofile.local"
+fi
