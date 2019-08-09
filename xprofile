@@ -9,11 +9,6 @@ if [[ -e ~/.Xmodmap ]]; then
     /usr/bin/xmodmap ~/.Xmodmap
 fi
 
-#wallpaper
-if [[ -f "${HOME}/.fehbg" ]]; then
-    source "${HOME}/.fehbg"
-fi
-
 # composite manager
 if [[ -f /usr/bin/compton ]]; then
     /usr/bin/compton -b
@@ -31,4 +26,9 @@ fi
 #local changes
 if [[ -f "${HOME}/.xprofile.local" ]]; then
     source "${HOME}/.xprofile.local"
+fi
+
+#wallpaper
+if [[ -f "${HOME}/.fehbg" ]]; then
+    sh "${HOME}/.fehbg"
 fi
