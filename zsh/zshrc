@@ -139,7 +139,7 @@ fi
 
 if [[ "${EUID}" != 0 ]]; then
     #enable autojump
-    if [[ "$commands[autojump]" ]]; then
+    if [[ ! -z "$commands[autojump]" ]]; then
         source /usr/share/autojump/autojump.zsh
     fi
     # Autosuggestions a la fish
