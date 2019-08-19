@@ -19,7 +19,9 @@ hostname
 cgroup
 hypervisor
 hypervisors
-virtualization
 virtualized
 virtualizes
 virtualize
+virtualization
+hypercall
+hypercalls
