@@ -15,12 +15,10 @@ if [[ -f /usr/bin/compton ]]; then
 fi
 
 # use local i3 config, where available
-CONFIG_BASE="${HOME}/config/i3/config"
-CONFIG_LOCAL="${HOME}/.i3/local.conf"
-if [[ -f "${CONFIG_LOCAL}" ]]; then
-    cat "${CONFIG_BASE}" "${CONFIG_LOCAL}" > "${HOME}/.config/i3/config"
+if [[ ! -f "${HOME}/config/i3/merge_config.sh" ]]; then
+    logger -p syslog.warning "Cannot find merge script for i3 config"
 else
-    cat "${CONFIG_BASE}" > "${HOME}/.config/i3/config"
+    bash "${HOME}/config/i3/merge_config.sh"
 fi
 
 #local changes
