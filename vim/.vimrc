@@ -27,6 +27,8 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 Plug 'SirVer/ultisnips'
 
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+
 call plug#end()
 :endif
 

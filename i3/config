@@ -124,7 +124,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-new_window 1pixel
+default_border normal
 focus_follows_mouse  no
 
 client.focused          #4D77BF #4D77BF #FFFFFF #4D77BF   #285577
@@ -149,7 +149,6 @@ bar {
             urgent_workspace   #2F343A #900000 #FFFFFF
             binding_mode       #2F343A #900000 #FFFFFF
         }
-        i3bar_command i3bar --transparency
         tray_output primary
         status_command i3status --config ~/.i3status.conf
         font pango:Source Code Pro Light 9
