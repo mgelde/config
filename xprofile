@@ -2,23 +2,25 @@
 
 logger -p news.info "Running .xprofile"
 
-/usr/bin/xscreensaver -nosplash &
 
-if [[ -e ~/.Xmodmap ]]; then
-    logger -p news.info "Xmodmapping..."
-    /usr/bin/xmodmap ~/.Xmodmap
-fi
+if [[ -f "${HOME}/.config/USE_I3" ]]; then
+    /usr/bin/xscreensaver -nosplash &
+    if [[ -e ~/.Xmodmap ]]; then
+        logger -p news.info "Xmodmapping..."
+        /usr/bin/xmodmap ~/.Xmodmap
+    fi
 
-# composite manager
-if [[ -f /usr/bin/compton ]]; then
-    /usr/bin/compton -b
-fi
+    # use local i3 config, where available
+    if [[ ! -f "${HOME}/config/i3/merge_config.sh" ]]; then
+        logger -p syslog.warning "Cannot find merge script for i3 config"
+    else
+        bash "${HOME}/config/i3/merge_config.sh"
+    fi
 
-# use local i3 config, where available
-if [[ ! -f "${HOME}/config/i3/merge_config.sh" ]]; then
-    logger -p syslog.warning "Cannot find merge script for i3 config"
-else
-    bash "${HOME}/config/i3/merge_config.sh"
+    # composite manager
+    if [[ -f /usr/bin/compton ]]; then
+        /usr/bin/compton -b
+    fi
 fi
 
 #local changes
