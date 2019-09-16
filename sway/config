@@ -145,7 +145,7 @@ bar {
         colors {
             background #202020D6
             statusline #F0F0F0f6
-            separator  #666666f6
+            separator  #777777FF
 
             focused_workspace  #202020D6 #1A5782E6 #FFFFFF
             active_workspace   #202020D6 #111111E6 #FFFFFF
@@ -156,6 +156,7 @@ bar {
         tray_output primary
         status_command i3status --config ~/.i3status.conf
         font pango:Source Code Pro Light 9
+        separator_symbol '⋮'
 }
 
 #lock
