@@ -21,14 +21,14 @@ if [[ -f "${HOME}/.config/USE_I3" ]]; then
     if [[ -f /usr/bin/compton ]]; then
         /usr/bin/compton -b
     fi
+
+    #wallpaper
+    if [[ -f "${HOME}/.fehbg" ]]; then
+        sh "${HOME}/.fehbg"
+    fi
 fi
 
 #local changes
 if [[ -f "${HOME}/.xprofile.local" ]]; then
     source "${HOME}/.xprofile.local"
-fi
-
-#wallpaper
-if [[ -f "${HOME}/.fehbg" ]]; then
-    sh "${HOME}/.fehbg"
 fi

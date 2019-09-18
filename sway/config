@@ -158,5 +158,3 @@ bar {
         font pango:Source Code Pro Light 9
         separator_symbol '⋮'
 }
-
-
