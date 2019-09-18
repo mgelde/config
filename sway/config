@@ -159,6 +159,4 @@ bar {
         separator_symbol '⋮'
 }
 
-#lock
-bindsym $mod+l exec --no-startup-id swaylock -t -i /home/marcus/Pictures/coffee-beans-1.png
 
