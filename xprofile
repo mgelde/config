@@ -2,8 +2,18 @@
 
 logger -p news.info "Running .xprofile"
 
+LOGIN_CMD="i3"
 
-if [[ -f "${HOME}/.config/USE_I3" ]]; then
+if [[ -z ${1+x} ]]; then
+    logger -p syslog.warn "No login command was found. Falling back to default: ${LOGIN_CMD}"
+else
+    LOGIN_CMD="${1}"
+fi
+logger -p news.info "Preparing for session: \"${LOGIN_CMD}\""
+
+# -f "${HOME}/.config/USE_I3"
+
+if [[ "${LOGIN_CMD}" == "i3" ]]; then
     /usr/bin/xscreensaver -nosplash &
     if [[ -e ~/.Xmodmap ]]; then
         logger -p news.info "Xmodmapping..."
@@ -26,6 +36,8 @@ if [[ -f "${HOME}/.config/USE_I3" ]]; then
     if [[ -f "${HOME}/.fehbg" ]]; then
         sh "${HOME}/.fehbg"
     fi
+elif [[ "${LOGIN_CMD}" == "sway" ]]; then
+    QT_QPA_PLATFORM="wayland"
 fi
 
 #local changes
