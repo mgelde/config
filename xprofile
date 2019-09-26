@@ -11,8 +11,6 @@ else
 fi
 logger -p news.info "Preparing for session: \"${LOGIN_CMD}\""
 
-# -f "${HOME}/.config/USE_I3"
-
 if [[ "${LOGIN_CMD}" == "i3" ]]; then
     /usr/bin/xscreensaver -nosplash &
     if [[ -e ~/.Xmodmap ]]; then
@@ -37,7 +35,7 @@ if [[ "${LOGIN_CMD}" == "i3" ]]; then
         sh "${HOME}/.fehbg"
     fi
 elif [[ "${LOGIN_CMD}" == "sway" ]]; then
-    QT_QPA_PLATFORM="wayland"
+    ## nothing for now
 fi
 
 #local changes
