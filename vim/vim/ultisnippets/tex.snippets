@@ -20,7 +20,13 @@ def enumerate():
 endglobal
 
 snippet usep "usepackage" bwAm
-\usepackage[${1:options}]{${2:name}}$0
+\usepackage${1:[${2:options}]}{${3:name}}
+$0
+endsnippet
+
+snippet docl "documentclass" bw
+\documentclass[$1]{$2}
+$0
 endsnippet
 
 snippet inp "input" bwAm
