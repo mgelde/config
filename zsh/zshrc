@@ -138,12 +138,14 @@ fi
 # anyway, plus plugins can slow things down on some devices.
 
 if [[ "${EUID}" != 0 ]]; then
-    #enable autojump
-    if [[ ! -z "$commands[autojump]" ]]; then
-        source /usr/share/autojump/autojump.zsh
+
+    # jumping with z
+    if [[ -r "/usr/share/z/z.sh" ]]; then
+        source /usr/share/z/z.sh
     fi
+
     # Autosuggestions a la fish
-    if [[ -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    if [[ -r /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
         source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     fi
 fi
@@ -161,11 +163,11 @@ fi
 
 # Syntax highlighting (must be sourced at the end)
 if [[ "${EUID}" != 0 ]]; then
-    if [[ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    if [[ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
         source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
     # For Debian systems
-    if [[ -e /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    if [[ -r /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
         source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
 fi
