@@ -242,7 +242,7 @@ name = os.path.realpath(vim.current.buffer.name)
 
 dirname, last = os.path.split(name)
 rtps = []
-while last is not "":
+while last != "":
     rtprc = os.path.join(dirname, ".vimrtprc")
     if os.path.isfile(rtprc): # also false if doesn't exist
         with open(rtprc, "r") as f:
