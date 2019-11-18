@@ -30,10 +30,10 @@ if [[ "${LOGIN_CMD}" = i3 ]] ; then
         bash "${HOME}/config/i3/merge_config.sh"
     fi
 
-    logger -p news.info "[+] Starting compton"
+    logger -p news.info "[+] Starting picom"
     # composite manager
-    if [[ -f /usr/bin/compton ]] ; then
-        /usr/bin/compton -b
+    if [[ -f /usr/bin/picom ]] ; then
+        /usr/bin/picom -b
     fi
 
     logger -p news.info "[+] Setting wallpaper"
