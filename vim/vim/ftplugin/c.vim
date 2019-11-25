@@ -3,7 +3,7 @@
 function! MyCodeFormat()
     let my_clang_format_file = "/usr/share/clang/clang-format.py"
     let l:lines = "all"
-	exec ":pyf " . my_clang_format_file
+	exec ":silent! py3f " . my_clang_format_file
 endfunction
 
 noremap ,i :call MyCodeFormat() <CR>

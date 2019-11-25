@@ -24,6 +24,11 @@ snippet usep "usepackage" bwAm
 $0
 endsnippet
 
+snippet doc "documentclass" bw
+\documentclass${1:[${2:options}]}{${3:name}}
+endsnippet
+
+
 snippet docl "documentclass" bw
 \documentclass[$1]{$2}
 $0
@@ -33,7 +38,7 @@ snippet inp "input" bwAm
 \input{${1:name}}$0
 endsnippet
 
-snippet benv "begin environment" bA
+snippet benv "begin environment" bAm
 \begin{${1}}${2}
 ${0:${VISUAL}}
 \end{$1}
@@ -97,7 +102,7 @@ snippet bdesc "description" bAwm
 endsnippet
 
 context "itemize() or enumerate()"
-snippet it "item" bmAw
+snippet nit "item" bmAw
 \item ${0:${VISUAL}}
 endsnippet
 
