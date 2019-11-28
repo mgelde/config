@@ -175,3 +175,25 @@ endsnippet
 snippet "\~(.+)\~" "tilde" rAmw
 \tilde{`!p snip.rv = match.group(1)`}$0
 endsnippet
+
+snippet { "braces" iA
+{$1}$0
+endsnippet
+
+snippet _ "subscr" i
+_{$1}$0
+endsnippet
+
+snippet bdis "displaymath" mw
+\begin{displaymath}
+${1:${VISUAL}}
+\end{displaymath}
+$0
+endsnippet
+
+snippet balign "align" mw
+\begin{align}
+${1:${VISUAL}}
+\end{align}
+$0
+endsnippet
