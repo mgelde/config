@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -u
+
 logger -p news.info "Running .xprofile"
 
 LOGIN_CMD="i3"
@@ -19,7 +21,7 @@ if [[ "${LOGIN_CMD}" = i3 ]] ; then
     /usr/bin/xscreensaver -nosplash &
     if [[ -e ~/.Xmodmap ]] ; then
         logger -p news.info "Xmodmapping..."
-        /usr/bin/xmodmap ~/.Xmodmap
+        /usr/bin/xmodmap ~/.Xmodmap || true
     fi
 
     logger -p news.info "[+] Merging i3 config"
@@ -27,19 +29,20 @@ if [[ "${LOGIN_CMD}" = i3 ]] ; then
     if [[ ! -f "${HOME}/config/i3/merge_config.sh" ]] ; then
         logger -p syslog.warning "[!] Cannot find merge script for i3 config"
     else
-        bash "${HOME}/config/i3/merge_config.sh"
+        bash "${HOME}/config/i3/merge_config.sh" || true
     fi
 
     logger -p news.info "[+] Starting picom"
     # composite manager
     if [[ -f /usr/bin/picom ]] ; then
-        /usr/bin/picom -b
+        logger -p news.info "[!] Skipping picom launch because of i915 bug."
+        #/usr/bin/picom -b
     fi
 
     logger -p news.info "[+] Setting wallpaper"
     #wallpaper
     if [[ -f "${HOME}/.fehbg" ]] ; then
-        sh "${HOME}/.fehbg"
+        sh "${HOME}/.fehbg" || true
     fi
 elif [[ "${LOGIN_CMD}" = sway ]] ; then
     logger -p news.info "[+] Preparing sway session..."
@@ -51,3 +54,5 @@ if [[ -f "${HOME}/.xprofile.local" ]] ; then
     logger -p news.info "[+] Found local profile. Sourcing..."
     source "${HOME}/.xprofile.local"
 fi
+
+set +u
