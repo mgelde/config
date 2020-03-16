@@ -123,14 +123,33 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 else
     MY_VIM_PROMPT=""
 fi
+
+# When logged in through SSH, we colorize the bacground to make that clear
+if [[ ! -z "${SSH_CLIENT}" ]]; then
+    SSH_BGCOLOR="%208K"
+    SSH_BGEND="%k"
+else
+    SSH_BGCOLOR=""
+    SSH_BGEND=""
+fi
+
+# root should be visibly different
+if [[ "${EUID}" != 0 ]]; then
+    USERNAME_STYLE="%245F"
+    USERNAME_STYLE_END="%f"
+else
+    USERNAME_STYLE="%202F%B"
+    USERNAME_STYLE_END="%f%b"
+fi
+
 #The actual prompt variables
 # Note: We escape the `$` character to ensure that the PROMPT variable still holds
 # the string `${MY_VIM_PROMPT}` in order for that to be expanded only upon zle-reset-prompt
 # above.
-PROMPT="%245F%n%239F@%60F%m%f%240F:%5~%{\${MY_VIM_PROMPT}%}%#%f "
+PROMPT="${USERNAME_STYLE}%n${USERNAME_STYLE_END}%239F@${SSH_BGCOLOR}%60F%m%f${SSH_BGEND}%240F:%5~%{\${MY_VIM_PROMPT}%}%#%f "
 RPROMPT="\$vcs_info_msg_0_%(?..%{$fg_bold[red]%}[%?]%{$reset_color%b%})"
-if [[ ! -z "$SSH_CLIENT" ]]; then
-    RPROMPT="$RPROMPT %{%F{red}%}⇄%f"
+if [[ ! -z "${SSH_CLIENT}" ]]; then
+    RPROMPT="${RPROMPT} %{%F{red}%}⇄%f"
 fi
 
 ## Plugins
