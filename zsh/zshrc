@@ -124,9 +124,9 @@ else
     MY_VIM_PROMPT=""
 fi
 
-# When logged in through SSH, we colorize the bacground to make that clear
+# When logged in through SSH, we colorize the background to make that clear
 if [[ ! -z "${SSH_CLIENT}" ]]; then
-    SSH_BGCOLOR="%208K"
+    SSH_BGCOLOR="%K{208}"
     SSH_BGEND="%k"
 else
     SSH_BGCOLOR=""
@@ -135,10 +135,10 @@ fi
 
 # root should be visibly different
 if [[ "${EUID}" != 0 ]]; then
-    USERNAME_STYLE="%245F"
+    USERNAME_STYLE="%F{245}"
     USERNAME_STYLE_END="%f"
 else
-    USERNAME_STYLE="%202F%B"
+    USERNAME_STYLE="%F{202}%B"
     USERNAME_STYLE_END="%f%b"
 fi
 
