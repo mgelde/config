@@ -3,13 +3,13 @@
 " Use vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 
 "To get symbols in C/C++ files
 Plug 'vim-scripts/taglist.vim'
 
 "File browser
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 
 "Highlight words under the cursor
 Plug 'itchyny/vim-cursorword'
