@@ -32,11 +32,12 @@ if [[ "${LOGIN_CMD}" = i3 ]] ; then
         bash "${HOME}/config/i3/merge_config.sh" || true
     fi
 
-    logger -p news.info "[+] Starting picom"
-    # composite manager
-    if [[ -f /usr/bin/picom ]] ; then
-        /usr/bin/picom -b
-    fi
+    logger -p news.info "[!] Picom launch disabled due to Intel graphics bug"
+    #logger -p news.info "[+] Starting picom"
+    ## composite manager
+    #if [[ -f /usr/bin/picom ]] ; then
+    #    /usr/bin/picom -b
+    #fi
 
     logger -p news.info "[+] Setting wallpaper"
 elif [[ "${LOGIN_CMD}" = sway ]] ; then
