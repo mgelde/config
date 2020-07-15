@@ -3,18 +3,18 @@
 " Use vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe', { 'for' : ['c', 'cpp', 'java', 'go' ] }
 
 "To get symbols in C/C++ files
 Plug 'vim-scripts/taglist.vim'
 
 "File browser
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 
 "Highlight words under the cursor
 Plug 'itchyny/vim-cursorword'
 
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -24,6 +24,8 @@ Plug 'jez/vim-superman'
 
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+
+Plug 'croaker/mustang-vim', { 'frozen' : 1 }
 
 Plug 'SirVer/ultisnips'
 
@@ -101,7 +103,7 @@ let g:airline#extensions#tabline#formatter = 'default'
 "(some colorscheme commands apparently clear user-defined groups)
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 "Set the default color-scheme
-colorscheme Mustang
+colorscheme mustang
 
 "Make search hits readable
 hi Search cterm=NONE ctermfg=black ctermbg=blue
