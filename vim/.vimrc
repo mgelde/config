@@ -3,13 +3,12 @@
 " Use vim-plug
 call plug#begin('~/.vim/plugged')
 
+:if expand('$USER') != "root"
+
 Plug 'ycm-core/YouCompleteMe', { 'for' : ['c', 'cpp', 'java', 'go' ] }
 
 "To get symbols in C/C++ files
 Plug 'vim-scripts/taglist.vim'
-
-"File browser
-Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 
 "Highlight words under the cursor
 Plug 'itchyny/vim-cursorword'
@@ -18,20 +17,26 @@ Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'bling/vim-bufferline'
-
 Plug 'jez/vim-superman'
 
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
-
-Plug 'croaker/mustang-vim', { 'frozen' : 1 }
 
 Plug 'SirVer/ultisnips'
 
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
+:endif
+
+" Plugins that may be used with the root account
+
+Plug 'croaker/mustang-vim', { 'frozen' : 1 }
+Plug 'bling/vim-bufferline'
+"File browser
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'godlygeek/tabular'
+
 call plug#end()
+
 :endif
 
 set nocompatible
