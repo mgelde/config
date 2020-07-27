@@ -5,7 +5,7 @@ call plug#begin('~/.vim/plugged')
 
 :if expand('$USER') != "root"
 
-Plug 'ycm-core/YouCompleteMe', { 'for' : ['c', 'cpp', 'java', 'go' ] }
+Plug 'ycm-core/YouCompleteMe', { 'for' : [ 'c', 'cpp', 'java', 'go', 'python', 'tex' ] }
 
 "To get symbols in C/C++ files
 Plug 'vim-scripts/taglist.vim'
