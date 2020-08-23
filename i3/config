@@ -135,6 +135,10 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 
+for_window[class="openssh-askpass"] floating enable
+for_window[class="openssh-askpass"] border pixel 1
+
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
