@@ -34,8 +34,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -49,7 +49,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: full
+  decorations: none
 
   dynamic_title: true
 
@@ -73,15 +73,15 @@ font:
     style: Regular
 
   # Bold font face
-  #bold:
+  bold:
     # Font family
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
-
+    family: Source Code Pro
     # The `style` can be specified to pick a specific face.
-    #style: Bold
+    style: SemiBold
+
 
   # Italic font face
   #italic:
@@ -95,7 +95,7 @@ font:
     #style: Italic
 
   # Point size
-  size: 11.0
+  size: 10.5
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
