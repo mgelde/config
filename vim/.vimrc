@@ -238,6 +238,11 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
+command! -complete=shellcmd -nargs=+ Shell call s:ShellScratch(<q-args>)
+function! s:ShellScratch(cmdline)
+:enew|pu=execute('r!' . a:cmdline)|setlocal bufhidden=wipe buftype=nofile noswapfile
+endfunction
+
 " Add directories to runtime-path
 "   based on config files
 function! SetupRtp()
@@ -271,3 +276,6 @@ for f in split(glob("~/.vim/custom/*"), "\n")
     exe "source" f
 endfor
 :endif
+
+
+
