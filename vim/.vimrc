@@ -240,7 +240,16 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
 command! -complete=shellcmd -nargs=+ Shell call s:ShellScratch(<q-args>)
 function! s:ShellScratch(cmdline)
-:enew|pu=execute('r!' . a:cmdline)|setlocal bufhidden=wipe buftype=nofile noswapfile
+    let expanded = []
+    for part in split(a:cmdline)
+        if part[0] =~ '\v[%#<]'
+            let part = expand(part)
+        endif
+        let part = shellescape(part, 1)
+        call add(expanded, part)
+    endfor
+    let final_cmdline = join(expanded)
+    :enew|pu=execute('r!' . final_cmdline)|setlocal bufhidden=wipe buftype=nofile noswapfile
 endfunction
 
 " Add directories to runtime-path
