@@ -152,6 +152,10 @@ snippet "\"(.+)\"it" "italic" wAr
 \textit{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
+snippet "\"(.+)\"tt" "mono" wAr
+\texttt{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
 snippet "\"(.+)\"emp" "emph" wAr
 \emph{`!p snip.rv = match.group(1)`}$0
 endsnippet
