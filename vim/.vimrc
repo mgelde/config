@@ -23,7 +23,7 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 Plug 'SirVer/ultisnips'
 
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+Plug 'google/yapf', { 'branch': 'main', 'rtp': 'plugins/vim', 'for': 'python' }
 
 :endif
 
