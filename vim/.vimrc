@@ -13,7 +13,7 @@ Plug 'vim-scripts/taglist.vim'
 "Highlight words under the cursor
 Plug 'itchyny/vim-cursorword'
 
-Plug 'lervag/vimtex', { 'for' : 'tex' }
+Plug 'lervag/vimtex'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -188,20 +188,6 @@ let g:vimtex_indent_enabled=1
 let g:vimtex_intent_bib_enabled=1
 
 "configure latexmk
-let g:vimtex_compiler_latexmk = {
-        \ 'backend' : 'jobs',
-        \ 'background' : 1,
-        \ 'build_dir' : '',
-        \ 'callback' : 1,
-        \ 'continuous' : 1,
-        \ 'executable' : 'latexmk',
-        \ 'options' : [
-        \   '-verbose',
-        \   '-file-line-error',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \ ],
-        \}
 let g:vimtex_compiler_latexmk_engines = {
         \ '_'                : '-xelatex',
         \ 'pdflatex'         : '-pdf',
