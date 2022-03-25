@@ -5,7 +5,7 @@ call plug#begin('~/.vim/plugged')
 
 :if expand('$USER') != "root"
 
-Plug 'ycm-core/YouCompleteMe', { 'for' : [ 'c', 'cpp', 'java', 'go', 'python', 'tex', 'rust' ] }
+Plug 'ycm-core/YouCompleteMe'
 
 "To get symbols in C/C++ files
 Plug 'vim-scripts/taglist.vim'
@@ -201,7 +201,6 @@ let g:vimtex_compiler_latexmk_engines = {
 let g:vimtex_view_method='zathura'
 
 " YouComepleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 noremap <leader>yt :YcmCompleter GetType <CR>
 noremap <leader>yg :YcmCompleter GoToDefinition <CR>
 noremap <leader>yd :YcmCompleter GetDoc <CR>
