@@ -210,6 +210,8 @@ noremap <leader>yd :YcmCompleter GetDoc <CR>
 "    for every kind of file.
 let g:ycm_min_num_of_chars_for_completion=99
 
+let g:ycm_add_preview_to_completeopt="popup"
+
 
 
 "CptrlP
