@@ -138,24 +138,4 @@ client.background       #FFFFFF
 for_window[class="openssh-askpass"] floating enable
 for_window[class="openssh-askpass"] border pixel 1
 
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        colors {
-            background #202020D6
-            statusline #F0F0F0f6
-            separator  #777777FF
-
-            focused_workspace  #202020D6 #1A5782E6 #FFFFFF
-            active_workspace   #202020D6 #111111E6 #FFFFFF
-            inactive_workspace #202020D6 #333333E6 #999999
-            urgent_workspace   #2F343A #900000 #FFFFFF
-            binding_mode       #2F343A #900000 #FFFFFF
-        }
-        tray_output primary
-        status_command i3status --config ~/.i3status.conf
-        i3bar_command i3bar --transparency
-        font pango:Source Code Pro Light 9
-        separator_symbol "⋮"
-}
+exec_always --no-startup-id ~/bin/exec_polybar.sh
