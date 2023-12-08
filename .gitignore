@@ -3,6 +3,7 @@
 # Plugins differ on various hosts / Linux flavors
 # so don't indlude them
 /vim/vim/plugged/**
+/nvim/plugged/**
 
 # Custom folder for settings per host.
 # Should not be included in git.

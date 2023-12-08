@@ -1,0 +1,203 @@
+global !p
+
+def in_environment(environ):
+	""" Determine if current line is within a frame """
+	pair = vim.eval(
+		"searchpairpos('\\\\begin{{{env:s}}}','','\\\\end{{{env:s}}}', 'bnW', '', max([line('.') - 80, 1]))"
+		.format(env=environ))
+	return pair != ['0', '0']
+
+
+def in_frame():
+	return in_environment("frame")
+
+def itemize():
+	return in_environment("itemize")
+
+def enumerate():
+	return in_environment("enumerate")
+
+endglobal
+
+snippet usep "usepackage" bwAm
+\usepackage${1:[${2:options}]}{${3:name}}
+$0
+endsnippet
+
+snippet doc "documentclass" bw
+\documentclass${1:[${2:options}]}{${3:name}}
+endsnippet
+
+
+snippet docl "documentclass" bw
+\documentclass[$1]{$2}
+$0
+endsnippet
+
+snippet inp "input" bwAm
+\input{${1:name}}$0
+endsnippet
+
+snippet benv "begin environment" bAm
+\begin{${1}}${2}
+${0:${VISUAL}}
+\end{$1}
+endsnippet
+
+snippet prgr "paragraph" bAw
+\paragraph{${1:Hinweis:}}$0
+endsnippet
+
+snippet bframe "frame environment" bAw
+\begin{frame}{${1}}
+	${0:${VISUAL}}
+\end{frame}
+endsnippet
+
+snippet bfrop "frame environment" bAw
+\begin{frame}[${2:fragile}]{${1}}
+	${0:${VISUAL}}
+\end{frame}
+endsnippet
+
+snippet frame "frame command" bAw
+\frame[${1}]{${0:${VISUAL}}}
+endsnippet
+
+snippet stfr "standout frame" bmAw
+\frame[plain,standout]{\Huge ${0}}
+endsnippet
+
+snippet bibfr "bibliography frame" bAw
+\frame[plain,allowframebreaks]{\frametitle{Bibliography} \printbibliography[heading=none]}
+endsnippet
+
+context "in_frame()"
+snippet bblock "block environment" bAm
+\begin{block}{${1:title}}
+	${0:${VISUAL}}
+\end{block}
+endsnippet
+
+snippet bitem "itemize" bAwm
+\begin{itemize}${1:`!p
+snip.rv = '[<+->]' if in_frame() else ''
+`}
+	\item ${0:${VISUAL}}
+\end{itemize}
+endsnippet
+
+snippet benum "enumerate" bAwm
+\begin{enumerate}${1:`!p
+snip.rv = '[<+->]' if in_frame() else ''
+`}
+	\item ${0:${VISUAL}}
+\end{enumerate}
+endsnippet
+
+snippet bdesc "description" bAwm
+\begin{description}
+	\item[${1}] ${0}
+\end{description}
+endsnippet
+
+context "itemize() or enumerate()"
+snippet nit "item" bmAw
+\item ${0:${VISUAL}}
+endsnippet
+
+snippet lst "lisitngs environ" bA
+\begin{lstlisting}${1:[${2:language={${3}},}${4:basicstyle=${5:\footnotesize\ttfamily}}]}
+	${0:${VISUAL}}
+\end{lstlisting}
+endsnippet
+
+snippet lsi
+\lstinline|${1}| ${0}
+endsnippet
+
+snippet "\"(.+)\"enq" "Parenthesis (postfix)" wAr
+\enquote{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\'(.+)\'enq" "Parenthesis (postfix)" wAr
+\enquote*{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet sect "section" b
+\section{${1}}
+${0}
+endsnippet
+
+snippet ssect "section" b
+\section*{${1}}
+${0}
+endsnippet
+
+snippet subsec "subsection" b
+\subsection{${1}}
+${0}
+endsnippet
+
+snippet ssubsec "subsection" b
+\subsection*{${1}}
+${0}
+endsnippet
+
+snippet "\"(.+)\"bf" "bold" wAr
+\textbf{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.+)\"it" "italic" wAr
+\textit{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.+)\"tt" "mono" wAr
+\texttt{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.+)\"emp" "emph" wAr
+\emph{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "\"(.*)\"sf" "serif" wAr
+\textsf{`!p snip.rv = match.group(1)`}${0}
+endsnippet
+
+snippet "\"(.*)\"sc" "smallcaps" wAr
+\textsc{`!p snip.rv = match.group(1)`}${0}
+endsnippet
+
+snippet $ "math" wA
+\$${1:${VISUAL}}\$$0
+endsnippet
+
+snippet lbl "label" w
+\label{${1}}$0
+endsnippet
+
+snippet ref "ref" w
+\ref{${1}}$0
+endsnippet
+
+snippet "\~(.+)\~" "tilde" rAmw
+\tilde{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet _ "subscr" i
+_{$1}$0
+endsnippet
+
+snippet bdis "displaymath" mw
+\begin{displaymath}
+${1:${VISUAL}}
+\end{displaymath}
+$0
+endsnippet
+
+snippet balign "align" mw
+\begin{align}
+${1:${VISUAL}}
+\end{align}
+$0
+endsnippet
