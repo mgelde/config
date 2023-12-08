@@ -138,4 +138,7 @@ client.background       #FFFFFF
 for_window[class="openssh-askpass"] floating enable
 for_window[class="openssh-askpass"] border pixel 1
 
+for_window [title="^zoom\s?$"] floating enable
+no_focus [title="^zoom\s?$"]
+
 exec_always --no-startup-id ~/bin/exec_polybar.sh
