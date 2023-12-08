@@ -167,6 +167,14 @@ if [[ "${EUID}" != 0 ]]; then
     if [[ -r /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
         source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     fi
+
+    if [[ -r /usr/share/fzf/completion.zsh ]]; then
+        source /usr/share/fzf/completion.zsh
+    fi
+
+    if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
+        source /usr/share/fzf/key-bindings.zsh
+    fi
 fi
 
 ## Customizations
