@@ -19,7 +19,7 @@ Plug 'jez/vim-superman'
 
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 
-Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+Plug 'preservim/vim-markdown', { 'for' : 'markdown' }
 
 Plug 'SirVer/ultisnips'
 
@@ -48,7 +48,6 @@ set autoindent
 set number
 set background=dark
 set cursorline "display a line under the cursor
-
 
 "Man pages
 runtime ftplugin/man.vim

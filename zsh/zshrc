@@ -183,7 +183,7 @@ source "$MY_CONF_DIR"/aliases
 
 # local configuration
 if [[ -d "$MY_LOCAL_CONF_DIR" ]]; then
-    for file in "$MY_LOCAL_CONF_DIR"/*; do
+    for file in "$MY_LOCAL_CONF_DIR"/*(.N); do
         source "$file"
     done
 fi
