@@ -19,8 +19,6 @@ Plug 'jez/vim-superman'
 
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 
-Plug 'preservim/vim-markdown', { 'for' : 'markdown' }
-
 Plug 'SirVer/ultisnips'
 
 Plug 'google/yapf', { 'branch': 'main', 'rtp': 'plugins/vim', 'for': 'python' }
@@ -33,8 +31,10 @@ Plug 'croaker/mustang-vim', { 'frozen' : 1 }
 Plug 'bling/vim-bufferline'
 "File browser
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+
 Plug 'godlygeek/tabular'
 
+Plug 'preservim/vim-markdown', { 'for' : 'markdown' }
 call plug#end()
 
 :endif

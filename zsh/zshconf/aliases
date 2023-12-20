@@ -21,6 +21,8 @@ alias man="nocorrect man"
 
 
 alias vim="nocorrect nvim"
+alias view="nocorrect nvim -R"
+alias vimdiff="nocorrect nvim -d"
 
 alias mkdir="nocorrect mkdir"
 alias pgrep='nocorrect pgrep'
