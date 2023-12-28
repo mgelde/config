@@ -1,7 +1,4 @@
-enable_experimental_conpty_backend = false
 live_config_reload = true
-scale_with_dpi = false
-startup_mode = "Windowed"
 
 [colors]
 draw_bold_text_with_bright_colors = true
@@ -39,7 +36,6 @@ unfocused_hollow = true
 log_level = "Warn"
 persistent_logging = false
 print_events = false
-ref_test = false
 render_timer = false
 
 [font]
@@ -56,6 +52,14 @@ y = 0
 [font.normal]
 family = "Source Code Pro"
 style = "Regular"
+
+[font.italic]
+family = "Source Code Pro"
+style = "Italic"
+
+[font.bold_italic]
+family = "Source Code Pro"
+style = "Semibold Italic"
 
 [font.offset]
 x = 0
@@ -584,12 +588,6 @@ hide_when_typing = false
 action = "PasteSelection"
 mouse = "Middle"
 
-[mouse.double_click]
-threshold = 300
-
-[mouse.triple_click]
-threshold = 300
-
 [scrolling]
 history = 10000
 multiplier = 3
@@ -599,10 +597,12 @@ save_to_clipboard = false
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
-decorations = "none"
+decorations = "None"
 dynamic_padding = false
 dynamic_title = true
 opacity = 0.9
+startup_mode = "Windowed"
+
 
 [window.dimensions]
 columns = 0
@@ -611,3 +611,4 @@ lines = 0
 [window.padding]
 x = 0
 y = 0
+
