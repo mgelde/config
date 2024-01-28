@@ -215,6 +215,7 @@ let g:ycm_add_preview_to_completeopt="popup"
 
 noremap <C-B> :FzfLua buffers <CR>
 noremap <C-P> :FzfLua files <CR>
+noremap <C-F> :FzfLua git_files <CR>
 
 " Snippets
 let g:UltiSnipsSnippetDirectories = ['ultisnippets']
