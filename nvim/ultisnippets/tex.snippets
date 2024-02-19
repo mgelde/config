@@ -29,11 +29,6 @@ snippet doc "documentclass" bw
 endsnippet
 
 
-snippet docl "documentclass" bw
-\documentclass[$1]{$2}
-$0
-endsnippet
-
 snippet inp "input" bwAm
 \input{${1:name}}$0
 endsnippet
@@ -190,14 +185,17 @@ endsnippet
 
 snippet bdis "displaymath" mw
 \begin{displaymath}
-${1:${VISUAL}}
+${0:${VISUAL}}
 \end{displaymath}
-$0
 endsnippet
 
 snippet balign "align" mw
 \begin{align}
-${1:${VISUAL}}
+${0:${VISUAL}}
 \end{align}
-$0
 endsnippet
+
+snippet "\"(.+)\"mcal" "mathcal" wrA
+\mathcal{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
