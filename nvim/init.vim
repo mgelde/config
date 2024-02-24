@@ -5,10 +5,13 @@ call plug#begin(expand('$XDG_CONFIG_HOME/nvim/plugged'))
 
 :if expand('$USER') != "root"
 
-Plug 'ycm-core/YouCompleteMe'
+"Code completion
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'neovim/nvim-lspconfig'
 
 "To get symbols in C/C++ files
-Plug 'vim-scripts/taglist.vim'
+"Plug 'vim-scripts/taglist.vim'
 
 "Highlight words under the cursor
 Plug 'itchyny/vim-cursorword'
@@ -38,6 +41,17 @@ Plug 'preservim/vim-markdown', { 'for' : 'markdown' }
 call plug#end()
 
 :endif
+
+
+"language servers
+lua << EOF
+local lspconfig = require "lspconfig"
+local coq = require "coq"
+
+lspconfig.clangd.setup{coq.lsp_ensure_capabilities()}
+lspconfig.pyright.setup{coq.lsp_ensure_capabilities()}
+
+EOF
 
 set nocompatible
 filetype plugin indent on
@@ -167,9 +181,6 @@ nnoremap k gk
 au BufNewFile,BufRead COMMIT_EDITMSG set spell spl=en
 au BufNewFile,BufRead COMMIT_EDITMSG set colorcolumn=72
 
-"for taglist
-noremap <F1> :Tlist <CR>
-
 "for nerdtree
 noremap <F2> :NERDTreeToggle <CR>
 
@@ -198,18 +209,6 @@ let g:vimtex_compiler_latexmk_engines = {
         \}
 "viewer that is launched
 let g:vimtex_view_method='zathura'
-
-" YouComepleteMe
-noremap <leader>yt :YcmCompleter GetType <CR>
-noremap <leader>yg :YcmCompleter GoToDefinition <CR>
-noremap <leader>yd :YcmCompleter GetDoc <CR>
-
-"  Effectively disable the auto-suggestions based on identifiers, because it
-"    is annoying in TeX files. Since this is a global variable, we disable it
-"    for every kind of file.
-let g:ycm_min_num_of_chars_for_completion=99
-
-let g:ycm_add_preview_to_completeopt="popup"
 
 
 
