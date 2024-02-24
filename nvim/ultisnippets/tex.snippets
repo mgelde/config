@@ -1,12 +1,9 @@
 global !p
 
-def in_environment(environ):
-	""" Determine if current line is within a frame """
-	pair = vim.eval(
-		"searchpairpos('\\\\begin{{{env:s}}}','','\\\\end{{{env:s}}}', 'bnW', '', max([line('.') - 80, 1]))"
-		.format(env=environ))
-	return pair != ['0', '0']
 
+def in_environment(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
+    return x != '0' and y != '0'
 
 def in_frame():
 	return in_environment("frame")
@@ -16,6 +13,12 @@ def itemize():
 
 def enumerate():
 	return in_environment("enumerate")
+
+def math():
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment():
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
 
 endglobal
 
@@ -111,11 +114,11 @@ snippet lsi
 \lstinline|${1}| ${0}
 endsnippet
 
-snippet "\"(.+)\"enq" "Parenthesis (postfix)" wAr
+snippet "\"(.+)\"enq" "quotation double (postfix)" wAr
 \enquote{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\'(.+)\'enq" "Parenthesis (postfix)" wAr
+snippet "\'(.+)\'enq" "quatation single (postfix)" wAr
 \enquote*{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
@@ -139,31 +142,31 @@ snippet ssubsec "subsection" b
 ${0}
 endsnippet
 
-snippet "\"(.+)\"bf" "bold" wAr
+snippet "\"(.+)\"bf" "bold" wr
 \textbf{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\"(.+)\"it" "italic" wAr
+snippet "\"(.+)\"it" "italic" wr
 \textit{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\"(.+)\"tt" "mono" wAr
-\texttt{`!p snip.rv = match.group(1)`}$0
+snippet "\"(.+)\"tt" "mono" wr
 endsnippet
 
-snippet "\"(.+)\"emp" "emph" wAr
+snippet "\"(.+)\"emp" "emph" wr
 \emph{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-snippet "\"(.*)\"sf" "serif" wAr
+snippet "\"(.*)\"sf" "serif" wr
 \textsf{`!p snip.rv = match.group(1)`}${0}
 endsnippet
 
-snippet "\"(.*)\"sc" "smallcaps" wAr
+snippet "\"(.*)\"sc" "smallcaps" wr
 \textsc{`!p snip.rv = match.group(1)`}${0}
 endsnippet
 
-snippet $ "math" wA
+context "math()"
+snippet $ "math" w
 \$${1:${VISUAL}}\$$0
 endsnippet
 
@@ -175,12 +178,18 @@ snippet ref "ref" w
 \ref{${1}}$0
 endsnippet
 
-snippet "\~(.+)\~" "tilde" rAmw
+snippet "\~(.+)\~" "tilde" rmw
 \tilde{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
+context "math()"
 snippet _ "subscr" i
-_{$1}$0
+_{${1}}$0
+endsnippet
+
+context "math()"
+snippet ^ "supscr" i
+^{${1}}$0
 endsnippet
 
 snippet bdis "displaymath" mw
@@ -195,7 +204,17 @@ ${0:${VISUAL}}
 \end{align}
 endsnippet
 
-snippet "\"(.+)\"mcal" "mathcal" wrA
+context "math()"
+snippet "\"(.+)\"cal" "mathcal" wrA
 \mathcal{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
+context "math()"
+snippet "\"(.+)\"frak" "mathfrak" wrA
+\mathfrak{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+context "math()"
+snippet set "set" i
+\set{${1}}$0
+endsnippet
