@@ -114,12 +114,12 @@ snippet lsi
 \lstinline|${1}| ${0}
 endsnippet
 
-snippet "\"(.+)\"enq" "quotation double (postfix)" wAr
-\enquote{`!p snip.rv = match.group(1)`}$0
+snippet "enq" "quotation double" w
+\enquote{${1:${VISUAL}}}$0
 endsnippet
 
-snippet "\'(.+)\'enq" "quatation single (postfix)" wAr
-\enquote*{`!p snip.rv = match.group(1)`}$0
+snippet "senq" "quatation single" w
+\enquote*{${1:${VISUAL}}}$0
 endsnippet
 
 snippet sect "section" b
@@ -142,27 +142,28 @@ snippet ssubsec "subsection" b
 ${0}
 endsnippet
 
-snippet "\"(.+)\"bf" "bold" wr
-\textbf{`!p snip.rv = match.group(1)`}$0
+snippet bf "bold" w
+\textbf{${1:${VISUAL}}}$0
 endsnippet
 
-snippet "\"(.+)\"it" "italic" wr
-\textit{`!p snip.rv = match.group(1)`}$0
+snippet it "italic" w
+\textit{${1:${VISUAL}}}$0
 endsnippet
 
-snippet "\"(.+)\"tt" "mono" wr
+snippet "tt" "mono" w
+\texttt{${1:${VISUAL}}}$0
 endsnippet
 
-snippet "\"(.+)\"emp" "emph" wr
-\emph{`!p snip.rv = match.group(1)`}$0
+snippet emp "emph" w
+\emph{${1:${VISUAL}}}$0
 endsnippet
 
-snippet "\"(.*)\"sf" "serif" wr
-\textsf{`!p snip.rv = match.group(1)`}${0}
+snippet sf "serif" w
+\textsf{${1:${VISUAL}}}$0
 endsnippet
 
-snippet "\"(.*)\"sc" "smallcaps" wr
-\textsc{`!p snip.rv = match.group(1)`}${0}
+snippet sc "smallcaps" w
+\textsf{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
@@ -178,8 +179,8 @@ snippet ref "ref" w
 \ref{${1}}$0
 endsnippet
 
-snippet "\~(.+)\~" "tilde" rmw
-\tilde{`!p snip.rv = match.group(1)`}$0
+snippet tilde "tilde" mw
+\tilde{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
@@ -205,16 +206,31 @@ ${0:${VISUAL}}
 endsnippet
 
 context "math()"
-snippet "\"(.+)\"cal" "mathcal" wrA
-\mathcal{`!p snip.rv = match.group(1)`}$0
+snippet "cal" "mathcal" w
+\mathcal{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
-snippet "\"(.+)\"frak" "mathfrak" wrA
-\mathfrak{`!p snip.rv = match.group(1)`}$0
+snippet "frak" "mathfrak" w
+\mathfrak{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
 snippet set "set" i
 \set{${1}}$0
+endsnippet
+
+context "math()"
+snippet left( "leftParenth" wA
+\left(${1}\right)$0
+endsnippet
+
+context "math()"
+snippet left{ "leftBrace" wA
+\left\{${1}\right\}$0
+endsnippet
+
+context "math()"
+snippet frac "fraction" Aw
+\frac{${1}}{$2}$0
 endsnippet
