@@ -39,7 +39,7 @@ print_events = false
 render_timer = false
 
 [font]
-size = 10.5
+size = 11
 
 [font.bold]
 family = "Source Code Pro"
