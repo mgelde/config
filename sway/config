@@ -1,5 +1,6 @@
 set $mod Mod4
 
+include /etc/sway/config.d/*
 include "${HOME}/.config/sway/config.local"
 
 font pango:Source Code Pro Regular 9
@@ -16,7 +17,7 @@ bindsym $mod+Shift+Return exec /usr/bin/alacritty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "rofi -show combi"
+bindsym $mod+d exec "wofi --show drun,run"
 
 # change focus
 bindsym $mod+Left focus left
@@ -128,6 +129,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 default_border none
+hide_edge_borders --i3 smart
 
 focus_follows_mouse  no
 
@@ -139,22 +141,19 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        colors {
-            background #202020D6
-            statusline #F0F0F0f6
-            separator  #777777FF
+#for_window[class="openssh-askpass"] floating enable
+#for_window[class="openssh-askpass"] border pixel 1
 
-            focused_workspace  #202020D6 #1A5782E6 #FFFFFF
-            active_workspace   #202020D6 #111111E6 #FFFFFF
-            inactive_workspace #202020D6 #333333E6 #999999
-            urgent_workspace   #2F343A #900000 #FFFFFF
-            binding_mode       #2F343A #900000 #FFFFFF
-        }
-        tray_output primary
-        status_command i3status --config ~/.i3status.conf
-        font pango:Source Code Pro Light 9
-        separator_symbol '⋮'
+for_window [title="^zoom\s?$"] floating enable
+no_focus [title="^zoom\s?$"]
+
+bar {
+    swaybar_command /usr/bin/waybar
+}
+
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark'
+    gsettings set org.gnome.desktop.interface icon-theme 'Arc'
+    gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+    gsettings set org.gnome.desktop.interface font-name 'Cantarell Light 12'
 }

@@ -41,7 +41,7 @@ fi
 #local changes
 if [[ -f "${HOME}/.xprofile.local" ]] ; then
     logger -p news.info "[+] Found local profile. Sourcing..."
-    source "${HOME}/.xprofile.local"
+    source "${HOME}/.xprofile.local" ${LOGIN_CMD}
 fi
 
 set +u
