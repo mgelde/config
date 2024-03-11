@@ -86,6 +86,9 @@ button {
 .modules-right > widget:not(:last-child) {
     border-right: 1px dotted #606060;
 }
+.modules-right > widget:first-child {
+    border-left: 1px dotted #606060;
+}
 
 #window,
 #workspaces {
