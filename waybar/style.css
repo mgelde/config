@@ -5,7 +5,7 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.9);
+    background-color: rgba(43, 48, 59, 0.95);
     border-bottom: 1px solid rgba(100, 114, 125, 1);
     color: #f0f0f0;
     transition-property: background-color;
@@ -24,15 +24,6 @@ window#waybar.solo {
     background-color: #FFFFFF;
 }
 */
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
@@ -88,7 +79,7 @@ button {
 #idle_inhibitor,
 #scratchpad,
 #mpd {
-    padding: 2px 10px;
+    padding: 2px 8px;
     color: #ffffff;
 }
 
@@ -98,7 +89,7 @@ button {
 
 #window,
 #workspaces {
-    margin: 0 4px;
+    margin: 0 2px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -148,8 +139,7 @@ label:focus {
 
 
 #language {
-    padding: 0 5px;
-    margin: 0 5px;
     min-width: 16px;
+    padding: 2px 6px;
 }
 
