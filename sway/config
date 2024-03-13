@@ -127,6 +127,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 default_border none
+default_floating_border none
 hide_edge_borders --i3 smart
 
 focus_follows_mouse  no
@@ -139,11 +140,17 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 
-#for_window[class="openssh-askpass"] floating enable
-#for_window[class="openssh-askpass"] border pixel 1
+for_window [app_id="ssh-askpass"] floating enable
+for_window [app_id="ssh-askpass"] border pixel 1
+
 
 for_window [title="^zoom\s?$"] floating enable
 no_focus [title="^zoom\s?$"]
+
+for_window [floating app_id="evince"] move position center, resize set 80ppt 80ppt
+for_window [floating app_id="xfce4-notifyd"] move position 5ppt 5ppt
+no_focus [floating app_id="xfce4-notifyd"]
+
 
 bar {
     swaybar_command /usr/bin/waybar

@@ -69,6 +69,11 @@
         "format-alt": "{:%Y-%m-%d}",
         "format" : "{:%H:%M:%S}",
         "interval": 1,
+        "calendar" : {
+            "format" : {
+                "today" : "<b><u>{}</u></b>"
+            }
+        }
     },
     "cpu": {
         "format": "{usage}% ",
