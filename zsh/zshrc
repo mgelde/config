@@ -43,6 +43,9 @@ key[PageDown]="$terminfo[knp]"
 bindkey -a -- '^?'  backward-delete-char
 bindkey    -- '^?'  backward-delete-char
 
+# permit Alt+Return in middle of multiline command
+bindkey -v '^[^M' self-insert-unmeta
+
 autoload -Uz compinit promptinit colors
 colors
 compinit
