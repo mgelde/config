@@ -4,6 +4,7 @@
 # so don't indlude them
 /vim/vim/plugged/**
 /nvim/plugged/**
+/waybar/local.conf
 
 # Custom folder for settings per host.
 # Should not be included in git.

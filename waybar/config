@@ -5,9 +5,7 @@
     // "width": 1280, // Waybar width
     "spacing": 2, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["network", "disk", "disk#disk2", "sway/language", "battery", "clock", "tray"],
+    "include" : ["~/.config/waybar/local.conf"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
