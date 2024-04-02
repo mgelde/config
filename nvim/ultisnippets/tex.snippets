@@ -179,9 +179,6 @@ snippet ref "ref" w
 \ref{${1}}$0
 endsnippet
 
-snippet tilde "tilde" mw
-\tilde{${1:${VISUAL}}}$0
-endsnippet
 
 context "math()"
 snippet _ "subscr" i
@@ -207,17 +204,17 @@ endsnippet
 
 priority 10
 context "math()"
-snippet cal "mathcal" w
+snippet cal "mathcal" i
 \mathcal{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
-snippet sf "mathsf" w
+snippet sf "mathsf" i
 \mathsf{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
-snippet frak "mathfrak" w
+snippet frak "mathfrak" i
 \mathfrak{${1:${VISUAL}}}$0
 endsnippet
 
@@ -227,16 +224,26 @@ snippet set "set" i
 endsnippet
 
 context "math()"
-snippet left( "leftParenth" wA
+snippet left( "leftParenth" i
 \left(${1}\right)$0
 endsnippet
 
 context "math()"
-snippet left{ "leftBrace" wA
+snippet left{ "leftBrace" i
 \left\{${1}\right\}$0
 endsnippet
 
 context "math()"
-snippet frac "fraction" Aw
+snippet frac "fraction" i
 \frac{${1}}{$2}$0
+endsnippet
+
+context "math()"
+snippet hat "hat" i
+\hat{${1:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet tilde "tilde" i
+\tilde{${1:${VISUAL}}}$0
 endsnippet
