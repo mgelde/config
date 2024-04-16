@@ -170,14 +170,6 @@ if [[ "${EUID}" != 0 ]]; then
     if [[ -r /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
         source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     fi
-
-    if [[ -r /usr/share/fzf/completion.zsh ]]; then
-        source /usr/share/fzf/completion.zsh
-    fi
-
-    if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
-        source /usr/share/fzf/key-bindings.zsh
-    fi
 fi
 
 ## Customizations
@@ -193,6 +185,14 @@ fi
 
 # Syntax highlighting (must be sourced at the end)
 if [[ "${EUID}" != 0 ]]; then
+
+    if [[ -r /usr/share/fzf/completion.zsh ]]; then
+        source /usr/share/fzf/completion.zsh
+    fi
+
+    if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
+        source /usr/share/fzf/key-bindings.zsh
+    fi
     if [[ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
         source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi

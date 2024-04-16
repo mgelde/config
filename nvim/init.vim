@@ -26,16 +26,17 @@ Plug 'SirVer/ultisnips'
 
 Plug 'google/yapf', { 'branch': 'main', 'rtp': 'plugins/vim', 'for': 'python' }
 
+Plug 'godlygeek/tabular'
+
 :endif
 
 " Plugins that may be used with the root account
 
 Plug 'croaker/mustang-vim', { 'frozen' : 1 }
 Plug 'bling/vim-bufferline'
+
 "File browser
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-
-Plug 'godlygeek/tabular'
 
 Plug 'preservim/vim-markdown', { 'for' : 'markdown' }
 call plug#end()
