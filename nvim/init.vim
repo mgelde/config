@@ -47,11 +47,15 @@ call plug#end()
 "language servers
 lua << EOF
 local lspconfig = require "lspconfig"
-local coq = require "coq"
 
-lspconfig.clangd.setup{coq.lsp_ensure_capabilities()}
-lspconfig.pyright.setup{coq.lsp_ensure_capabilities()}
-lspconfig.texlab.setup{coq.lsp_ensure_capabilities()}
+
+if vim.fn.expand("$USER") ~= "root" then
+    local coq = require "coq"
+
+    lspconfig.clangd.setup{coq.lsp_ensure_capabilities()}
+    lspconfig.pyright.setup{coq.lsp_ensure_capabilities()}
+    lspconfig.texlab.setup{coq.lsp_ensure_capabilities()}
+end
 
 EOF
 
