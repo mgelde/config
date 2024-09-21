@@ -157,8 +157,8 @@ bar {
 }
 
 exec_always {
-    gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark'
-    gsettings set org.gnome.desktop.interface icon-theme 'Arc'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+    gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface font-name 'Cantarell Light 12'
 }

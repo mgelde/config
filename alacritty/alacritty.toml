@@ -597,7 +597,7 @@ save_to_clipboard = false
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
-decorations = "None"
+decorations = "Full"
 dynamic_padding = false
 dynamic_title = true
 opacity = 0.9
