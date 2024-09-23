@@ -3,6 +3,8 @@
 # Use lsd if it exists
 if which lsd > /dev/null 2>&1; then
     alias ls="lsd"
+elif which eza > /dev/null 2>&1; then
+    alias ls="eza --icons=always"
 else
     alias ls="ls --color=auto"
 fi
