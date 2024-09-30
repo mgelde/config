@@ -17,7 +17,7 @@ bindsym $mod+Shift+Return exec /usr/bin/alacritty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "wofi -I --show drun"
+bindsym $mod+d exec "wofi"
 
 # change focus
 bindsym $mod+Left focus left
