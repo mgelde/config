@@ -55,6 +55,25 @@ if vim.fn.expand("$USER") ~= "root" then
     lspconfig.clangd.setup{coq.lsp_ensure_capabilities()}
     lspconfig.pyright.setup{coq.lsp_ensure_capabilities()}
     lspconfig.texlab.setup{coq.lsp_ensure_capabilities()}
+    lspconfig.vls.setup{coq.lsp_ensure_capabilities()}
+end
+
+do
+    vim.keymap.set('n', 'grn', function()
+      vim.lsp.buf.rename()
+    end, { desc = 'vim.lsp.buf.rename()' })
+
+    vim.keymap.set({ 'n', 'x' }, 'gra', function()
+      vim.lsp.buf.code_action()
+    end, { desc = 'vim.lsp.buf.code_action()' })
+
+    vim.keymap.set('n', 'grr', function()
+      vim.lsp.buf.references()
+    end, { desc = 'vim.lsp.buf.references()' })
+
+    vim.keymap.set('i', '<C-S>', function()
+      vim.lsp.buf.signature_help()
+    end, { desc = 'vim.lsp.buf.signature_help()' })
 end
 
 EOF
