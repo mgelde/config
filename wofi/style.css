@@ -35,12 +35,14 @@ border: none;
 color: #f8f8f2;
 }
 
-#entry.activatable #text {
-color: #282a36;
+#expander-box #unselected #text {
+color: #f8f8f8;
+font: 11pt "Source Code Pro Light";
 }
 
-#entry > * {
-color: #f8f8f2;
+#expander-box #entry:selected #text {
+color: #f0f0f0;
+font: 11pt "Source Code Pro Semibold";
 }
 
 #entry:selected {
@@ -48,5 +50,6 @@ background-color: #44475a;
 }
 
 #entry:selected #text {
-font: 12pt "Source Code Pro Semibold"
+font: 12pt "Source Code Pro Semibold";
+color: #f0f0f0;
 }

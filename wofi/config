@@ -3,5 +3,9 @@ location=top
 yoffset=30
 show=drun
 allow_images=true
+insenstive=true
 
 drun-display_generic=true
+
+key_expand=space
+
