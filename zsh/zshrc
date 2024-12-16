@@ -110,14 +110,14 @@ fi
 
 #Environment variable for the status of VIM input mode.
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-    MY_VIM_PROMPT="%009F"
+    MY_VIM_PROMPT="%F{009}"
     function zle-line-init zle-keymap-select
     {
         echoti smkx
         if [[ "$KEYMAP" == "viins" || "$KEYMAP" == "main" ]]; then
             MY_VIM_PROMPT=""
         elif [[ $KEYMAP == "vicmd" ]]; then
-            MY_VIM_PROMPT="%009F"
+            MY_VIM_PROMPT="%F{009}"
         fi
         zle reset-prompt;
     }
@@ -149,7 +149,7 @@ fi
 # Note: We escape the `$` character to ensure that the PROMPT variable still holds
 # the string `${MY_VIM_PROMPT}` in order for that to be expanded only upon zle-reset-prompt
 # above.
-PROMPT="${USERNAME_STYLE}%n${USERNAME_STYLE_END}%239F@${SSH_BGCOLOR}%60F%m%f${SSH_BGEND}%250F:%5~${USERNAME_STYLE}%{\${MY_VIM_PROMPT}%}❯${USERNAME_STYLE_END}%f "
+PROMPT="${USERNAME_STYLE}%n${USERNAME_STYLE_END}%239F@${SSH_BGCOLOR}%60F%m%f${SSH_BGEND}%F{248}:%5~${USERNAME_STYLE}%{\${MY_VIM_PROMPT}%}%B❯%b${USERNAME_STYLE_END}%f "
 RPROMPT="\$vcs_info_msg_0_%(?..%{$fg_bold[red]%} [%?]%{$reset_color%b%})"
 if [[ ! -z "${SSH_CLIENT}" ]]; then
     RPROMPT="${RPROMPT} %F{red}⇄%f"
