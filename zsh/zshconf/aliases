@@ -4,7 +4,7 @@
 if which lsd > /dev/null 2>&1; then
     alias ls="lsd"
 elif which eza > /dev/null 2>&1; then
-    alias ls="eza --icons=always"
+    alias ls="eza --icons=always -g"
 else
     alias ls="ls --color=auto"
 fi
