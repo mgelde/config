@@ -1,55 +1,75 @@
-#window {
-margin: 0px;
-border: 1px solid #bd93f9;
-background-color: #282a36;
-font: 11pt "Source Code Pro Light"
+window {
+    margin: 0px;
+    border: 5px solid #1e1e2e;
+    background-color: #cdd6f4;
+    border-radius: 0px;
 }
 
 #input {
-margin: 5px;
-border: none;
-color: #f8f8f2;
-background-color: #44475a;
+    padding: 4px;
+    margin: 4px;
+    padding-left: 20px;
+    border: none;
+    color: #cdd6f4;
+    font-weight: bold;
+    background-color: #1e1e2e;
+   	outline: none;
+    border-radius: 15px;
+    margin: 10px;
+    margin-bottom: 2px;
+}
+#input:focus {
+    border: 0px solid #1e1e2e;
+    margin-bottom: 0px;
 }
 
 #inner-box {
-margin: 5px;
-border: none;
-background-color: #282a36;
+    margin: 4px;
+    border: 10px solid #1e1e2e;
+    color: #cdd6f4;
+    font-weight: bold;
+    background-color: #1e1e2e;
+    border-radius: 15px;
 }
 
 #outer-box {
-margin: 5px;
-border: none;
-background-color: #282a36;
+    margin: 0px;
+    border: none;
+    border-radius: 15px;
+    background-color: #1e1e2e;
 }
 
 #scroll {
-margin: 0px;
-border: none;
+    margin-top: 5px;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    /* background: rgb(255,255,255); */
 }
 
-#text {
-margin: 5px;
-border: none;
-color: #f8f8f2;
+#img:selected {
+    background-color: #204070;
+    border-radius: 15px;
 }
 
-#expander-box #unselected #text {
-color: #f8f8f8;
-font: 11pt "Source Code Pro Light";
+#text:selected {
+    color: #cdd6f4;
+    margin: 0px 0px;
+    border: none;
+    border-radius: 15px;
+    background-color: #204070;
 }
 
-#expander-box #entry:selected #text {
-color: #f0f0f0;
-font: 11pt "Source Code Pro Semibold";
+#entry {
+    margin: 0px 0px;
+    border: none;
+    border-radius: 15px;
+    background-color: transparent;
 }
 
 #entry:selected {
-background-color: #44475a;
-}
-
-#entry:selected #text {
-font: 12pt "Source Code Pro Semibold";
-color: #f0f0f0;
+    margin: 0px 0px;
+    border: none;
+    border-radius: 15px;
+    background-color: #204070;
 }
