@@ -37,7 +37,7 @@
 
 #inner-box {
     margin: 4px;
-    border-top: 5px solid shade(@background_color, 1.5);
+    padding-top:5px;
     color: shade(@text_color, .5);
     font-weight: bold;
     background-color: @background_color;
