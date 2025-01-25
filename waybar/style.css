@@ -1,15 +1,21 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Source Code Pro, Helvetica, Arial, sans-serif;
+    font-family: FontAwesome, Source Code Pro, monospace;
     font-size: 13px;
+    font-weight: 400;
 }
 
+@define-color text_color #90d0b8;
+@define-color background_color rgba(10, 35, 32, 0.95);
+@define-color urgent_bg_color #985040;
+@define-color urgent_fg_color #e0a8a8;
+
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.95);
-    border-bottom: 1px solid rgba(100, 114, 125, 1);
-    color: #f0f0f0;
+    background-color: @background_color;
+    border-top: 1px solid rgba(20, 55, 50, 1);
     transition-property: background-color;
     transition-duration: .5s;
+    color: @text_color;
 }
 
 window#waybar.hidden {
@@ -31,31 +37,36 @@ button {
     /* Avoid rounded borders under each button name */
     border: none;
     border-radius: 0;
+    color: @text_color;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-#button:hover {
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect
+button:hover {
     background: inherit;
     box-shadow: inset 0 -3px #ffffff;
 }
+*/
 
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
-    color: #ffffff;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: shade(@background_color, 0.6);
+    transition-property: background-color;
+    transition-duration: 500ms;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: shade(@background_color, 1.8);
+    box-shadow: inset 0 -3px #20a070;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @urgent_bg_color;
+    font-weight:bolder;
+    color: @urgent_fg_color;
 }
 
 #mode {
@@ -80,7 +91,6 @@ button {
 #scratchpad,
 #mpd {
     padding: 2px 8px;
-    color: #ffffff;
 }
 
 .modules-right > widget:not(:last-child) {
@@ -107,7 +117,7 @@ button {
 
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
+    color: mix(@text_color, #00FF00, 0.3);
 }
 
 @keyframes blink {
@@ -118,8 +128,8 @@ button {
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: #a53c3c;
+    color: #ffdddd;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -144,5 +154,14 @@ label:focus {
 #language {
     min-width: 16px;
     padding: 2px 6px;
+}
+
+tooltip {
+    background-color: shade(@background_color, 0.4);
+}
+
+tooltip label {
+    color: #a0e0c8;
+    font-weight: 500;
 }
 
