@@ -6,8 +6,8 @@
 }
 
 @define-color text_color #90d0b8;
-@define-color background_color rgba(10, 35, 32, 0.95);
-@define-color urgent_bg_color #985040;
+@define-color background_color rgba(10, 35, 40, 0.95);
+@define-color urgent_bg_color rgba(152, 80, 64, 0.6);
 @define-color urgent_fg_color #e0a8a8;
 
 window#waybar {
@@ -93,6 +93,15 @@ button:hover {
     padding: 2px 8px;
 }
 
+#disk.warning {
+    color: mix(@text_color, red, 0.3);
+}
+
+#disk.full {
+    background-color: @urgent_bg_color;
+    color: @urgent_fg_color;
+}
+
 .modules-right > widget:not(:last-child) {
     border-right: 1px dotted #606060;
 }
@@ -116,8 +125,31 @@ button:hover {
 }
 
 
-#battery.charging, #battery.plugged {
+#battery.awesome.discharging {
     color: mix(@text_color, #00FF00, 0.3);
+}
+#battery.good.discharging {
+    color: mix(@text_color, #00FF00, 0.2);
+}
+#battery.fair.discharging {
+    color: mix(@text_color, #00FF00, 0.1);
+}
+#battery.warning.discharging {
+    color: mix(@text_color, #FF0000, 0.2);
+}
+#battery.bad.discharging {
+    color: mix(@text_color, #FF0000, 0.4);
+}
+
+#battery.critical:not(.charging) {
+    background-color: @urgent_bg_color;
+    color: @urgent_fg_color;
+    animation-name: blink;
+    font-weight: 600;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 @keyframes blink {
@@ -125,16 +157,6 @@ button:hover {
         background-color: #ffffff;
         color: #000000;
     }
-}
-
-#battery.critical:not(.charging) {
-    background-color: #a53c3c;
-    color: #ffdddd;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
 }
 
 label:focus {

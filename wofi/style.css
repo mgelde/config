@@ -1,6 +1,7 @@
 @define-color text_color #90d0b8;
-@define-color background_color rgba(10, 35, 32, 0.95);
+@define-color background_color rgba(10, 35, 40, 0.95);
 @define-color light_background shade(@background_color, 1.8);
+@define-color unselected_text_color shade(@text_color, .5);
 
 * {
     border: none;
@@ -16,37 +17,37 @@
 
 
 #input {
-    padding: 4px;
-    margin: 4px;
-    padding-left: 20px;
-    border: none;
+    padding: 6px 20px 6px 20px;
+    margin: 5px;
+
+    border: 1px solid shade(@background_color, 1.2);
+    border-radius: 15px;
+
     color: @text_color;
     font-weight: bold;
-    background-color: shade(@background_color,0.9);
+    background-color: shade(@background_color,0.7);
    	outline: none;
-    border-radius: 15px;
-    margin: 10px;
-    margin-bottom: 2px;
     box-shadow: none;
 }
 
 #input:focus {
-    border: 1px solid shade(@background_color, 2);
+    border: 2px solid shade(@background_color, 2);
 }
 
 
 #inner-box {
     margin: 4px;
     padding-top:5px;
-    color: shade(@text_color, .5);
+    color: @unselected_text_color;
     font-weight: bold;
     background-color: @background_color;
 }
 
 #outer-box {
     margin: 0px;
-    border: none;
+    padding: 10px;
     border-radius: 15px;
+    border: 1px solid #053040;
     background-color: @background_color;
 }
 
@@ -69,8 +70,18 @@
 }
 
 #expander-box {
-    background-color: shade(@background_color, 1.2);
+    padding-left: 4ex;
+
+    background-color: inherit;
 }
+
+#expander-box #text {
+    color: @unselected_text_color;
+}
+#expander-box #entry:selected #text {
+    color: @text_color;
+}
+
 
 
 #entry:selected {

@@ -25,11 +25,19 @@
     // },
     "disk" : {
         "format" : " / {percentage_used}%",
-        "path" : "/"
+        "path" : "/",
+        "states" : {
+            "full": 90,
+            "warning": 50
+        }
     },
     "disk#disk2" : {
         "format" : " /home {percentage_used}%",
-        "path" : "/home"
+        "path" : "/home",
+        "states" : {
+            "full": 90,
+            "warning": 50
+        }
     },
     "keyboard-state": {
         "numlock": true,
@@ -95,16 +103,17 @@
     },
     "battery": {
         "states": {
-            "good": 95,
-            "warning": 30,
+            "awesome": 100,
+            "good": 80,
+            "fair": 60,
+            "warning": 40,
+            "bad" : 20,
             "critical": 15
         },
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
