@@ -1,5 +1,5 @@
 @define-color text_color #90d0b8;
-@define-color background_color rgba(10, 35, 40, 0.95);
+@define-color background_color rgba(15, 40, 45, 0.95);
 @define-color light_background shade(@background_color, 1.8);
 @define-color unselected_text_color shade(@text_color, .5);
 
@@ -12,6 +12,7 @@
     margin: 0px;
     background-color: @background-color;
     border-radius: 0px;
+    opacity: 0.97;
 }
 
 
@@ -41,6 +42,7 @@
     color: @unselected_text_color;
     font-weight: bold;
     background-color: @background_color;
+    background:transparent;
 }
 
 #outer-box {
@@ -86,7 +88,7 @@
 
 #entry:selected {
     color: @text_color;
-    border: 1px solid @light_background;
+    border: 2px solid @light_background;
     box-shadow: none;
 }
 
