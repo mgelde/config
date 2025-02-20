@@ -132,10 +132,10 @@ hide_edge_borders --i3 smart
 
 focus_follows_mouse  no
 
-client.focused          #4D77BF #4D77BF #FFFFFF #4D77BF   #285577
+client.focused          #208880 #205350 #C0C0C0 #4D77BF   #285577
 client.focused_inactive #555555 #444444 #FFFFFF #484E50   #5F676A
 client.unfocused        #333333 #222222 #888888 #292D2E   #222222
-client.urgent           #2F343A #CC0044 #FFFFFF #CC0044   #CC0044
+client.urgent           #2F343A #985040 #FFFFFF #CC0044   #CC0044
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
@@ -158,5 +158,5 @@ exec_always {
     gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-    gsettings set org.gnome.desktop.interface font-name 'Cantarell Light 12'
+    gsettings set org.gnome.desktop.interface font-name 'Roboto Light 12'
 }
