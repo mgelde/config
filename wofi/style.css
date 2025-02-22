@@ -65,6 +65,15 @@
     color: inherit;
 }
 
+#img {
+	padding-left: 1em;
+	margin-right: .5em;
+}
+
+expander #img {
+	padding-left: 0em;
+}
+
 #entry {
     border: none;
     border-radius: 15px;
@@ -80,11 +89,10 @@
 #expander-box #text {
     color: @unselected_text_color;
 }
+
 #expander-box #entry:selected #text {
     color: @text_color;
 }
-
-
 
 #entry:selected {
     color: @text_color;
