@@ -13,3 +13,4 @@ inoremap ,i <C-O> :call YapfAllTheThings() <CR>
 noremap ,o <CR> :call yapf#YAPF()<CR>
 inoremap ,o <C-O> :call yapf#YAPF() <CR>
 
+:COQnow --shut-up
