@@ -1,4 +1,3 @@
-lua << EOF
 if vim.fn.expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim') ~= '' then
 
 do
@@ -293,35 +292,4 @@ vim.g.UltiSnipsSnippetDirectories = {'ultisnippets'}
 vim.g.UltiSnipsExpandTrigger = '<c-j>'
 vim.g.UltiSnipsJumpForwardTrigger = '<c-j>'
 vim.g.UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-EOF
-
-command! -complete=shellcmd -nargs=+ Shell call s:ShellScratch(<q-args>)
-command! -complete=shellcmd -nargs=+ SShell call s:ShellScratch(<q-args>, 0)
-function! s:ShellScratch(cmdline, wipe=1)
-    let l:expanded = []
-    for part in split(a:cmdline)
-        if part[0] =~ '\v[%#<]'
-            let part = expand(part)
-        endif
-        let part = shellescape(part, 1)
-        call add(expanded, part)
-    endfor
-    let l:final_cmdline = join(l:expanded)
-    if a:wipe == 1
-        enew|pu=execute('r!' . l:final_cmdline)|setlocal bufhidden=wipe buftype=nofile noswapfile
-    else
-        enew|pu=execute('r!' . l:final_cmdline)|setlocal buftype=nofile noswapfile
-    endif
-endfunction
-
-
-
-
-
-
-
-
-
-
 
