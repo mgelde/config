@@ -1,36 +1,33 @@
 if vim.fn.expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim') ~= '' then
-
-do
     local Plug = vim.fn['plug#']
     -- Use vim-plug
     vim.fn['plug#begin'](vim.fn.expand('$XDG_CONFIG_HOME/nvim/plugged'))
 
     if vim.fn.expand('$USER') ~= "root" then
 
-    -- Code completion
-    Plug('ms-jpq/coq_nvim', {branch='coq'})
-    Plug('ms-jpq/coq.artifacts', {branch='artifacts'})
-    Plug('neovim/nvim-lspconfig')
+        -- Code completion
+        Plug('ms-jpq/coq_nvim', {branch='coq'})
+        Plug('ms-jpq/coq.artifacts', {branch='artifacts'})
+        Plug('neovim/nvim-lspconfig')
 
-    --Highlight words under the cursor
-    Plug('itchyny/vim-cursorword')
+        --Highlight words under the cursor
+        Plug('itchyny/vim-cursorword')
 
-    Plug('lervag/vimtex')
+        Plug('lervag/vimtex')
 
-    Plug('jez/vim-superman')
+        Plug('jez/vim-superman')
 
-    Plug('ibhagwan/fzf-lua', {branch='main'})
+        Plug('ibhagwan/fzf-lua', {branch='main'})
 
-    Plug('SirVer/ultisnips')
+        Plug('SirVer/ultisnips')
 
-    Plug('google/yapf', { branch='main', rtp='plugins/vim', ['for']='python' })
+        Plug('google/yapf', { branch='main', rtp='plugins/vim', ['for']='python' })
 
     end
 
     -- Plugins that may be used with the root account
 
     Plug('croaker/mustang-vim', { frozen=true })
-    Plug('bling/vim-bufferline')
 
     --File browser
     Plug('preservim/nerdtree', { on='NERDTreeToggle' })
@@ -39,117 +36,108 @@ do
     vim.fn['plug#end']()
 end
 
-end
-
 
 -- language servers
-do
+if vim.fn.expand("$USER") ~= "root" then
     local lspconfig = require "lspconfig"
+    local coq = require "coq"
 
-
-    if vim.fn.expand("$USER") ~= "root" then
-        local coq = require "coq"
-
-        lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
-        lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
-        lspconfig.texlab.setup(coq.lsp_ensure_capabilities())
-        lspconfig.vls.setup(coq.lsp_ensure_capabilities())
-    end
+    lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
+    lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
+    lspconfig.texlab.setup(coq.lsp_ensure_capabilities())
+    lspconfig.vls.setup(coq.lsp_ensure_capabilities())
 end
 
 -- keymaps and vim options
-do
-    vim.keymap.set('n', 'grn', function()
-      vim.lsp.buf.rename()
-    end, { desc = 'vim.lsp.buf.rename()' })
 
-    vim.keymap.set({ 'n', 'x' }, 'gra', function()
-      vim.lsp.buf.code_action()
-    end, { desc = 'vim.lsp.buf.code_action()' })
+vim.keymap.set('n', 'grn', function()
+  vim.lsp.buf.rename()
+end, { desc = 'vim.lsp.buf.rename()' })
 
-    vim.keymap.set('n', 'grr', function()
-      vim.lsp.buf.references()
-    end, { desc = 'vim.lsp.buf.references()' })
+vim.keymap.set({ 'n', 'x' }, 'gra', function()
+  vim.lsp.buf.code_action()
+end, { desc = 'vim.lsp.buf.code_action()' })
 
-    vim.keymap.set('i', '<C-S>', function()
-      vim.lsp.buf.signature_help()
-    end, { desc = 'vim.lsp.buf.signature_help()' })
+vim.keymap.set('n', 'grr', function()
+  vim.lsp.buf.references()
+end, { desc = 'vim.lsp.buf.references()' })
 
-    -- mappings for interacting with buffers
-    vim.keymap.set('', '<leader>bn',  ':bnext <CR>', {noremap = true})
-    vim.keymap.set('', '<leader>bp',  ':bprev <CR>', {noremap = true})
-    vim.keymap.set('', '<leader>bg',  ':buf <SPACE>', {noremap = true})
-    vim.keymap.set('', '<leader>bq',  ':bp <BAR> bd #<CR>', {noremap = true})
+vim.keymap.set('i', '<C-S>', function()
+  vim.lsp.buf.signature_help()
+end, { desc = 'vim.lsp.buf.signature_help()' })
 
-
-    -- show whitespaces
-    vim.opt.listchars= 'eol:$,tab:>-,trail:~,extends:>,precedes:<'
-    vim.keymap.set('', '<F6>', ':set list! <CR>', {noremap = true})
-
-    --do not highlight search results
-    vim.keymap.set('n', 'm', ':nohls <CR>', {noremap = true})
+-- mappings for interacting with buffers
+vim.keymap.set('', '<leader>bn',  ':bnext <CR>', {noremap = true})
+vim.keymap.set('', '<leader>bp',  ':bprev <CR>', {noremap = true})
+vim.keymap.set('', '<leader>bg',  ':buf <SPACE>', {noremap = true})
+vim.keymap.set('', '<leader>bq',  ':bp <BAR> bd #<CR>', {noremap = true})
 
 
+-- show whitespaces
+vim.opt.listchars= 'eol:$,tab:>-,trail:~,extends:>,precedes:<'
+vim.keymap.set('', '<F6>', ':set list! <CR>', {noremap = true})
 
-    --move 'normally' in wrapped lines
-    vim.keymap.set('n', 'j', 'gj', {noremap=true})
-    vim.keymap.set('n', 'k', 'gk', {noremap=true})
-
-
-    vim.opt.autoindent = true
-    vim.opt.number = true
-    vim.opt.background = 'dark'
-    vim.opt.cursorline = true
-    vim.opt.hidden = true
-
-    --vim.opt.lazyredraw = true -- redraw only when necessary. may speed up things.
-    vim.opt.showmatch = true
-
-    vim.cmd.syntax('enable')
-    vim.cmd.filetype{'plugin', 'indent', 'on'}
-
-    --tab settings. softtabstop and tabstop should be identical or else mixtures of
-    --tabs and spaces may be used
-    vim.opt.tabstop=4      -- visual spaces per tab (existing spaces)
-    vim.opt.softtabstop=4  -- spaces per tab in insert mode (i.e. creating new spaces vs. displaying)
-    vim.opt.shiftwidth=4   -- spaces used when indenting '>>' or '<<'
-    vim.opt.expandtab=true -- use spaces not tabs
-
-    vim.opt.incsearch = true --highlight search results as you type
-    vim.opt.hlsearch = true  --highlight search results
-
-    -- folds
-    vim.opt.foldenable = true --enable folding
-    vim.opt.foldlevelstart=10 --first ten levels of folds are open by default
-    vim.opt.foldmethod=manual -- others: marker manual expr syntax diff
-
-    -- man page viewer
-    vim.cmd.runtime 'ftplugin/man.vim'
-
-
-    -- Set the default color-scheme
-    vim.cmd.colorscheme('mustang')
-
-    --##########  Status Line ###########
-
-    --We use airline. This is just legacy for systems without airline
-    vim.opt.statusline='%F%m%r%h%w [FORMAT=%{&ff}] [TYPE=%Y] [ASCII=%03.3b] [HEX=%02.2B] [POS=%04l,%04v][%p%%] [LEN=%L]'
-    vim.opt.laststatus=2
-    vim.opt.wildmenu=true
-    vim.opt.wildmode='list:longest,full'
+--do not highlight search results
+vim.keymap.set('n', 'm', ':nohls <CR>', {noremap = true})
 
 
 
-    --Now for airline
-    vim.g['airline_theme']="solarized"
-    vim.g['airline#extensions#branch#enabled']= 1 --enable git integration
-    vim.g['airline_powerline_fonts']= 1
-    vim.g['airline#extensions#tabline#enabled'] = 1 --show buffers at the top
-    vim.g['airline#extensions#tabline#formatter'] = 'default'
+--move 'normally' in wrapped lines
+vim.keymap.set('n', 'j', 'gj', {noremap=true})
+vim.keymap.set('n', 'k', 'gk', {noremap=true})
 
-    -- for now until libutf8prog is fixed on my machine
-    vim.g['airline#extensions#whitespace#enabled'] = 0
-end
+
+vim.opt.autoindent = true
+vim.opt.number = true
+vim.opt.background = 'dark'
+vim.opt.cursorline = true
+vim.opt.hidden = true
+
+--vim.opt.lazyredraw = true -- redraw only when necessary. may speed up things.
+vim.opt.showmatch = true
+
+vim.cmd.syntax('enable')
+vim.cmd.filetype{'plugin', 'indent', 'on'}
+
+--tab settings. softtabstop and tabstop should be identical or else mixtures of
+--tabs and spaces may be used
+vim.opt.tabstop=4      -- visual spaces per tab (existing spaces)
+vim.opt.softtabstop=4  -- spaces per tab in insert mode (i.e. creating new spaces vs. displaying)
+vim.opt.shiftwidth=4   -- spaces used when indenting '>>' or '<<'
+vim.opt.expandtab=true -- use spaces not tabs
+
+vim.opt.incsearch = true --highlight search results as you type
+vim.opt.hlsearch = true  --highlight search results
+
+-- folds
+vim.opt.foldenable = true --enable folding
+vim.opt.foldlevelstart=10 --first ten levels of folds are open by default
+vim.opt.foldmethod=manual -- others: marker manual expr syntax diff
+
+-- man page viewer
+vim.cmd.runtime 'ftplugin/man.vim'
+
+
+-- Set the default color-scheme
+vim.cmd.colorscheme('mustang')
+
+--##########  Status Line ###########
+
+--We use airline. This is just legacy for systems without airline
+vim.opt.statusline='%F%m%r%h%w [FORMAT=%{&ff}] [TYPE=%Y] [ASCII=%03.3b] [HEX=%02.2B] [POS=%04l,%04v][%p%%] [LEN=%L]'
+vim.opt.laststatus=2
+vim.opt.wildmenu=true
+vim.opt.wildmode='list:longest,full'
+
+--Now for airline
+vim.g['airline_theme']="solarized"
+vim.g['airline#extensions#branch#enabled']= 1 --enable git integration
+vim.g['airline_powerline_fonts']= 1
+vim.g['airline#extensions#tabline#enabled'] = 1 --show buffers at the top
+vim.g['airline#extensions#tabline#formatter'] = 'default'
+
+-- for now until libutf8prog is fixed on my machine
+--vim.g['airline#extensions#whitespace#enabled'] = 0
 
 -- use .vimrtprc marker-files to add path to runtimepath
 -- This is currently only used for ultisnippets and moreover should probably be done somwhere when

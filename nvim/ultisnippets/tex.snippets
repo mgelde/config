@@ -6,13 +6,13 @@ def in_environment(name):
     return x != '0' and y != '0'
 
 def in_frame():
-	return in_environment("frame")
+    return in_environment("frame")
 
 def itemize():
-	return in_environment("itemize")
+    return in_environment("itemize")
 
 def enumerate():
-	return in_environment("enumerate")
+    return in_environment("enumerate")
 
 def math():
     return vim.eval('vimtex#syntax#in_mathzone()') == '1'
@@ -48,13 +48,13 @@ endsnippet
 
 snippet bframe "frame environment" bAw
 \begin{frame}{${1}}
-	${0:${VISUAL}}
+    ${0:${VISUAL}}
 \end{frame}
 endsnippet
 
 snippet bfrop "frame environment" bAw
 \begin{frame}[${2:fragile}]{${1}}
-	${0:${VISUAL}}
+    ${0:${VISUAL}}
 \end{frame}
 endsnippet
 
@@ -73,7 +73,7 @@ endsnippet
 context "in_frame()"
 snippet bblock "block environment" bAm
 \begin{block}{${1:title}}
-	${0:${VISUAL}}
+    ${0:${VISUAL}}
 \end{block}
 endsnippet
 
@@ -81,7 +81,7 @@ snippet bitem "itemize" bAwm
 \begin{itemize}${1:`!p
 snip.rv = '[<+->]' if in_frame() else ''
 `}
-	\item ${0:${VISUAL}}
+    \item ${0:${VISUAL}}
 \end{itemize}
 endsnippet
 
@@ -89,13 +89,13 @@ snippet benum "enumerate" bAwm
 \begin{enumerate}${1:`!p
 snip.rv = '[<+->]' if in_frame() else ''
 `}
-	\item ${0:${VISUAL}}
+    \item ${0:${VISUAL}}
 \end{enumerate}
 endsnippet
 
 snippet bdesc "description" bAwm
 \begin{description}
-	\item[${1}] ${0}
+    \item[${1}] ${0}
 \end{description}
 endsnippet
 
@@ -106,7 +106,7 @@ endsnippet
 
 snippet lst "lisitngs environ" bA
 \begin{lstlisting}${1:[${2:language={${3}},}${4:basicstyle=${5:\footnotesize\ttfamily}}]}
-	${0:${VISUAL}}
+    ${0:${VISUAL}}
 \end{lstlisting}
 endsnippet
 
