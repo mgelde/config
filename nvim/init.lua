@@ -127,7 +127,8 @@ vim.cmd.colorscheme('mustang')
 vim.opt.statusline='%F%m%r%h%w [FORMAT=%{&ff}] [TYPE=%Y] [ASCII=%03.3b] [HEX=%02.2B] [POS=%04l,%04v][%p%%] [LEN=%L]'
 vim.opt.laststatus=2
 vim.opt.wildmenu=true
-vim.opt.wildmode='list:longest,full'
+vim.opt.wildmode='longest,full'
+vim.opt.wildoptions='fuzzy,pum'
 
 --Now for airline
 vim.g['airline_theme']="solarized"
