@@ -160,7 +160,7 @@ do
             end
         end
         if not have_lines then
-            vim.opt.rtp:append(filename)
+            vim.opt.rtp:append(vim.fs.dirname(filename))
         end
         rtp_file:close()
     end
