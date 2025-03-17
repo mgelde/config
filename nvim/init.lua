@@ -46,6 +46,7 @@ if vim.fn.expand("$USER") ~= "root" then
     lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
     lspconfig.texlab.setup(coq.lsp_ensure_capabilities())
     lspconfig.vls.setup(coq.lsp_ensure_capabilities())
+    lspconfig.gopls.setup(coq.lsp_ensure_capabilities())
 end
 
 -- keymaps and vim options
@@ -137,8 +138,7 @@ vim.g['airline_powerline_fonts']= 1
 vim.g['airline#extensions#tabline#enabled'] = 1 --show buffers at the top
 vim.g['airline#extensions#tabline#formatter'] = 'default'
 
--- for now until libutf8prog is fixed on my machine
---vim.g['airline#extensions#whitespace#enabled'] = 0
+vim.g['airline#extensions#whitespace#enabled'] = 0
 
 -- use .vimrtprc marker-files to add path to runtimepath
 -- This is currently only used for ultisnippets and moreover should probably be done somwhere when
