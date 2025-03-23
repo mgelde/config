@@ -13,3 +13,6 @@ inoremap ,o <C-O> :py3f /usr/share/clang/clang-format.py<CR>
 
 "For C and the like, foldmethod syntax is the way to go
 setlocal foldmethod=syntax
+
+
+:COQnow --shut-up
