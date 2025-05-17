@@ -63,7 +63,7 @@ vim.keymap.set('n', 'grr', function()
   vim.lsp.buf.references()
 end, { desc = 'vim.lsp.buf.references()' })
 
-vim.keymap.set('i', '<C-S>', function()
+vim.keymap.set('', '<C-S>', function()
   vim.lsp.buf.signature_help()
 end, { desc = 'vim.lsp.buf.signature_help()' })
 
