@@ -141,7 +141,7 @@ fi
 
 # root should be visibly different
 if [[ "${EUID}" != 0 ]]; then
-    USERNAME_STYLE="%F{#20d8a8}"
+    USERNAME_STYLE="%F{#58b098}"
     USERNAME_STYLE_END="%f"
 else
     USERNAME_STYLE="%F{202}%B"
