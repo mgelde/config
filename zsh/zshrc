@@ -19,6 +19,9 @@ key[Right]="$terminfo[kcuf1]"
 key[PageUp]="$terminfo[kpp]"
 key[PageDown]="$terminfo[knp]"
 
+# Check for truecolor support and load nearcolors if truecolor is not not supported
+[[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
+
 # setup key accordingly
 #
 ## Note: We prefer backward-delete-char over vi-backward-delete-char
@@ -138,7 +141,7 @@ fi
 
 # root should be visibly different
 if [[ "${EUID}" != 0 ]]; then
-    USERNAME_STYLE="%F{247}"
+    USERNAME_STYLE="%F{#20d8a8}"
     USERNAME_STYLE_END="%f"
 else
     USERNAME_STYLE="%F{202}%B"
@@ -149,7 +152,7 @@ fi
 # Note: We escape the `$` character to ensure that the PROMPT variable still holds
 # the string `${MY_VIM_PROMPT}` in order for that to be expanded only upon zle-reset-prompt
 # above.
-PROMPT="${USERNAME_STYLE}%n${USERNAME_STYLE_END}%239F@${SSH_BGCOLOR}%60F%m%f${SSH_BGEND}%F{248}:%5~${USERNAME_STYLE}%{\${MY_VIM_PROMPT}%}%B❯%b${USERNAME_STYLE_END}%f "
+PROMPT="%B${USERNAME_STYLE}%n${USERNAME_STYLE_END}%b%F{240}@${SSH_BGCOLOR}%F{#2f8880}%m%f${SSH_BGEND}%F{248}:%5~${USERNAME_STYLE}%{\${MY_VIM_PROMPT}%}%B❯%b${USERNAME_STYLE_END}%f "
 RPROMPT="\$vcs_info_msg_0_%(?..%{$fg_bold[red]%} [%?]%{$reset_color%b%})"
 if [[ ! -z "${SSH_CLIENT}" ]]; then
     RPROMPT="${RPROMPT} %F{red}⇄%f"
