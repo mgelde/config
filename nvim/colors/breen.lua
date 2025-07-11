@@ -42,12 +42,7 @@ local function highlight(args)
         ctermbg = string.format('ctermbg=%s', truecolor2termcolor(args.guibg))
     end
 
-    local cterm = ''
-    if args.cterm then
-        cterm = string.format('cterm=%s', args.cterm)
-    elseif args.gui then
-        cterm = string.format('cterm=%s', args.gui)
-    end
+    local cterm = args.cterm and string.format('cterm=%s', args.cterm) or ''
 
     vim.cmd.highlight(string.format('%s %s %s %s %s %s %s',
         args.group,
