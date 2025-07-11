@@ -25,10 +25,6 @@ if vim.fn.expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim') ~= '' then
 
     end
 
-    -- Plugins that may be used with the root account
-
-    Plug('croaker/mustang-vim', { frozen=true })
-
     --File browser
     Plug('preservim/nerdtree', { on='NERDTreeToggle' })
 
@@ -120,7 +116,7 @@ vim.cmd.runtime 'ftplugin/man.vim'
 
 
 -- Set the default color-scheme
-vim.cmd.colorscheme('mustang')
+vim.cmd.colorscheme('breen')
 
 --##########  Status Line ###########
 
