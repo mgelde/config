@@ -64,7 +64,7 @@ local theme_green='#72AB8C'
 local theme_red='#a09060'
 local theme_blue='#6096b8'
 local theme_dark_blue='#36607a'
-local theme_light_blue='#a0c0d5'
+local theme_light_blue='#95b7ca'
 local theme_orange='#cfaa30'
 local theme_yellow1='#A0C561'
 local theme_yellow2='#a1e6a1'
@@ -85,8 +85,8 @@ highlight{group='NonText',          guifg='#808080', guibg=background_base_color
 
 highlight{group='Special',          guifg=theme_orange}
 
-highlight{group='Type',             guifg=theme_light_blue, gui='none'}
-highlight{group='Structure',        guifg=theme_dark_blue, gui='bold'}
+highlight{group='Type',             guifg=theme_blue, gui='bold,italic'}
+highlight{group='Structure',        guifg=theme_light_blue, gui='bold'}
 
 highlight{group='PreProc',          guifg=theme_dark_yellow, gui='none' }
 
@@ -94,7 +94,7 @@ highlight{group='Constant',         guifg=theme_red, gui='none'}
 highlight{group='Number',           guifg=theme_red, gui='none'}
 highlight{group='String',           guifg=theme_green, gui='italic'}
 
-highlight{group='Statement',        guifg=theme_blue, gui='bold' }
+highlight{group='Statement',        guifg=theme_dark_blue, gui='bold' }
 
 
 highlight{group='Identifier',       guifg=theme_yellow2, gui='none'}
