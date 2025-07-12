@@ -59,42 +59,50 @@ local background_base_color = '#0f2027'
 local background_complementary_color = '#2c5b6d'
 local background_dark_color = '#081115'
 local background_light_color = '#162f39'
-local theme_yellow1='#A0C561'
 
 local theme_green='#72AB8C'
 local theme_red='#a09060'
-local theme_bright_yellow='#d0d0c0'
 local theme_blue='#6096b8'
+local theme_dark_blue='#36607a'
+local theme_light_blue='#a0c0d5'
 local theme_orange='#cfaa30'
+local theme_yellow1='#A0C561'
 local theme_yellow2='#a1e6a1'
+local theme_dark_yellow='#799e3a'
+local theme_light_yellow='#b1d07e'
 
 highlight{group='Normal', guifg='#f0f0f0', guibg=background_base_color, gui='none'}
 
-highlight{group='CursorLine',    guibg=background_light_color}
-highlight{group='LineNr',        guifg='#808080', guibg=background_dark_color, gui='none' }
-highlight{group='CursorLineNr',  guifg='#B0D0B0', gui='bold' }
-highlight{group='ColorColumn',   guibg=background_complementary_color}
+highlight{group='CursorLine',       guibg=background_light_color}
+highlight{group='LineNr',           guifg='#808080', guibg=background_dark_color, gui='none' }
+highlight{group='CursorLineNr',     guifg='#B0D0B0', gui='bold' }
+highlight{group='ColorColumn',      guibg=background_complementary_color}
 
-highlight{group='Pmenu',		 guifg='#E0E0E0', guibg='#102020' }
-highlight{group='PmenuSel',		 guifg=theme_green, guibg='#0a0a0a', cterm='reverse'}
-highlight{group='Folded',       guifg='#a0a8b0', guibg=background_base_color, gui='none'}
-highlight{group='NonText',      guifg='#808080', guibg=background_base_color, gui='none'}
-highlight{group='Special',    guifg=theme_orange}
+highlight{group='Pmenu',		    guifg='#E0E0E0', guibg='#102020' }
+highlight{group='PmenuSel',		    guifg=theme_green, guibg='#0a0a0a', cterm='reverse'}
+highlight{group='Folded',           guifg='#a0a8b0', guibg=background_base_color, gui='none'}
+highlight{group='NonText',          guifg='#808080', guibg=background_base_color, gui='none'}
+
+highlight{group='Special',          guifg=theme_orange}
+
+highlight{group='Type',             guifg=theme_light_blue, gui='none'}
+highlight{group='Structure',        guifg=theme_dark_blue, gui='bold'}
+
+highlight{group='PreProc',          guifg=theme_dark_yellow, gui='none' }
+
+highlight{group='Constant',         guifg=theme_red, gui='none'}
+highlight{group='Number',           guifg=theme_red, gui='none'}
+highlight{group='String',           guifg=theme_green, gui='italic'}
+
+highlight{group='Statement',        guifg=theme_blue, gui='bold' }
 
 
-highlight{group='String',     guifg=theme_green, gui='italic'}
-highlight{group='PreProc',    guifg=theme_yellow1, gui='none' }
-highlight{group='Type',       guifg=theme_blue, gui='none'}
-highlight{group='Comment',    guifg='#508080', gui='italic'}
-highlight{group='Keyword',    guifg=theme_blue, gui='bold'}
-highlight{group='Constant',   guifg=theme_red, gui='none'}
-highlight{group='Number',     guifg=theme_red}
-highlight{group='Identifier', guifg=theme_yellow2, gui=italic}
+highlight{group='Identifier',       guifg=theme_yellow2, gui='none'}
+highlight{group='Function',         guifg=theme_light_yellow, gui='bold'}
 
+highlight{group='Todo',             guifg='#040404', guibg=theme_yellow1, gui='italic'}
 
-highlight{group='Function',     guifg=theme_bright_yellow, gui='bold'}
-highlight{group='Statement',    guifg=theme_red, gui='bold' }
-highlight{group='Todo',         guifg='#040404', guibg=theme_yellow1, gui='italic'}
+highlight{group='Comment',          guifg='#508080', gui='italic'}
 
 
 vim.cmd.highlight('MatchParen    guifg=#d0fff0  guibg=#0b4338 gui=bold ctermfg=157 ctermbg=237 cterm=bold')
