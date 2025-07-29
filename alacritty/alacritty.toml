@@ -44,7 +44,7 @@ size = 11
 
 [font.bold]
 family = "Inconsolata LGC Nerd Font Mono"
-style = "SemiBold"
+style = "Bold"
 
 [font.glyph_offset]
 x = 0
