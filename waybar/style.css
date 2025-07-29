@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Source Code Pro, monospace;
+    font-family: Source Code Pro, monospace;
     font-size: 13px;
     font-weight: 400;
 }
@@ -90,7 +90,7 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #mpd {
-    padding: 2px 8px;
+    padding: 2px .8em 0px .5em;
 }
 
 #disk.warning {

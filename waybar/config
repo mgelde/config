@@ -61,8 +61,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "󰈈",
+            "deactivated": "󰈉"
         }
     },
     "tray": {
@@ -111,18 +111,18 @@
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-charging": "{capacity}% 󰂏",
+        "format-plugged": "{capacity}% 󰂄",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "",
-        "format-ethernet": "",
+        "format-wifi": "",
+        "format-ethernet": "󰈀",
         "tooltip-format-ethernet": "{ifname} {ipaddr}/{cidr} via {gwaddr} ",
         "tooltip-format-wifi": "{ifname} {ipaddr}/{cidr} via {gwaddr}\n{essid} ({signalStrength}%)",
-        "format-linked": "{ifname} (No IP) ",
+        "format-linked": "󰈀  !",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
