@@ -43,7 +43,7 @@ render_timer = false
 size = 11
 
 [font.bold]
-family = "Source Code Pro"
+family = "Inconsolata LGC Nerd Font Mono"
 style = "SemiBold"
 
 [font.glyph_offset]
@@ -51,16 +51,15 @@ x = 0
 y = 0
 
 [font.normal]
-family = "Source Code Pro"
-style = "Regular"
+family = "Inconsolata LGC Nerd Font Mono"
 
 [font.italic]
-family = "Source Code Pro"
+family = "Inconsolata LGC Nerd Font Mono"
 style = "Italic"
 
 [font.bold_italic]
-family = "Source Code Pro"
-style = "Semibold Italic"
+family = "Inconsolata LGC Nerd Font Mono"
+style = "Bold Italic"
 
 [font.offset]
 x = 0
