@@ -35,14 +35,18 @@ end
 
 -- language servers
 if vim.fn.expand("$USER") ~= "root" then
-    local lspconfig = require "lspconfig"
     local coq = require "coq"
 
-    lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
-    lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
-    lspconfig.texlab.setup(coq.lsp_ensure_capabilities())
-    lspconfig.vls.setup(coq.lsp_ensure_capabilities())
-    lspconfig.gopls.setup(coq.lsp_ensure_capabilities())
+    vim.lsp.config("clangd", coq.lsp_ensure_capabilities())
+    vim.lsp.enable("clangd")
+    vim.lsp.config("pyright", coq.lsp_ensure_capabilities())
+    vim.lsp.enable("pyright")
+    vim.lsp.config("texlab", coq.lsp_ensure_capabilities())
+    vim.lsp.enable("texlab")
+    vim.lsp.config("vls", coq.lsp_ensure_capabilities())
+    vim.lsp.enable("vls")
+    vim.lsp.config("gopls", coq.lsp_ensure_capabilities())
+    vim.lsp.enable("gopls")
 end
 
 -- keymaps and vim options
