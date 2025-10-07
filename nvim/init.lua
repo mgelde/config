@@ -1,7 +1,7 @@
-if vim.fn.expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim') ~= '' then
+do
     local Plug = vim.fn['plug#']
     -- Use vim-plug
-    vim.fn['plug#begin'](vim.fn.expand('$XDG_CONFIG_HOME/nvim/plugged'))
+    vim.fn['plug#begin'](vim.fn.stdpath('config')..'/plugged')
 
     if vim.fn.expand('$USER') ~= "root" then
 
