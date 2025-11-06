@@ -160,4 +160,6 @@ exec_always {
     gsettings set org.gnome.desktop.interface font-name 'Roboto Light 12'
 }
 
+bindsym $mod+Shift+d exec "/usr/bin/python ${XDG_CONFIG_HOME}/wofi/active_windows.py"
+
 include "${HOME}/.config/sway/config.local"
