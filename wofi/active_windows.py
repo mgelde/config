@@ -55,18 +55,18 @@ def main():
     windows = extract_windows(tree, -1)
 
     wofi_choice = '\n'.join([
-        f'{i:>2d}. {window["name"]} on workspace "{window["workspace"]}"'
+        f'<!-- {i} -->{window["name"]}  <small>on workspace "{window["workspace"]}"</small>'
         for i, window in enumerate(windows) if window['name']
     ])
 
     try:
         selected = subprocess.check_output(
-            ['wofi', '-d'], input=wofi_choice.encode()).decode().strip()
+            ['wofi', '-dm'], input=wofi_choice.encode()).decode().strip()
     except subprocess.CalledProcessError:
         # wofi aborted; maybe the user dismissed. do nothing
         sys.exit(0)
 
-    match = re.match(r'(\d+)\.', selected)
+    match = re.match(r'<!-- (\d+) -->', selected)
     if not match:
         print(f'[!] Cannot find this window: {selected}')
         sys.exit(1)
