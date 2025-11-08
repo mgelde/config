@@ -15,25 +15,26 @@ def get_tree():
             f'[!] Could not call swaymsg command. Exited with code {err.returncode}.',
             file=sys.stderr)
         print(f'   Reason: {err.stderr}')
-        sys.exit(1)
     except (json.JSONDecodeError, UnicodeDecodeError) as err:
         print(f'[!] Error cannot decode JSON: {err!s}', file=sys.stderr)
-        pass
-
+    sys.exit(1)
 
 def extract_windows(tree, workspace):
     windows = []
 
-    if 'type' in tree and tree['type'] in ['con', 'floating_con'
-                                           ] and tree['name']:
-        # need to add the enclosing workspace, because we need it later...
-        tree['workspace'] = workspace
-        windows.append(tree)
-    if 'type' in tree and tree['type'] == 'workspace':
-        workspace = tree['name']
-    if 'nodes' in tree:
-        for x in tree['nodes']:
-            windows.extend(extract_windows(x, workspace))
+    if 'type' in tree:
+        if tree['type'] in ['con', 'floating_con'] and tree['name']:
+            # need to add the enclosing workspace, because we need it later...
+            tree['workspace'] = workspace
+            windows.append(tree)
+        if tree['type'] == 'workspace':
+            workspace = tree['name']
+    for subtree in ['nodes', 'floating_nodes']:
+        try:
+            for x in tree[subtree]:
+                windows.extend(extract_windows(x, workspace))
+        except KeyError:
+            pass
     return windows
 
 
@@ -53,6 +54,8 @@ def focus_window(window):
 def main():
     tree = get_tree()
     windows = extract_windows(tree, -1)
+    if not windows:
+        sys.exit(0)
 
     wofi_choice = '\n'.join([
         f'<!-- {i} -->{window["name"]}  <small>on workspace "{window["workspace"]}"</small>'
