@@ -64,8 +64,8 @@ button:hover {
 }
 
 #workspaces button.visible {
-    background-color: shade(@background_color, 1.4);
-    box-shadow: inset 0 -3px #509090;
+    background-color: shade(@background_color, 1.3);
+    box-shadow: inset 0 -3px #505070;
 }
 
 #workspaces button.urgent {
