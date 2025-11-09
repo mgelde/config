@@ -1,9 +1,13 @@
 #! /bin/env/python3
 
 import json
+import os
 import re
+import socket
+import struct
 import subprocess
 import sys
+from enum import IntEnum
 
 try:
     import gi
@@ -30,18 +34,66 @@ except (ModuleNotFoundError, ValueError):
     HAVE_ICONS = False
 
 
-def get_tree():
-    try:
-        output = subprocess.check_output(['swaymsg', '-t', 'get_tree', '-r'])
-        return json.loads(output.decode())
-    except subprocess.CalledProcessError as err:
-        print(
-            f'[!] Could not call swaymsg command. Exited with code {err.returncode}.',
-            file=sys.stderr)
-        print(f'   Reason: {err.stderr}')
-    except (json.JSONDecodeError, UnicodeDecodeError) as err:
-        print(f'[!] Error cannot decode JSON: {err!s}', file=sys.stderr)
-    sys.exit(1)
+class MessageType(IntEnum):
+
+    MT_CMD = 0
+    MT_GET_TREE = 4
+
+
+class Sway:
+
+    def __init__(self):
+        self._socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+
+    def __enter__(self):
+        self._socket.connect(os.getenv('SWAYSOCK'))
+        return self
+
+    def __exit__(self, *_unused):
+        self._socket.close()
+
+    @staticmethod
+    def _build_msg(kind, payload):
+        match kind:
+            case MessageType.MT_CMD:
+                pass
+            case MessageType.MT_GET_TREE:
+                pass
+            case _:
+                raise ValueError(f'Unknown message type: {kind}')
+        return struct.pack('=6sII', b'i3-ipc', len(payload), kind) + payload
+
+    _HEADER_SIZE = 14
+
+    @staticmethod
+    def _parse_header(header, expected_kind=None):
+        magic, length, kind = struct.unpack('=6sII', header)
+        if magic != b'i3-ipc' or (expected_kind and kind != expected_kind):
+            raise ValueError(f'{magic}:{kind} was not expected')
+        return length
+
+    def _get_response(self, expected_kind=None):
+        response_length = Sway._parse_header(
+            self._socket.recv(Sway._HEADER_SIZE), expected_kind)
+        return json.loads(self._socket.recv(response_length).decode())
+
+    def get_tree(self):
+        msg = Sway._build_msg(MessageType.MT_GET_TREE, b'')
+        self._socket.send(msg)
+        return self._get_response(MessageType.MT_GET_TREE)
+
+    def cmd(self, command_string):
+        msg = Sway._build_msg(MessageType.MT_CMD, command_string.encode())
+        self._socket.send(msg)
+        response = self._get_response(MessageType.MT_CMD)
+        err_msg = []
+        for item in response:
+            if item['success'] is False:
+                err_msg.append(
+                    f'parser_error={item["parse_error"]}. message: {item["error"]}'
+                )
+        if err_msg:
+            raise ValueError(f'Command not successful: {" ; ".join(err_msg)}')
 
 
 def extract_windows(tree, workspace):
@@ -63,7 +115,7 @@ def extract_windows(tree, workspace):
     return windows
 
 
-def focus_window(window):
+def focus_window(window, sway):
     # hopefully these are enough for all use-cases
     descriptor = [
         f'title="{window["name"]}"',
@@ -73,7 +125,7 @@ def focus_window(window):
     ]
 
     descriptor_string = ' '.join(descriptor)
-    subprocess.check_call(['swaymsg', f'[{descriptor_string}]', 'focus'])
+    sway.cmd(f'[{descriptor_string}] focus')
 
 
 def build_wofi_choices(windows, use_icons=False):
@@ -88,8 +140,8 @@ def build_wofi_choices(windows, use_icons=False):
     return choices
 
 
-def main():
-    tree = get_tree()
+def main(sway):
+    tree = sway.get_tree()
     windows = extract_windows(tree, -1)
     if not windows:
         sys.exit(0)
@@ -108,8 +160,9 @@ def main():
         print(f'[!] Cannot find this window: {selected}')
         sys.exit(1)
     index = int(match.group(1))
-    focus_window(windows[index])
+    focus_window(windows[index], sway)
 
 
 if __name__ == '__main__':
-    main()
+    with Sway() as sway_ipc:
+        main(sway_ipc)
