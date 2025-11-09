@@ -1,9 +1,33 @@
 #! /bin/env/python3
 
-import subprocess
 import json
-import sys
 import re
+import subprocess
+import sys
+
+try:
+    import gi
+    gi.require_version('Gtk', '4.0')
+    from gi.repository import Gtk, Gdk, GioUnix
+
+    def lookup_icon(app_id):
+        try:
+            desktop_filename = GioUnix.DesktopAppInfo.search(app_id)[0][-1]
+            desktop_file = GioUnix.DesktopAppInfo.new(desktop_filename)
+            names = desktop_file.get_icon().get_names()
+        except IndexError:
+            names = [app_id]
+        theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+        path = theme.lookup_icon(names[0], names[1:], 0, 1, 0,
+                                 0).get_file().get_path()
+        if not path:
+            path = theme.lookup_icon('application-x-executable', None, 0, 1, 0,
+                                     0).get_file().get_path()
+        return path
+
+    HAVE_ICONS = True
+except (ModuleNotFoundError, ValueError):
+    HAVE_ICONS = False
 
 
 def get_tree():
@@ -18,6 +42,7 @@ def get_tree():
     except (json.JSONDecodeError, UnicodeDecodeError) as err:
         print(f'[!] Error cannot decode JSON: {err!s}', file=sys.stderr)
     sys.exit(1)
+
 
 def extract_windows(tree, workspace):
     windows = []
@@ -51,25 +76,34 @@ def focus_window(window):
     subprocess.check_call(['swaymsg', f'[{descriptor_string}]', 'focus'])
 
 
+def build_wofi_choices(windows, use_icons=False):
+    choices = []
+
+    for i, window in enumerate(windows):
+        text = f'<!-- {i} -->{window["name"]}  <small>on workspace "{window["workspace"]}"</small>'
+        if use_icons:
+            icon = lookup_icon(window['app_id'])
+            text = f'img:{icon}:text:{text}'
+        choices.append(text)
+    return choices
+
+
 def main():
     tree = get_tree()
     windows = extract_windows(tree, -1)
     if not windows:
         sys.exit(0)
 
-    wofi_choice = '\n'.join([
-        f'<!-- {i} -->{window["name"]}  <small>on workspace "{window["workspace"]}"</small>'
-        for i, window in enumerate(windows) if window['name']
-    ])
-
     try:
         selected = subprocess.check_output(
-            ['wofi', '-dm'], input=wofi_choice.encode()).decode().strip()
+            ['wofi', '-dm'],
+            input='\n'.join(build_wofi_choices(
+                windows, HAVE_ICONS)).encode()).decode().strip()
     except subprocess.CalledProcessError:
         # wofi aborted; maybe the user dismissed. do nothing
         sys.exit(0)
 
-    match = re.match(r'<!-- (\d+) -->', selected)
+    match = re.search(r'<!-- (\d+) -->', selected)
     if not match:
         print(f'[!] Cannot find this window: {selected}')
         sys.exit(1)
