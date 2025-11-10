@@ -24,11 +24,13 @@ try:
                 name,
                 name.split('.')[-1].lower(),
                 name.split('.')[-1].lower().capitalize(),
+                name.split()[0],
+                name.split()[0].capitalize()
             }
             app_info_candidates = None
             names = None
-            for name in search_terms:
-                app_info_candidates = GioUnix.DesktopAppInfo.search(name)
+            for term in search_terms:
+                app_info_candidates = GioUnix.DesktopAppInfo.search(term)
                 if not app_info_candidates:
                     continue
                 for desktop_filename in app_info_candidates[0]:
@@ -55,6 +57,19 @@ class MessageType(IntEnum):
 
     MT_CMD = 0
     MT_GET_TREE = 4
+
+
+class SwayError(Exception):
+
+    def __init__(self, is_parser, msg):
+        self._is_parser = is_parser
+        self._msg = msg
+
+    def is_parser_error(self):
+        return self._is_parser
+
+    def msg(self):
+        return self._msg
 
 
 class Sway:
@@ -103,14 +118,9 @@ class Sway:
         msg = Sway._build_msg(MessageType.MT_CMD, command_string.encode())
         self._socket.send(msg)
         response = self._get_response(MessageType.MT_CMD)
-        err_msg = []
         for item in response:
             if item['success'] is False:
-                err_msg.append(
-                    f'parser_error={item["parse_error"]}. message: {item["error"]}'
-                )
-        if err_msg:
-            raise ValueError(f'Command not successful: {" ; ".join(err_msg)}')
+                raise SwayError(item['parser_error'], item['error'])
 
 
 def extract_windows(tree, workspace):
@@ -135,14 +145,26 @@ def extract_windows(tree, workspace):
 def focus_window(window, sway):
     # hopefully these are enough for all use-cases
     descriptor = [
-        f'title="{window["name"]}"',
+        # title accepts pcre expressions, so we need to escape
+        f'title="{re.escape(window["name"])}"',
         f'pid={window["pid"]}' if 'pid' in window else '',
-        f'app_id={window["app_id"]}' if 'app_id' in window and window['app_id']
-        else '', f'workspace="{window["workspace"]}"'
+        f'workspace="{window["workspace"]}"'
     ]
-
+    if window['app_id'] is not None:
+        descriptor.append(f'app_id="{window["app_id"]}"')
+    elif window['window'] is not None and 'window_properties' in window:
+        descriptor.append(f'class="{window["window_properties"]["class"]}"')
     descriptor_string = ' '.join(descriptor)
-    sway.cmd(f'[{descriptor_string}] focus')
+    command = f'[{descriptor_string}] focus'
+    try:
+        sway.cmd(command)
+    except SwayError as err:
+        if err.is_parser_error():
+            print(f'[!] Parser error for command: {err.msg()}',
+                  file=sys.stderr)
+        else:
+            print(f'[!] Command failed: {command}', file=sys.stderr)
+        sys.exit(1)
 
 
 def build_wofi_choices(windows, use_icons=False):
