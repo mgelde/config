@@ -14,16 +14,33 @@ try:
     gi.require_version('Gtk', '4.0')
     from gi.repository import Gtk, Gdk, GioUnix
 
-    def lookup_icon(app_id):
-        try:
-            desktop_filename = GioUnix.DesktopAppInfo.search(app_id)[0][-1]
-            desktop_file = GioUnix.DesktopAppInfo.new(desktop_filename)
-            names = desktop_file.get_icon().get_names()
-        except IndexError:
-            names = [app_id]
+    def lookup_icon(name):
+        path = None
         theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
-        path = theme.lookup_icon(names[0], names[1:], 0, 1, 0,
-                                 0).get_file().get_path()
+
+        if name is not None:
+            search_terms = {
+                name.split('.')[-1],  # for names like org.gnome.Evolution
+                name,
+                name.split('.')[-1].lower(),
+                name.split('.')[-1].lower().capitalize(),
+            }
+            app_info_candidates = None
+            names = None
+            for name in search_terms:
+                app_info_candidates = GioUnix.DesktopAppInfo.search(name)
+                if not app_info_candidates:
+                    continue
+                for desktop_filename in app_info_candidates[0]:
+                    desktop_file = GioUnix.DesktopAppInfo.new(desktop_filename)
+                    icon = desktop_file.get_icon()
+                    if icon:
+                        names = icon.get_names()
+                        break
+            if not names:
+                names = [name]
+            path = theme.lookup_icon(names[0], names[1:], 0, 1, 0,
+                                     0).get_file().get_path()
         if not path:
             path = theme.lookup_icon('application-x-executable', None, 0, 1, 0,
                                      0).get_file().get_path()
@@ -134,7 +151,12 @@ def build_wofi_choices(windows, use_icons=False):
     for i, window in enumerate(windows):
         text = f'<!-- {i} -->{window["name"]}  <small>on workspace "{window["workspace"]}"</small>'
         if use_icons:
-            icon = lookup_icon(window['app_id'])
+            if window['app_id'] is not None:
+                icon = lookup_icon(window['app_id'])
+            elif window['window'] is not None and 'window_properties' in window:
+                icon = lookup_icon(window['window_properties']['class'])
+            else:
+                icon = lookup_icon(None)
             text = f'img:{icon}:text:{text}'
         choices.append(text)
     return choices
