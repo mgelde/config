@@ -1,6 +1,8 @@
 #! /bin/env/python3
 
+import argparse
 import json
+import logging
 import os
 import re
 import socket
@@ -10,6 +12,25 @@ import sys
 from enum import IntEnum
 
 try:
+    import Levenshtein
+
+    def select_matching_item(key, items):
+        found = items[0]
+        score = Levenshtein.distance(key, found)
+        for item in items[1:]:
+            newscore = Levenshtein.distance(key, item)
+            if score < newscore:
+                continue
+            found = item
+            score = newscore
+        return found
+except (ModuleNotFoundError, ValueError):
+
+    def select_matching_item(_, items):
+        return items[0]
+
+
+try:
     import gi
     gi.require_version('Gtk', '4.0')
     from gi.repository import Gtk, Gdk, GioUnix
@@ -17,6 +38,7 @@ try:
     def lookup_icon(name):
         path = None
         theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+        logging.info(f'looking up icon for name: {name}')
 
         if name is not None:
             search_terms = {
@@ -27,18 +49,23 @@ try:
                 name.split()[0],
                 name.split()[0].capitalize()
             }
+
             app_info_candidates = None
             names = None
             for term in search_terms:
                 app_info_candidates = GioUnix.DesktopAppInfo.search(term)
                 if not app_info_candidates:
+                    logging.debug(f'Found no desktop file for {term}')
                     continue
-                for desktop_filename in app_info_candidates[0]:
-                    desktop_file = GioUnix.DesktopAppInfo.new(desktop_filename)
-                    icon = desktop_file.get_icon()
-                    if icon:
-                        names = icon.get_names()
-                        break
+                logging.debug(
+                    f'Found desktop files for {term}: {app_info_candidates}')
+                desktop_filename = select_matching_item(term, app_info_candidates[0])
+                logging.debug(
+                    f'Selected desktop files for {term}: {desktop_filename}')
+                icon = GioUnix.DesktopAppInfo.new(desktop_filename).get_icon()
+                if icon:
+                    names = icon.get_names()
+                    break
             if not names:
                 names = [name]
             path = theme.lookup_icon(names[0], names[1:], 0, 1, 0,
@@ -184,29 +211,42 @@ def build_wofi_choices(windows, use_icons=False):
     return choices
 
 
-def main(sway):
-    tree = sway.get_tree()
-    windows = extract_windows(tree, -1)
-    if not windows:
-        sys.exit(0)
+def parse_args():
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument('--log-level',
+                           choices=['ERROR', 'WARN', 'INFO', 'DEBUG'],
+                           help='Desireg log-level (default: WARN)',
+                           default='WARN')
+    return argparser.parse_args()
 
-    try:
-        selected = subprocess.check_output(
-            ['wofi', '-dm'],
-            input='\n'.join(build_wofi_choices(
-                windows, HAVE_ICONS)).encode()).decode().strip()
-    except subprocess.CalledProcessError:
-        # wofi aborted; maybe the user dismissed. do nothing
-        sys.exit(0)
 
-    match = re.search(r'<!-- (\d+) -->', selected)
-    if not match:
-        print(f'[!] Cannot find this window: {selected}')
-        sys.exit(1)
-    index = int(match.group(1))
-    focus_window(windows[index], sway)
+def main():
+    args = parse_args()
+
+    logging.basicConfig(level=logging.getLevelNamesMapping()[args.log_level],
+                        stream=sys.stderr)
+    with Sway() as sway:
+        tree = sway.get_tree()
+        windows = extract_windows(tree, -1)
+        if not windows:
+            sys.exit(0)
+
+        try:
+            selected = subprocess.check_output(
+                ['wofi', '-dm'],
+                input='\n'.join(build_wofi_choices(
+                    windows, HAVE_ICONS)).encode()).decode().strip()
+        except subprocess.CalledProcessError:
+            # wofi aborted; maybe the user dismissed. do nothing
+            sys.exit(0)
+
+        match = re.search(r'<!-- (\d+) -->', selected)
+        if not match:
+            print(f'[!] Cannot find this window: {selected}')
+            sys.exit(1)
+        index = int(match.group(1))
+        focus_window(windows[index], sway)
 
 
 if __name__ == '__main__':
-    with Sway() as sway_ipc:
-        main(sway_ipc)
+    main()
