@@ -115,6 +115,9 @@ vim.opt.foldenable = true --enable folding
 vim.opt.foldlevelstart=10 --first ten levels of folds are open by default
 vim.opt.foldmethod=manual -- others: marker manual expr syntax diff
 
+-- window titles for tmux / alacritty
+vim.opt.title = true
+
 -- man page viewer
 vim.cmd.runtime 'ftplugin/man.vim'
 
