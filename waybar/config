@@ -4,7 +4,7 @@
     "spacing": 2, // Gaps between modules (4px)
     "include" : ["~/.config/waybar/local.conf"],
     "disk" : {
-        "format" : " / {percentage_used}%",
+        "format" : " {percentage_used}%",
         "path" : "/",
         "states" : {
             "full": 90,
@@ -12,7 +12,7 @@
         }
     },
     "disk#disk2" : {
-        "format" : " /home {percentage_used}%",
+        "format" : " {percentage_used}%",
         "path" : "/home",
         "states" : {
             "full": 90,
@@ -73,9 +73,9 @@
     "network": {
         "format-wifi": "",
         "format-ethernet": "󰈀",
-        "tooltip-format-ethernet": "{ifname} {ipaddr}/{cidr} via {gwaddr} ",
+        "tooltip-format-ethernet": "{ifname} {ipaddr}/{cidr} via {gwaddr} ",
         "tooltip-format-wifi": "{ifname} {ipaddr}/{cidr} via {gwaddr}\n{essid} ({signalStrength}%)",
-        "format-linked": "󰈀  !",
+        "format-linked": "󰈀 !",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },

@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Inconsolata LGC Nerd Font Propo, monospace;
+    font-family: Inconsolata LGC Nerd Font Propo, FontAwesome, monospace;
     font-size: 13px;
     font-weight: 400;
 }
