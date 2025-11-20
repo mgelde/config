@@ -94,8 +94,9 @@ button:hover {
 #mode,
 #idle_inhibitor,
 #scratchpad,
+#language,
 #mpd {
-    padding: 2px 8px;
+    padding: 2px 6px;
 }
 
 #disk.warning {
@@ -107,12 +108,14 @@ button:hover {
     color: @urgent_fg_color;
 }
 
+/*
 .modules-right > widget:not(:last-child) {
     border-right: 1px dotted #606060;
 }
 .modules-right > widget:first-child {
     border-left: 1px dotted #606060;
 }
+*/
 
 #window,
 #workspaces {
@@ -179,8 +182,7 @@ label:focus {
 
 
 #language {
-    min-width: 16px;
-    padding: 2px 6px;
+    min-width: 1.5em;
 }
 
 tooltip {
