@@ -1,6 +1,7 @@
 #! /bin/env/python3
 
 import argparse
+import html
 import json
 import logging
 import os
@@ -59,7 +60,8 @@ try:
                     continue
                 logging.debug(
                     f'Found desktop files for {term}: {app_info_candidates}')
-                desktop_filename = select_matching_item(term, app_info_candidates[0])
+                desktop_filename = select_matching_item(
+                    term, app_info_candidates[0])
                 logging.debug(
                     f'Selected desktop files for {term}: {desktop_filename}')
                 icon = GioUnix.DesktopAppInfo.new(desktop_filename).get_icon()
@@ -198,7 +200,8 @@ def build_wofi_choices(windows, use_icons=False):
     choices = []
 
     for i, window in enumerate(windows):
-        text = f'<!-- {i} -->{window["name"]}  <small>on workspace "{window["workspace"]}"</small>'
+        text = f'<!-- {i} -->{html.escape(window["name"])}  <small>on workspace'\
+                f' "{html.escape(window["workspace"])}"</small>'
         if use_icons:
             if window['app_id'] is not None:
                 icon = lookup_icon(window['app_id'])
