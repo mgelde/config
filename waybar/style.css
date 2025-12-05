@@ -107,6 +107,10 @@ button:hover {
     background-color: @urgent_bg_color;
     color: @urgent_fg_color;
 }
+#temperature.critical {
+    background-color: @urgent_bg_color;
+    color: @urgent_fg_color;
+}
 
 /*
 .modules-right > widget:not(:last-child) {
