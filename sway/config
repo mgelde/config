@@ -146,6 +146,8 @@ for_window [app_id="ssh-askpass"] border pixel 1
 for_window [title="^zoom\s?$"] floating enable
 no_focus [title="^zoom\s?$"]
 
+for_window [class="VirtualBoxVM" title="Close Virtual Machine" floating] resize set 80ppt 80ppt
+
 for_window [floating app_id="evince"] move position center, resize set 80ppt 80ppt
 
 bar {
