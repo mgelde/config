@@ -150,6 +150,8 @@ for_window [class="VirtualBoxVM" title="Close Virtual Machine" floating] resize 
 
 for_window [floating app_id="evince"] move position center, resize set 80ppt 80ppt
 
+for_window [app_id="firefox" title="Password Required - Mozilla Firefox"] resize set 30ppt 20ppt, floating enable
+
 bar {
     swaybar_command /usr/bin/waybar
 }
