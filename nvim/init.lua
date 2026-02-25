@@ -15,8 +15,6 @@ do
 
         Plug('lervag/vimtex')
 
-        Plug('jez/vim-superman')
-
         Plug('ibhagwan/fzf-lua', {branch='main'})
 
         Plug('SirVer/ultisnips')
@@ -24,9 +22,6 @@ do
         Plug('google/yapf', { branch='main', rtp='plugins/vim', ['for']='python' })
 
     end
-
-    --File browser
-    Plug('preservim/nerdtree', { on='NERDTreeToggle' })
 
     Plug('preservim/vim-markdown', { ['for']='markdown' })
     vim.fn['plug#end']()
@@ -241,10 +236,6 @@ set spell spl=en
 set colorcolumn=72
 ]]})
 
---for nerdtree
-vim.keymap.set('', '<F2>', ':NERDTreeToggle <CR>', {noremap=true})
-
-
 --for vimtex
 -- prevent files from being recognized as plaintex
 vim.g.tex_flavor = 'latex'
@@ -270,13 +261,12 @@ vim.g.vimtex_compiler_latexmk_engines = {
 --viewer that is launched
 vim.g.vimtex_view_method='zathura'
 
-
 -- FZF
 vim.keymap.set('', '<C-B>', ':FzfLua buffers <CR>', { noremap=true })
 vim.keymap.set('', '<C-P>', ':FzfLua files <CR>', { noremap=true })
 vim.keymap.set('', '<C-F>', ':FzfLua git_files <CR>', { noremap=true })
-
-
+vim.keymap.set('', '<C-G>', ':FzfLua live_grep <CR>', {noremap=true })
+vim.keymap.set('', '<leader><C-G>', ':FzfLua grep <CR>', {noremap=true })
 
 
 -- Snippets
