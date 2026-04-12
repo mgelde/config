@@ -21,6 +21,9 @@ do
 
         Plug('google/yapf', { branch='main', rtp='plugins/vim', ['for']='python' })
 
+        Plug('nvim-lualine/lualine.nvim')
+        -- If you want to have icons in your statusline choose one of these
+        -- Plug 'nvim-tree/nvim-web-devicons'
     end
 
     Plug('preservim/vim-markdown', { ['for']='markdown' })
@@ -122,21 +125,71 @@ vim.cmd.colorscheme('breen')
 
 --##########  Status Line ###########
 
---We use airline. This is just legacy for systems without airline
+--We use lualine. This is just legacy for systems without lualine
 vim.opt.statusline='%F%m%r%h%w [FORMAT=%{&ff}] [TYPE=%Y] [ASCII=%03.3b] [HEX=%02.2B] [POS=%04l,%04v][%p%%] [LEN=%L]'
 vim.opt.laststatus=2
 vim.opt.wildmenu=true
 vim.opt.wildmode='longest,full'
 vim.opt.wildoptions='fuzzy,pum'
 
---Now for airline
-vim.g['airline_theme']="solarized"
-vim.g['airline#extensions#branch#enabled']= 1 --enable git integration
-vim.g['airline_powerline_fonts']= 1
-vim.g['airline#extensions#tabline#enabled'] = 1 --show buffers at the top
-vim.g['airline#extensions#tabline#formatter'] = 'default'
+--Now for lualine
 
-vim.g['airline#extensions#whitespace#enabled'] = 0
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'horizon',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    always_show_tabline = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+      refresh_time = 16, -- ~60fps
+      events = {
+        'WinEnter',
+        'BufEnter',
+        'BufWritePost',
+        'SessionLoadPost',
+        'FileChangedShellPost',
+        'VimResized',
+        'Filetype',
+        'CursorMoved',
+        'CursorMovedI',
+        'ModeChanged',
+      },
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+      lualine_a = {'buffers'}
+  },
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
 
 -- use .vimrtprc marker-files to add path to runtimepath
 -- This is currently only used for ultisnippets and moreover should probably be done somwhere when
