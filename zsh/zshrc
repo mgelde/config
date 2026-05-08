@@ -76,7 +76,6 @@ setopt correctall # spelling correction for arguments
 
 #menu completion
 zstyle ':completion:*' menu select=3
-setopt completealiases
 zstyle ':completion:*:correct:*'       insert-unambiguous true
 zstyle ':completion:*:corrections'     format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}'
 zstyle ':completion:*:correct:*'       original true
@@ -168,11 +167,6 @@ fi
 
 if [[ "${EUID}" != 0 ]]; then
 
-    # jumping with z
-    if [[ -r "/usr/share/z/z.sh" ]]; then
-        source /usr/share/z/z.sh
-    fi
-
     # Autosuggestions a la fish
     if [[ -r /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
         source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -184,6 +178,10 @@ if [[ "${EUID}" != 0 ]]; then
 
     if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
         source /usr/share/fzf/key-bindings.zsh
+    fi
+
+    if [[ -r ~/config/zsh/plugins/zsh-z/zsh-z.plugin.zsh ]]; then
+        source ~/config/zsh/plugins/zsh-z/zsh-z.plugin.zsh
     fi
 fi
 
@@ -208,3 +206,5 @@ if [[ "${EUID}" != 0 ]]; then
         source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
 fi
+
+autoload -U compinit; compinit
