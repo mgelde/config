@@ -45,6 +45,8 @@ if vim.fn.expand("$USER") ~= "root" then
     vim.lsp.enable("vls")
     vim.lsp.config("gopls", coq.lsp_ensure_capabilities())
     vim.lsp.enable("gopls")
+    vim.lsp.config("rust_analyzer", coq.lsp_ensure_capabilities())
+    vim.lsp.enable("rust_analyzer")
 end
 
 -- keymaps and vim options
