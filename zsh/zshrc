@@ -51,7 +51,6 @@ bindkey -v '^[^M' self-insert-unmeta
 
 autoload -Uz compinit promptinit colors
 colors
-compinit
 promptinit
 
 MY_CONF_DIR=~/.zshconf
@@ -196,6 +195,10 @@ if [[ -d "$MY_LOCAL_CONF_DIR" ]]; then
     done
 fi
 
+# invoke compinit after having loaded completions for z and fzf and possibke custom
+# extensions
+compinit
+
 # Syntax highlighting (must be sourced at the end)
 if [[ "${EUID}" != 0 ]]; then
     if [[ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
@@ -207,4 +210,3 @@ if [[ "${EUID}" != 0 ]]; then
     fi
 fi
 
-autoload -U compinit; compinit

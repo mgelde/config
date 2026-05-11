@@ -81,10 +81,10 @@
     },
     "sway/language" : {
         "format" : "{short}",
-        "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
     },
     "sway/window" : {
         "icon" : true,
-        "icon-size" : 20,
+        "icon-size" : 20
     }
 }
